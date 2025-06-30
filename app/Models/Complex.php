@@ -17,7 +17,6 @@ class Complex extends Model
         'city',         
         'postal_code',  
         'phone',  
-        'manager_id', //amministratore responsabile del complesso
         'opening_hours', //orari di apertura del complesso
     ];
 
@@ -30,12 +29,6 @@ class Complex extends Model
     public function courts()
     {
         return $this->hasMany(Court::class);
-    }
-
-    //amministratore responsabile del complesso
-    public function manager()
-    {
-        return $this->belongsTo(Admin::class, 'manager_id');
     }
 
     //relazione con le prenotazioni associate a questo complesso
