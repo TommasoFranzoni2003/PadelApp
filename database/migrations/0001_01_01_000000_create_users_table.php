@@ -11,7 +11,7 @@ return new class extends Migration
     {
         //crea lo schema per la tabella degli utenti
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //id dell'utente che è la chiave primaria
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();

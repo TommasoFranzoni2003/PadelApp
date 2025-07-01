@@ -12,7 +12,7 @@ return new class extends Migration
     {
         //crea lo schema per la tabella degli admins
         Schema::create('admins', function (Blueprint $table) {
-            $table->id();
+            $table->id(); //id dell'admin che è la chiave primaria
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
