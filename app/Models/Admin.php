@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
-class Admin extends Authenticatable{
-   
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Admin extends Authenticatable
+{
+    use HasFactory, Notifiable;
+
     protected $fillable = [
         'name',
         'surname',
@@ -16,6 +22,15 @@ class Admin extends Authenticatable{
         'emergency_contact_phone',
         'address',
     ];
-}
 
-?>
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'birth_date' => 'date',
+    ];
+}

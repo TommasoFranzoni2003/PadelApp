@@ -16,7 +16,6 @@ class Booking extends Model
         'start_time',
         'end_time',
         'status', //stato della prenotazione
-        'price_total',
     ];
 
     //costanti per gli stati della prenotazione

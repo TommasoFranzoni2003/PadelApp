@@ -15,7 +15,6 @@ return new class extends Migration
             $table->dateTime('start_time')->index();
             $table->dateTime('end_time')->index();
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending'); //stato della prenotazione
-            $table->decimal('price_total', 8, 2);
             $table->timestamps();
         });
     }
