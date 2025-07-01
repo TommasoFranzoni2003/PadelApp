@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Admin extends User{
+class Admin extends Authenticatable{
    
     protected $fillable = [
         'name',
@@ -16,19 +16,6 @@ class Admin extends User{
         'emergency_contact_phone',
         'address',
     ];
-
-    //Metodo eseguito quando viene creato un nuovo Admin
-    protected static function booted()
-    {
-        static::addGlobalScope('admin', function ($query) { //consente di identificare gli Admin con role='admin'
-            $query->where('role', 'admin');
-        });
-
-        static::creating(function ($admin) {
-            $admin->role = 'admin'; //imposto automaticamente role='admin'
-        });
-    }
-
 }
 
 ?>

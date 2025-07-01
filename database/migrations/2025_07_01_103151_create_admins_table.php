@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    //creo la tabella nel database per gli utenti
+   
+    //quando creo la tabella per gli admins
     public function up(): void
     {
-        //crea lo schema per la tabella degli utenti
-        Schema::create('users', function (Blueprint $table) {
+        //crea lo schema per la tabella degli admins
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('surname');
@@ -21,11 +22,11 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('tax_code');
             $table->string('phone')->unique();
-            $table->integer('points_accumulated')->default(0); //punti fedeltà accumulati
-            $table->boolean('is_active')->default(true); //se l'utente è attivo
+            $table->string('emergency_contact_phone')->nullable(); //contatto di emergenza
+            $table->string('address')->nullable(); //indirizzo di residenza
             $table->rememberToken();
             $table->timestamps();
-        });
+        });  
 
         //schema della tabella per i token in caso di reset della password
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -43,12 +44,12 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-    }
-
+    }  
+    
     //quando elimino la tabella
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('admins');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

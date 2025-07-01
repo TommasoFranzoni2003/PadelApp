@@ -16,7 +16,8 @@ class Complex extends Model
         'address',      //indirizzo fisico
         'city',         
         'postal_code',  
-        'phone',  
+        'phone', 
+        'email',       
         'opening_hours', //orari di apertura del complesso
     ];
 

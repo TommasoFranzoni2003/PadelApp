@@ -13,7 +13,8 @@ class AvailabilitySchedule extends Model
         'court_id',     //campo a cui si riferisce la disponibilità
         'day_of_week',  //giorno della settimana
         'start_time',
-        'end_time',     
+        'end_time',
+        'is_available', //disponibilità del campo effettiva
     ];
 
     protected $casts = [

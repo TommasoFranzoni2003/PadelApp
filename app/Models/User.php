@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+//classe che rappresenta il modello del cliente che interagisce con il sistema
 class User extends Authenticatable
 {
 
@@ -21,6 +22,8 @@ class User extends Authenticatable
         'gender',
         'tax_code',
         'phone',
+        'points_accumulated', //punti fedeltà accumulati
+        'is_active', //se l'utente è attivo o meno
     ];
 
     //attributi mai mostrati quando si fa la serializzazione dell'oggetto
@@ -37,4 +40,11 @@ class User extends Authenticatable
             'password' => 'hashed', //laravel cripta automaticamente la password
         ];
     }
+
+    //prenotazioni associate all'utente
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }
+

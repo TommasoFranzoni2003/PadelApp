@@ -11,8 +11,9 @@ class Court extends Model
 
     // Attributi del campo da padel
     protected $fillable = [
-        'name',             
-        'description',      //descrizione del campo
+        'name',
+        'type',            //tipo di campo             
+        'description',     //descrizione del campo
         'location',         //posizione del campo
         'price_per_hour',   
         'status',           //es: attivo/manutenzione/...
@@ -23,6 +24,9 @@ class Court extends Model
     protected $casts = [
         'price_per_hour' => 'float',
     ];
+
+    // tipi consentiti per il campo 'type'
+    public const TYPES = ['indoor', 'outdoor'];
 
     // Riferimento alla struttura (Complex) a cui appartiene il campo
     public function complex()
@@ -40,5 +44,11 @@ class Court extends Model
     public function availabilitySchedules()
     {
         return $this->hasMany(AvailabilitySchedule::class);
+    }
+
+    //eventualmente puoi aggiungere un metodo helper per validare i tipi
+    public static function isValidType(string $type): bool
+    {
+        return in_array($type, self::TYPES);
     }
 }
