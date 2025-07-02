@@ -38,6 +38,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime', 
             'password' => 'hashed', //laravel cripta automaticamente la password
+            'is_active' => 'boolean', //converte in booleano
+            'points_accumulated' => 'integer', //converte in intero
+            'birth_date' => 'date', //converte in data
         ];
     }
 

@@ -23,6 +23,7 @@ class Court extends Model
     //cast degli attributi
     protected $casts = [
         'price_per_hour' => 'float',
+        'status' => 'string', // stato del campo, es: 'active', 'maintenance'
     ];
 
     // tipi consentiti per il campo 'type'

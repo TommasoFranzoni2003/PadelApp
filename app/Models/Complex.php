@@ -23,7 +23,7 @@ class Complex extends Model
 
     //orario di apertura gestiti con json
     protected $casts = [
-    'opening_hours' => 'array',
+        'opening_hours' => 'array',
     ];
 
     //relazione con gli N campi da padel

@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-
-//factory per la creazione di utenti fittizi
-class UserFactory extends Factory
+use Illuminate\Support\Str;
+//factory per la creazione di amministratori fittizi
+class AdminFactory extends Factory
 {
-    //metodo per definire un utente fittizio per il test del DB
+   
+    //metodo per definire un amministratore fittizio per il test del DB
     public function definition(): array
     {
         return [
@@ -21,8 +21,8 @@ class UserFactory extends Factory
             'gender' => $this->faker->randomElement(['M', 'F']),
             'tax_code' => strtoupper(Str::random(16)), //codice fiscale fittizio
             'phone' => $this->faker->phoneNumber,
-            'points_accumulated' => $this->faker->numberBetween(0, 500),
-            'is_active' => $this->faker->boolean(95), //95% di probabilità che l'utente sia attivo
+            'emergency_contact_phone' => $this->faker->phoneNumber,
+            'address' => $this->faker->address,
         ];
     }
 }

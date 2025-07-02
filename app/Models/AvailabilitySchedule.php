@@ -18,8 +18,10 @@ class AvailabilitySchedule extends Model
     ];
 
     protected $casts = [
-        'start_time' => 'time',
-        'end_time' => 'time',
+        'start_time' => 'datetime:H:i', 
+        'end_time' => 'datetime:H:i', 
+        'is_available' => 'boolean',
+        'day_of_week' => 'string', 
     ];
 
     //riferimento al campo
