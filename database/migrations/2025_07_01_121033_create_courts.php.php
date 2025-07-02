@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->id(); //id autoincrementale della prenotazione che funge come chiave primaria
             $table->string('name');
-            $table->enum('type', ['indoor', 'outdoor'])->default('outdoor')->after('some_column'); //tipo di campo indoor-outdoor 
+$table->enum('type', ['indoor', 'outdoor'])->default('outdoor'); //tipo di campo, indoor o outdoor
             $table->string('description')->nullable(); 
             $table->string('location'); 
             $table->decimal('price_per_hour', 8, 2); 

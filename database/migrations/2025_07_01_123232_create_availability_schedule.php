@@ -1,31 +1,32 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    //quando creo la tabella per le disponibilità del campo
-    public function up(): void
+    return new class extends Migration
     {
-        Schema::create('availability_schedule', function (Blueprint $table) {
-            $table->id(); // ID univoco per la disponibilità
-            $table->time('start_time'); 
-            $table->time('end_time'); 
-            $table->enum('day_of_week', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']); //giorno della settimana
-            $table->boolean('is_available')->default(true); //disponibilità del campo per
-            $table->timestamps();
-            //chiave esterna
-            $table->foreignId('court_id')->constrained()->onDelete('cascade'); //chiave esterna al campo a cui è riferita la disponibilità
-            //evito di avere duplicati per lo stesso giorno della settimana
-            $table->unique(['court_id', 'day_of_week', 'start_time', 'end_time']);
-        });
-    }
+        public function up(): void
+        {
+            Schema::create('availability_schedule', function (Blueprint $table) {
+                $table->id();
+                $table->time('start_time');
+                $table->time('end_time');
+                $table->enum('day_of_week', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']);
+                $table->boolean('is_available')->default(true);
+                $table->timestamps();
+                $table->foreignId('court_id')->constrained()->onDelete('cascade');
+                //Nome breve per evitare errore
+                $table->unique(
+                    ['court_id', 'day_of_week', 'start_time', 'end_time'], 
+                    'avail_sched_court_day_start_end_unique'
+                );
+            });
+        }
 
-    //quando elimino la tabella
-    public function down(): void
-    {
-        Schema::dropIfExists('availability_schedule');
-    }
-};
+        public function down(): void
+        {
+            Schema::dropIfExists('availability_schedule');
+        }
+    };
+?>
