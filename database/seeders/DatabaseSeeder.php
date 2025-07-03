@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
        $this->createUserSeeder();
-       $this->createAdminSeeder();
+
        $this->createComplexSeeder();
        $this->createCourtSeeder();
        $this->createAvailabilitySeeder();
@@ -119,50 +119,4 @@ class DatabaseSeeder extends Seeder
         Complex::factory(3)->create();
     }
 
-    //seeder per creare gli admin
-    private function createAdminSeeder()
-    {
-        //creo un admin specifico
-        Admin::factory()->create([
-            'id' => 1, //imposto l'ID per poterlo associare alle prenotazioni
-            'name' => 'Alessandro',
-            'surname' => 'Belussi',
-            'email' => 'a.belussi007@studenti.unibs.it',
-            'password' => bcrypt('0000'),
-            'birth_date' => '2003-04-29',
-            'gender' => 'M',
-            'tax_code' => 'BLSLSN03L07A000Z',
-            'phone' => '3401234567',
-            'emergency_contact_phone' => '3317512120',
-            'address' => 'Via Roma 19, Bergamo',
-        ]);
-        //creo un admin specifico
-        Admin::factory()->create([
-            'id' => 2, //imposto l'ID per poterlo associare alle prenotazioni
-            'name' => 'Vincenzo',
-            'surname' => 'Ingiaimo',
-            'email' => 'v.ingiaimo@studenti.unibs.it',
-            'password' => bcrypt('1234'),
-            'birth_date' => '2003-10-15',
-            'gender' => 'M',
-            'tax_code' => 'INGVNC03P15A000Z',
-            'phone' => '3473465119',
-            'emergency_contact_phone' => '3913503400',
-            'address' => 'Via Costellazione 1, Licata',
-        ]);
-       //creo un admin specifico
-        Admin::factory()->create([
-            'id' => 3, //imposto l'ID per poterlo associare alle prenotazioni
-            'name' => 'Tommaso',
-            'surname' => 'Franzoni',
-            'email' => 't.franzoni@studenti.unibs.it',
-            'password' => bcrypt('4321'),
-            'birth_date' => '2003-07-07',
-            'gender' => 'M',
-            'tax_code' => 'FRNTMS03L07B157X',
-            'phone' => '3313512921',
-            'emergency_contact_phone' => '3410095673',
-            'address' => 'Via Arici 117, Brescia',
-        ]);
-    }
 }

@@ -6,48 +6,62 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
 
-//classe che rappresenta il modello del cliente che interagisce con il sistema
 class User extends Authenticatable
 {
+    use HasApiTokens;
 
-    use HasFactory, Notifiable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
-        'surname',
         'email',
         'password',
-        'birth_date',
-        'gender',
-        'tax_code',
-        'phone',
-        'points_accumulated', //punti fedeltà accumulati
-        'is_active', //se l'utente è attivo o meno
     ];
 
-    //attributi mai mostrati quando si fa la serializzazione dell'oggetto
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
-    //conversione degli attributi automatica
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime', 
-            'password' => 'hashed', //laravel cripta automaticamente la password
-            'is_active' => 'boolean', //converte in booleano
-            'points_accumulated' => 'integer', //converte in intero
-            'birth_date' => 'date', //converte in data
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
         ];
     }
-
-    //prenotazioni associate all'utente
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
 }
-
