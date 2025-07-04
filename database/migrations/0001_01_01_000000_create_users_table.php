@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('tax_code')->unique();
             $table->string('phone');
-            $table->integer('points_accumulated')->default(0);
             $table->boolean('is_active')->default(true);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -26,16 +26,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('it_IT');
         return [
-            'name' => fake()->name(),
-            'surname' => fake()->lastName(),
-            'birth_date' => fake()->date(),
-            'gender' => fake()->randomElement(['male', 'female', 'other']),
-            'tax_code' => strtoupper(fake()->bothify('??????99A99A999A')),
-            'phone' => fake()->phoneNumber(),
-            'points_accumulated' => fake()->numberBetween(0, 1000),
-            'is_active' => fake()->boolean(90),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $faker->firstName(),
+            'surname' => $faker->lastName(),
+            'birth_date' => $faker->date(),
+            'gender' => $faker->randomElement(['male', 'female', 'other']),
+            'tax_code' => strtoupper($faker->bothify('??????99A99A999A')),
+            'phone' => $faker->phoneNumber(),
+            'is_active' => $faker->boolean(90),
+            'email' => $faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,

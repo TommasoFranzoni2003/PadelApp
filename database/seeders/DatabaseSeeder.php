@@ -10,39 +10,85 @@ use App\Models\AvailabilitySchedule as Availability;
 use App\Models\Complex;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
     //creo i vari seeder per popolare il database
     public function run(): void
     {
-       $this->createUserSeeder();
-
-       $this->createComplexSeeder();
-       $this->createCourtSeeder();
-       $this->createAvailabilitySeeder();
-       $this->createBookingSeeder();
+        $this->createPermissionSeeder();
+        $this->createRoleSeeder();
+        $this->createUserSeeder();
+        $this->createComplexSeeder();
+        $this->createCourtSeeder();
+        $this->createAvailabilitySeeder();
+        $this->createBookingSeeder();
     }
 
     //seeder per creare gli utenti
     private function createUserSeeder()
     {
-        //creo un utente specifico
+        //admin con id=1
         User::factory()->create([
-            'id' => 1, 
+            'name' => 'Alessandro',
+            'surname' => 'Belussi',
+            'email' => 'a.belussi007.studenti.unibs.it',
+            'password' => bcrypt('0000'),
+            'birth_date' => '2003-04-29',
+            'gender' => 'male',
+            'tax_code' => 'ABLSLS03D29A000Z',
+            'phone' => '3404869403',
+            'is_active' => true,
+        ]);
+        User::find(1)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
+        //admin con id=2
+        User::factory()->create([
+            'name' => 'Tommaso',
+            'surname' => 'Franzoni',
+            'email' => 't.franzoni.studenti.unibs.it',
+            'password' => bcrypt('1234'),
+            'birth_date' => '2003-07-07',
+            'gender' => 'male',
+            'tax_code' => 'FRNTSM03L07A000Z',
+            'phone' => '3313512921',
+            'is_active' => true,
+        ]);
+        User::find(2)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
+        //admin con id=3
+        User::factory()->create([
+            'name' => 'Vincenzo',
+            'surname' => 'Ingiaimo',
+            'email' => 'v.ingiaimo.studenti.unibs.it',
+            'password' => bcrypt('4321'),
+            'birth_date' => '2003-10-15',
+            'gender' => 'male',
+            'tax_code' => 'INGVNC03D15A000Z',
+            'phone' => '3473465119',
+            'is_active' => true,
+        ]);
+        User::find(3)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
+        //creo un utente specifico
+        $simpleUser= User::factory()->create([
             'name' => 'Alberto',
             'surname' => 'Ferrari',
             'email' => 'a.ferrari03.studenti.unibs.it',
             'password' => bcrypt('ironman'),
             'birth_date' => '2003-04-10',
-            'gender' => 'M',
+            'gender' => 'male',
             'tax_code' => 'AFRRBT03D10A000Z',
             'phone' => '3270921251',
-            'points_accumulated' => 0,
             'is_active' => true,
         ]);
+        //assegno il ruolo di admin all'utente con ID 1
+        $simpleUser->assignRole('user');
         //creo 10 utenti fittizzi
-        User::factory(10)->create();
+        $users= User::factory(10)->create();
+        //assegno a tutti gli utenti il ruolo di user
+        foreach ($users as $user) {
+            $user->assignRole('user');
+        }
     }
 
     //seeder per creare le prenotazioni
@@ -119,4 +165,47 @@ class DatabaseSeeder extends Seeder
         Complex::factory(3)->create();
     }
 
+    private function createPermissionSeeder()
+    {
+        //permessi dell'applicazione
+        Permission::create(['name' => 'booking_create']);
+        Permission::create(['name' => 'booking_view']);
+        Permission::create(['name' => 'booking_cancel']);
+        Permission::create(['name' => 'court_create']);
+        Permission::create(['name' => 'court_view']);
+        Permission::create(['name' => 'court_edit']);
+        Permission::create(['name' => 'court_delete']);
+        Permission::create(['name' => 'complex_create']);
+        Permission::create(['name' => 'complex_view']);
+        Permission::create(['name' => 'complex_edit']);
+        Permission::create(['name' => 'complex_delete']);
+    }
+
+    private function createRoleSeeder(): void
+    {
+        //ruolo di amministratore
+        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole->givePermissionTo([
+            'booking_create',
+            'booking_view',
+            'booking_cancel',
+            'court_create',
+            'court_view',
+            'court_edit',
+            'court_delete',
+            'complex_create',
+            'complex_view',
+            'complex_edit',
+            'complex_delete'
+        ]);
+        //ruolo di utente
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->givePermissionTo([
+            'booking_create',
+            'booking_view',
+            'booking_cancel',
+            'court_view',
+            'complex_view'
+        ]);
+    }
 }

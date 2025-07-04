@@ -10,14 +10,15 @@ class ComplexFactory extends Factory
     //funzione per definire i complessi fittizi dei vari campi
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('it_IT');
         return [
-            'name' => $this->faker->company, 
-            'description' => $this->faker->paragraph, 
-            'address' => $this->faker->streetAddress, 
-            'city' => $this->faker->city, 
-            'postal_code' => $this->faker->postcode, 
-            'phone' => $this->faker->phoneNumber, 
-            'email' => $this->faker->unique()->safeEmail, 
+            'name' => $faker->company, 
+            'description' => $faker->text(50), 
+            'address' => $faker->streetAddress, 
+            'city' => $faker->city, 
+            'postal_code' => $faker->postcode, 
+            'phone' => $faker->phoneNumber, 
+            'email' => $faker->unique()->safeEmail, 
             //orari di apertura del complesso prestabilito
             'opening_hours' => [
                 'monday' => '08:00-20:00',
