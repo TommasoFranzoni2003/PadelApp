@@ -7,7 +7,7 @@ Route::get('/laravel', function () {
 });
 
 Route::get('/', function () {
-    return view('enterpage');
+    return view('homepage');
 });
 
 Route::middleware([
