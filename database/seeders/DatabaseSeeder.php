@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Alessandro',
             'surname' => 'Belussi',
-            'email' => 'a.belussi007.studenti.unibs.it',
+            'email' => 'a.belussi007@studenti.unibs.it',
             'password' => bcrypt('0000'),
             'birth_date' => '2003-04-29',
             'gender' => 'male',
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Tommaso',
             'surname' => 'Franzoni',
-            'email' => 't.franzoni.studenti.unibs.it',
+            'email' => 't.franzoni@studenti.unibs.it',
             'password' => bcrypt('1234'),
             'birth_date' => '2003-07-07',
             'gender' => 'male',
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Vincenzo',
             'surname' => 'Ingiaimo',
-            'email' => 'v.ingiaimo.studenti.unibs.it',
+            'email' => 'v.ingiaimo@studenti.unibs.it',
             'password' => bcrypt('4321'),
             'birth_date' => '2003-10-15',
             'gender' => 'male',
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         $simpleUser= User::factory()->create([
             'name' => 'Alberto',
             'surname' => 'Ferrari',
-            'email' => 'a.ferrari03.studenti.unibs.it',
+            'email' => 'a.ferrari03@studenti.unibs.it',
             'password' => bcrypt('ironman'),
             'birth_date' => '2003-04-10',
             'gender' => 'male',
