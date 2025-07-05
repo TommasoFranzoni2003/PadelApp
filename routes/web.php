@@ -8,10 +8,7 @@ Route::get('/laravel', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    $courts = Court::all();
-    return view('homepage', compact('courts'));
-});
+Route::get('/', [CourtController::class, 'selectCourt']);
 
 Route::get('/addCourt', function () {
     return view('pages.court.addCourt');
@@ -23,7 +20,7 @@ Route::get('/viewCourt', [CourtController::class, 'showAll'])->name('court.show'
 
 Route::get('/editCourt', function () {
     return view('pages.court.editCourt');
-})->name('edit.show');
+})->name('court.edit');
 
 Route::middleware([
     'auth:sanctum',

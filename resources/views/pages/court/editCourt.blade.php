@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Court')
+@section('title', 'Edit Court')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">

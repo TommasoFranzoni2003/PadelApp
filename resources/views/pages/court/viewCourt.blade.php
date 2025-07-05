@@ -28,6 +28,13 @@
                             <p class="card-text"><strong>Stato:</strong> {{ ucfirst($court->status) }}</p>
                             <p class="card-text"><strong>Località:</strong> {{ $court->location }}</p>
                         </div>
+                        @if(Auth::user()->hasRole('admin'))
+                            <div class="card-footer text-center">
+                                <a href="{{ route('court.edit') }}" class="btn btn-primary mt-2 text-center" role="button">
+                                    Modifica
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @empty

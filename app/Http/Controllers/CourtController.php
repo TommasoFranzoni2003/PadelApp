@@ -47,6 +47,11 @@ class CourtController extends Controller
         return view('pages.court.viewCourt')->with('courts', $court);
     }
 
+    public function selectCourt($number = 9) {  //=> Default = 9
+        $courts = Court::take($number)->get();
+        return view('homepage', compact('courts'));
+    }
+
     public function delete() {
 
     }
