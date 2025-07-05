@@ -21,6 +21,10 @@ Route::post('/addCourt', [CourtController::class, 'store'])->name('court.store')
 
 Route::get('/viewCourt', [CourtController::class, 'showAll'])->name('court.show');
 
+Route::get('/editCourt', function () {
+    return view('pages.court.editCourt');
+})->name('edit.show');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

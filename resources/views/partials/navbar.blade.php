@@ -18,7 +18,7 @@
             <li><a class="dropdown-item" href="{{ route('court.show') }}">Visualizza Campi</a></li>
             
             @auth
-              @if (Auth::user()->role === 'admin')
+              @if (Auth::user()->hasRole('admin'))
                 <li><a class="dropdown-item" href="">Inserisci Campo</a></li>
                 <li><a class="dropdown-item" href="">Modifica Campo</a></li>
                 <li><a class="dropdown-item" href="">Rimuovi Campo</a></li>
@@ -29,7 +29,7 @@
 
         {{-- Dropdown Prenotazioni (solo per admin e user) --}}
         @auth
-          @if (Auth::user()->role === 'admin' || Auth::user()->role === 'user')
+          @if (Auth::user()->hasAnyRole(['admin', 'user']))
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="prenotazioniDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Prenotazioni

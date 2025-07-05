@@ -117,7 +117,8 @@ class DatabaseSeeder extends Seeder
             'status' => 'active',
             'description' => 'Campo da padel all\'aperto con erba sintetica',
             'location' => 'Lato est del complesso',
-            'price_per_hour' => 20.00
+            'price_per_hour' => 20.00,
+            'image_path' => 'courts/AjS1te4NkWlmAHS8JGVDrACHJBGyXckP2sbP95WN.webp'
         ]);
         //creo 5 campi da gioco fittizi
         Court::factory(5)->create();
