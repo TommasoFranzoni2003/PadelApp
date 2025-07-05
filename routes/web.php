@@ -7,7 +7,11 @@ Route::get('/laravel', function () {
 });
 
 Route::get('/', function () {
-    return view('enterpage');
+    return view('homepage');
+});
+
+Route::get('/addCourt', function () {
+    return view('pages.court.addCourt');
 });
 
 
