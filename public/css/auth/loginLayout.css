@@ -1,0 +1,47 @@
+.video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.7;
+  pointer-events: none;
+
+  /* Default: video normale, verticale */
+  transform: none;
+}
+
+/* Su desktop (da 768px in su) inverti orizzontalmente */
+@media (min-width: 768px) {
+  .video-bg {
+    transform: scaleX(-1);
+  }
+}
+
+/* Contenitore bianco sopra il video */
+.auth-container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Box login con contenuto allineato a sinistra */
+.auth-content {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  
+  /* Allineamento classico */
+  text-align: left;
+  display: block; /* oppure puoi rimuovere display flex se c’era */
+}
