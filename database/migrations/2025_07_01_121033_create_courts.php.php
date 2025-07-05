@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('location'); 
             $table->decimal('price_per_hour', 8, 2); 
             $table->boolean('is_available')->default(true); //disponibilità del campo
+            $table->string('image_path')->nullable();
             $table->timestamps(); //timestamp per la creazione e l'aggiornamento
 
             //chiavi esterne
