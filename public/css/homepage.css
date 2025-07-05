@@ -2,17 +2,17 @@ body {
   overflow-x: hidden;
 }
 
-.video-bg {
+.image-bg {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vh; /* ruotato: serve usare l'altezza della viewport */
-  height: 100vw; /* ruotato: serve usare la larghezza della viewport */
-  transform: rotate(90deg) translateY(-100%);
-  transform-origin: top left;
-  object-fit: cover;
-  opacity: 0.7;
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../image/homepage-bg.webp'); 
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  /*opacity: 0.7;*/
 }
 
 .section {
@@ -29,7 +29,7 @@ body {
   align-items: center;
 
   background: rgba(255, 255, 255, 0.1); /* Semitrasparente */
-  color: #0D47A1;
+  color: #E4E1B6;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
@@ -73,7 +73,7 @@ body {
 .section .subtitle {
   margin: 0;
   font-weight: normal;
-  color: #555;
+  color: #E4E1B6;
   text-align: center;
 }
 
@@ -120,14 +120,17 @@ body {
 /******* GESTIONE MENU STICKY ********/
 /* Navbar: stile di partenza */
 .custom-navbar {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  z-index: 1030; /* sopra gli altri */
-  position: relative; /* di default */
+  position: fixed;               
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;                 
   background-color: transparent !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .custom-navbar.sticky {
-  position: fixed;   /* rende la navbar fissa in cima */
+  position: fixed;   
   top: 0;
   left: 0;
   width: 100%;
@@ -177,14 +180,23 @@ body {
   opacity: 1 !important;
 }
 
+/*** BUTTON ***/
 .btn {
   background-color: #0D47A1 !important;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover {
+  color: #E4E1B6;
+  font-size: 17px;
+  transform: scale(1.1);   /* => Ingrandisce del 10% */
+  transition: transform 0.3s ease;
 }
 
 
 /****** SEZIONE CON SFONDO ********/
 .bg-image {
-  background-image: url('https://a.storyblok.com/f/320069/2716x739/4eae11b673/energy-blue-with-stroke-background.svg'); 
+  background-image: url('../image/bgSection.svg'); 
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -209,4 +221,29 @@ body {
 
 div .bg-image {
   margin-top: 150px;
+}
+
+div i {
+  margin-top: 50px;
+  font-size: 55px;
+  padding: 10px;
+}
+
+div i:hover {
+  color: #0D47A1;
+  font-size: 60px;
+}
+
+/**** SEZIONE CARD ****/
+.card-body {
+  position: relative;
+  min-height: 300px; 
+}
+
+.card-body .btn {
+  position: absolute;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0 !important;
 }
