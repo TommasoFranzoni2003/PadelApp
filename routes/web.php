@@ -10,6 +10,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/addCourt', function () {
+    return view('pages.court.addCourt');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
