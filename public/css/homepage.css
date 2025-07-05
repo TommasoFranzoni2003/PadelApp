@@ -12,7 +12,6 @@ body {
   background-size: cover;
   background-position: center;
   z-index: -1;
-  /*opacity: 0.7;*/
 }
 
 .section {
@@ -57,7 +56,6 @@ body {
   margin-bottom: 1rem;
 
   font-style: italic;
-  color: #CD5B43;
   font-weight: 400;
   font-size: 1.25rem;
   text-align: center;
@@ -114,7 +112,7 @@ body {
 }
 
 .nav-link:hover {
-  color: #CD5B43;
+  color: #E4E1B6;
 }
 
 /******* GESTIONE MENU STICKY ********/
@@ -215,13 +213,11 @@ body {
   min-height: 500px;
 }
 
-.panel .card {
-  min-height: 350px;
-}
-
 div .bg-image {
   margin-top: 150px;
 }
+
+/*** SEZIONE CON LE ICONE ***/
 
 div i {
   margin-top: 50px;
@@ -246,4 +242,8 @@ div i:hover {
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0 !important;
+}
+
+.panel .card {
+  min-height: 350px;
 }
