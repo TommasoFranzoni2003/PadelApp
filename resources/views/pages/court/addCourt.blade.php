@@ -4,6 +4,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/addCourt.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
 @endpush
 
 @section('header')
@@ -11,8 +12,6 @@
 @endsection
 
 @section('content')
-
-    
 
     <div class="container pt-5 mt-5 mb-4">
     @if(session('success'))

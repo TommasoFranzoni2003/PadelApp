@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .video-bg {
   position: fixed;
   top: 0;
@@ -25,7 +29,7 @@
   align-items: center;
 
   background: rgba(255, 255, 255, 0.1); /* Semitrasparente */
-  color: #E4E1B6;
+  color: #0D47A1;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
@@ -80,20 +84,31 @@
 }
 
 .panel {
-  height: 100vh;
-  width: 100%;
-  background-color: #fff;
+  background-color: #f8f8f2;
+  padding: 2rem 1rem;
   position: relative;
-  z-index: 2; /*Sopra al video e al testo*/
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+  z-index: 2;
+}
+
+.panel-header {
+  max-width: 700px;
+  margin: 0 auto 1rem auto;
+}
+
+.panel-header h2 {
+  color: #0D47A1;
+  margin-top: 30px;
+}
+
+.panel-header h4 {
+  margin-bottom: 50px; 
+  margin-top: 0px;
+  font-size: 22px;
 }
 
 /* Navbar: modifica del coloro delle voci menu */
 .nav-link {
-  color: #E4E1B6;
+  color: #FDF5E6;
   font-weight: 600;
   transition: color 0.3s ease;
 }
@@ -102,7 +117,7 @@
   color: #CD5B43;
 }
 
-/*** GESTIONE MENU STICKY ***/
+/******* GESTIONE MENU STICKY ********/
 /* Navbar: stile di partenza */
 .custom-navbar {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -116,22 +131,82 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #0C2A28 !important;
+  background-color: #0D47A1 !important;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .custom-navbar.sticky .navbar-nav .nav-link,
 .custom-navbar.sticky .navbar-brand {
-  color: #E4E1B6 !important;
+  color: #FDF5E6 !important;
   font-weight: 600;
 }
 
 .custom-navbar.sticky .navbar-nav .nav-link:hover {
-  color: #CD5B43 !important;
+  color: #E4E1B6 !important;
 }
 
-/*
-.custom-navbar.sticky .dropdown-menu:hover,
-.custom-navbar.sticky .dropdown-item:hover {
-  background-color: #CD5B43;
-} */
+
+/********  STYLE AROUSEL  ********/
+.carousel-indicators {
+  position: static; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.carousel-indicators button[type="button"] {
+  background-color: #0D47A1 !important;
+  opacity: 0.7;
+  width: 12px;
+  height: 12px;
+  border-radius: 50% !important;
+  border: none !important;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-indicators .active {
+  opacity: 1 !important;
+}
+
+.carousel-indicators button[type="button"]:hover {
+  opacity: 1 !important;
+}
+
+.btn {
+  background-color: #0D47A1 !important;
+}
+
+
+/****** SEZIONE CON SFONDO ********/
+.bg-image {
+  background-image: url('https://a.storyblok.com/f/320069/2716x739/4eae11b673/energy-blue-with-stroke-background.svg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  min-height: 500px;
+}
+
+.panel .card {
+  min-height: 350px;
+}
+
+div .bg-image {
+  margin-top: 150px;
+}

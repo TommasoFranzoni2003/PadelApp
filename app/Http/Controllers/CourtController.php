@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CourtController extends Controller
@@ -30,6 +31,20 @@ class CourtController extends Controller
         Court::create($validate);
 
         return redirect()->back()->with("success", "Court added");
+    }
+
+    public function showAll() {
+        $query = Court::query();
+
+        /** @var User $user */
+        $user = Auth::user();   //=> Specifico il tipo di $user (VS non sa qual è il tipo ritornato generando)
+
+        if(!($user && $user->hasRole('admin')))
+            $query->where('status', 'active');
+        
+        $court = $query->get();
+
+        return view('pages.court.viewCourt')->with('courts', $court);
     }
 
     public function delete() {
