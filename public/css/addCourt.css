@@ -1,47 +1,5 @@
-
-/* Navbar: modifica del coloro delle voci menu */
-.nav-link {
-    color: #E4E1B6;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-  
-.nav-link:hover {
-    color: #CD5B43;
-}
-  
-.custom-navbar {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1030; /* sopra gli altri */
-    position: relative; /* di default */
-    background-color: transparent !important;
-}
-  
-.custom-navbar {
-    position: fixed;   /* rende la navbar fissa in cima */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #0C2A28 !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-  
-.custom-navbar .navbar-nav .nav-link,
-.custom-navbar .navbar-brand {
-    color: #E4E1B6 !important;
-    font-weight: 600;
-}
-
-.custom-navbar .navbar-nav .nav-link:hover {
-    color: #CD5B43 !important;
-}
-
+/* STILE BUTTON */
 .btn-color {
-    background-color: #E4E1B6;
-    color: #CD5B43;
-}
-
-.btn-color:hover {
-    background-color: #CD5B43;
+    background-color: #0D47A1;
     color: #E4E1B6;
 }

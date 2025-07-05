@@ -15,7 +15,7 @@
             Gestione Campi
           </a>
           <ul class="dropdown-menu" aria-labelledby="campiDropdown">
-            <li><a class="dropdown-item" href="">Visualizza Campi</a></li>
+            <li><a class="dropdown-item" href="{{ route('court.show') }}">Visualizza Campi</a></li>
             
             @auth
               @if (Auth::user()->role === 'admin')
