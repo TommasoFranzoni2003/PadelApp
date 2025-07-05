@@ -18,6 +18,8 @@ class Court extends Model
         'price_per_hour',   
         'status',           //es: attivo/manutenzione/...
         'complex_id',       //struttura a cui appartiene il campo
+        'is_available',
+        'image_path'
     ];
 
     //cast degli attributi

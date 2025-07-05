@@ -61,7 +61,7 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="">Profilo</a></li>
               <li>
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('logout') }}" x-data>
                   @csrf
                   <button type="submit" class="dropdown-item">Logout</button>
                 </form>

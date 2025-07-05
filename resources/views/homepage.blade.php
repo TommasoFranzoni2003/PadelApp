@@ -23,8 +23,56 @@
     </div>
 
     <div id="panel" class="panel">
-        <h2>Ingegneria Estrema</h2>
+    <div id="carouselCourts" class="carousel slide" data-bs-ride="carousel">
+
+        {{-- Indicatori (pallini) --}}
+        <div class="carousel-indicators">
+            @foreach($courts->chunk(3) as $chunkIndex => $chunk)
+                <button type="button" data-bs-target="#carouselCourts" data-bs-slide-to="{{ $chunkIndex }}" 
+                    class="{{ $chunkIndex === 0 ? 'active' : '' }}" 
+                    aria-current="{{ $chunkIndex === 0 ? 'true' : 'false' }}" 
+                    aria-label="Slide {{ $chunkIndex + 1 }}">
+                </button>
+            @endforeach
+        </div>
+
+        <div class="carousel-inner">
+            @foreach($courts->chunk(3) as $chunkIndex => $chunk)
+                <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                    <div class="container">
+                        <div class="row">
+                            @foreach($chunk as $court)
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <img src="{{ asset('storage/' . $court->image_path) }}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $court->name }}</h5>
+                                            <p class="card-text">{{ $court->description }}</p>
+                                            <p class="card-text"><small class="text-muted">{{ $court->type }}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- FRECCE RIMOSSE --}}
+        {{-- 
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCourts" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselCourts" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+        --}}
+
     </div>
+</div>
+
+
 @endsection
 
 @push('scripts')
