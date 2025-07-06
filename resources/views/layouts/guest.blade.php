@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!--tolgo fiveicon per adesso -->
+    <link rel="icon" href="data:,">
+
     <title>Autenticazione</title>
 
     <!-- Fonts -->
