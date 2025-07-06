@@ -1,0 +1,14 @@
+/* STILE BUTTON */
+.btn-color {
+    background-color: #0D47A1;
+    color: #E4E1B6;
+    transition: transform 0.3s ease;
+  }
+  
+.btn-color:hover {
+    background-color: #0D47A1;
+    color: #E4E1B6;
+    font-size: 17px;
+    /*transform: scale(1.1);   /* => Ingrandisce del 10% */
+    transition: transform 0.3s ease;
+}

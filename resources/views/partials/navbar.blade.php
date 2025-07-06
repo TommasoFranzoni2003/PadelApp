@@ -19,7 +19,7 @@
             
             @auth
               @if (Auth::user()->hasRole('admin'))
-                <li><a class="dropdown-item" href="">Inserisci Campo</a></li>
+                <li><a class="dropdown-item" href="{{ route('court.store') }}">Inserisci Campo</a></li>
                 <li><a class="dropdown-item" href="">Modifica Campo</a></li>
                 <li><a class="dropdown-item" href="">Rimuovi Campo</a></li>
               @endif

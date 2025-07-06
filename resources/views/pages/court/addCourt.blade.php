@@ -1,79 +1,98 @@
 @extends('layouts.app')
 
-@section('title', 'Add Court')
+@section('title', 'Add Court') <!-- TITOLO -->
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/addCourt.css') }}">
+@push('styles') <!-- AGGIUNTA STILI -->
+    <link rel="stylesheet" href="{{ asset('css/formCourt.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
 @endpush
 
-@section('header')
-    @include('partials.navbar')
+@section('header')  
+    @include('partials.navbar') <!-- MENU -->
 @endsection
 
-@section('content')
+@section('content') <!-- CONTENT -->
 
     <div class="container pt-5 mt-5 mb-4">
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
+        @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- FORM -->
         <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputName">Nome</label>
-                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Nome">
+
+                <div class="row"> <!-- 1° RIGA -->
+                    <!-- COLONNA DI SINISTRA: dimensione = metà row -->
+                    <div class="col-md-6"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
+                        <div class="form-group py-2">    <!-- NOME -->
+                            <label for="inputName">Nome</label>
+                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome del campo" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- DESCRIZIONE -->
+                            <label for="inputDescription">Descrizione</label>
+                            <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Inserisci una descrizione">
+                        </div>
+                        <div class="form-group py-2">    <!-- LOCATION -->
+                            <label for="inputLocation">Location</label>
+                            <input type="text" class="form-control" name="location" id="inputLocation" placeholder="Inserisci una location" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- PREZZO -->
+                            <label for="inputPrice">Prezzo € / h</label>
+                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" placeholder="Inserisci il prezzo" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- ID DEL COMPLESSO-->
+                            <label for="inputComplexId">Id del complesso</label>
+                            <input type="number" class="form-control" name="complex_id" id="inputComplexId" placeholder="Inserisci l'id del complesso" required>
+                        </div>
+                    </div>
+
+                    <!-- COLONNA DI DESTRA: dimensione = metà row, display flex, column flex, allineamento a sinistra e centrato nella colonna -->
+                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center">
+                        <!-- PADDING LUNGO Y SU OGNI ELEMENTO-->
+                        <div class="form-group py-3">    <!-- TIPO DI CAMPO -->
+                            <label for="selectType">Tipo</label> <br>
+                            <select class="custom-select" name="type" id="selectType" required>
+                                <option value="" disabled selected>Seleziona un tipo</option>
+                                <option value="indoor">Indoor</option>
+                                <option value="outdoor">Outdoor</option>
+                            </select>
+                        </div>
+                        <div class="form-group py-3">    <!-- STATO DEL CAMPO -->
+                            <label for="selectStatus">Stato del campo</label> <br>
+                            <select class="custom-select" name="status" id="selectStatus" required>
+                                <option selected disabled>Seleziona uno stato</option>
+                                <option value="active">Attivo</option>
+                                <option value="inactive">Inattivo</option>
+                                <option value="maintenance">In Manutenzione</option>
+                            </select>
+                        </div>
+                        <div class="form-group py-3">    <!-- IMMAGINE DI CARICAMENTO -->
+                            <label for="image">Immagine del campo</label>
+                            <input type="file" class="form-control" name="image_path" id="image">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="my-1 mr-2" for="selectType">Tipo</label> <br>
-                    <select class="custom-select my-1 mr-sm-2" name="type" id="selectType">
-                        <option value="" disabled selected>Seleziona una voce</option>
-                        <option value="indoor">Indoor</option>
-                        <option value="outdoor">Outdoor</option>
-                    </select>
+
+                <!-- 2° RIGA -->
+                <div class="row mt-5 text-center">
+                    <div class="col d-flex justify-content-center">
+                        <button type="submit" class="btn btn-color">Aggiungi</button>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputDescription">Descrizione</label>
-                     <input type="text" class="form-control" name="description" id="inputDescription" placeholder="">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputLocation">Location</label>
-                    <input type="text" class="form-control" name="location" id="inputLocation" placeholder="">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPrice">Prezzo € / h</label>
-                    <input type="number" step="0.01" class="form-control" name="price_per_hour" id="inputPrice" placeholder="">
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="my-1 mr-2" for="selectType">Status</label> <br>
-                    <select class="custom-select my-1 mr-sm-2" name="status" id="selectType">
-                        <option selected>Seleziona una voce</option>
-                        <option value="active">Attivo</option>
-                        <option value="maintenance">In Manutenzione</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputComplexId">Id Complesso</label>
-                    <input type="number" class="form-control" name="complex_id" id="inputComplexId" placeholder="">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="image">Immagine del campo</label>
-                    <input type="file" class="form-control" name="image_path" id="image">
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-color">Add</button>
         </form>
     </div>
 @endsection

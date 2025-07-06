@@ -30,7 +30,7 @@
                         </div>
                         @if(Auth::user() && Auth::user()->hasRole('admin'))
                             <div class="card-footer text-center">
-                                <a href="{{ route('court.edit') }}" class="btn btn-primary mt-2 text-center" role="button">
+                                <a href="{{ route('court.edit', ['courtId' => $court->id ?? null]) }}" class="btn btn-primary mt-2 text-center" role="button">
                                     Modifica
                                 </a>
                             </div>

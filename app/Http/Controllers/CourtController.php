@@ -16,7 +16,7 @@ class CourtController extends Controller
             'description' => 'string|max:255',
             'location' =>  'required|string|max:255',
             'price_per_hour' =>  'required|numeric|min:0',
-            'status' => 'required|in:active,maintenance',
+            'status' => 'required|in:active,inactive,maintenance',
             'complex_id' => 'required|integer',
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
@@ -52,11 +52,21 @@ class CourtController extends Controller
         return view('homepage', compact('courts'));
     }
 
+    public function edit($courtId = null) {
+        $court = [];
+
+        if($courtId == null){
+            return ;
+        }
+        $court = Court::all()->findOrFail($courtId);
+        return view('pages.court.editCourt')->with('court', $court);
+    }
+
     public function delete() {
 
     }
 
-    public function update() {
-
+    public function update() {   
+       
     }
 }

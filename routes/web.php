@@ -18,9 +18,9 @@ Route::post('/addCourt', [CourtController::class, 'store'])->name('court.store')
 
 Route::get('/viewCourt', [CourtController::class, 'showAll'])->name('court.show');
 
-Route::get('/editCourt', function () {
-    return view('pages.court.editCourt');
-})->name('court.edit');
+Route::get('/editCourt/{courtId?}', [CourtController::class, 'edit'])->name('court.edit');
+
+
 
 Route::middleware([
     'auth:sanctum',
