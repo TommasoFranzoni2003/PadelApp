@@ -3,8 +3,8 @@
 @section('title', 'Edit Court') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/formCourt.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/court/formCourt.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
 @endpush
 
 @section('header')  
@@ -13,56 +13,96 @@
 
 @section('content') <!-- CONTENT -->
 
-    <div class="container pt-5 mt-5 mb-4">
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli del campo</h1>
+    <h4 class="fst-italic text-center text-muted"> 
+        Aggiorna le informazioni relative al campo selezionato.<br>
+        Puoi modificare nome, descrizione, location, prezzo e molto altro.
+    </h4>
+
+    <div class="container mb-4">
+
+        @if ($errors->any())    <!-- MESSAGGIO DI ERRORE -->
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <!-- FORM -->
-        <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('court.update', $court->id) }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-row">
-                <div class="form-group col-md-6"> <!-- NOME CAMPO -->
-                    <label for="inputName">Nome</label>
-                    <input type="text" class="form-control" name="name" id="inputName" value="{{ $court->name }}" required>
+
+                <div class="row"> <!-- 1° RIGA -->
+                    <!-- COLONNA DI SINISTRA: dimensione = metà row -->
+                    <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
+                        <div class="form-group py-2">    <!-- NOME -->
+                            <label for="inputName">Nome</label>
+                            <input type="text" class="form-control" name="name" id="inputName" value="{{ $court->name }}" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- DESCRIZIONE -->
+                            <label for="inputDescription">Descrizione</label>
+                            <input type="text" class="form-control" name="description" id="inputDescription" value="{{ $court->description }}">
+                        </div>
+                        <div class="form-group py-2">    <!-- LOCATION -->
+                            <label for="inputLocation">Location</label>
+                            <input type="text" class="form-control" name="location" id="inputLocation" value="{{ $court->location }}" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- PREZZO -->
+                            <label for="inputPrice">Prezzo € / h</label>
+                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" value="{{ $court->price_per_hour }}" required>
+                        </div>
+                        <div class="form-group py-2">    <!-- ID DEL COMPLESSO-->
+                            <label for="inputComplexId">Id del complesso</label>
+                            <input type="number" class="form-control" name="complex_id" id="inputComplexId" value="{{ $court->complex_id }}" required>
+                        </div>
+                    </div>
+
+                    <!-- COLONNA DI DESTRA: dimensione = metà row, display flex, column flex, allineamento a sinistra e centrato nella colonna -->
+                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center bg-column">
+                        <!-- PADDING LUNGO Y SU OGNI ELEMENTO-->
+                        <div class="form-group py-3">    <!-- TIPO DI CAMPO -->
+                            <label for="selectType">Tipo</label> <br>
+                            <select class="custom-select" name="type" id="selectType" required>
+                                <option value="" disabled selected>Seleziona un tipo</option>
+                                <option value="indoor" @selected($court->type == 'indoor')>Indoor</option>
+                                <option value="outdoor" @selected($court->type == 'outdoor')>Outdoor</option>
+                            </select>
+                        </div>
+                        <div class="form-group py-3">    <!-- STATO DEL CAMPO -->
+                            <label for="selectStatus">Stato del campo</label> <br>
+                            <select class="custom-select" name="status" id="selectStatus" required>
+                                <option selected disabled>Seleziona uno stato</option>
+                                <option value="active" @selected($court->status == 'active')>Attivo</option>
+                                <option value="inactive" @selected($court->status == 'inactive')>Inattivo</option>
+                                <option value="maintenance" @selected($court->status == 'maintenance')>In Manutenzione</option>
+                            </select>
+                        </div>
+                        <div class="form-group py-3">    <!-- IMMAGINE DI CARICAMENTO -->
+                            <label for="image">Immagine del campo</label>
+                            
+                            <!-- Input per caricare una nuova immagine, sempre visibile -->
+                            <input type="file" class="form-control mt-3" name="image_path" id="image">
+
+                        <!--    @if ($court->image_path)
+                                
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/' . $court->image_path) }}" alt="Immagine campo" style="max-width: 100%; max-height: 150px; border-radius: 8px;">
+                                </div>
+                            @endif
+                        -->
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">   <!-- TIPO CAMPO -->
-                    <label class="my-1 mr-2" for="selectType">Tipo</label> <br>
-                    <select class="custom-select my-1 mr-sm-2" name="type" id="selectType">
-                        <option value="" disabled selected>Seleziona una voce</option>
-                        <option value="indoor">Indoor</option>
-                        <option value="outdoor">Outdoor</option>
-                    </select>
+
+                <!-- 2° RIGA -->
+                <div class="row text-center p-5">
+                    <div class="col d-flex justify-content-center">
+                        <button type="submit" class="btn btn-color">Modifica</button>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">   <!-- DESCRIZIONE CAMPO -->
-                    <label for="inputDescription">Descrizione</label>
-                     <input type="text" class="form-control" name="description" id="inputDescription" placeholder="">
-                </div>
-                <div class="form-group col-md-6">   <!-- LOCATION CAMPO -->
-                    <label for="inputLocation">Location</label>
-                    <input type="text" class="form-control" name="location" id="inputLocation" placeholder="">
-                </div>
-                <div class="form-group col-md-6"> <!-- PREZZO CAMPO -->
-                    <label for="inputPrice">Prezzo € / h</label>
-                    <input type="number" step="0.01" class="form-control" name="price_per_hour" id="inputPrice" placeholder="">
-                </div>
-                <div class="form-group col-md-6">   <!-- STATO DEL CAMPO -->
-                    <label class="my-1 mr-2" for="selectType">Status</label> <br>
-                    <select class="custom-select my-1 mr-sm-2" name="status" id="selectType">
-                        <option selected>Seleziona una voce</option>
-                        <option value="active">Attivo</option>
-                        <option value="inactive">Inattivo</option>
-                        <option value="maintenance">In Manutenzione</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6"> <!-- ID DEL COMPLESSO IN CUI SI TROVA -->
-                    <label for="inputComplexId">Id Complesso</label>
-                    <input type="number" class="form-control" name="complex_id" id="inputComplexId" placeholder="">
-                </div>
-                <div class="form-group col-md-6">  <!-- CARICAMENTO IMMAGINE DEL CAMPO -->
-                    <label for="image">Immagine del campo</label>
-                    <input type="file" class="form-control" name="image_path" id="image">
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-color">Add</button>
         </form>
     </div>
 @endsection

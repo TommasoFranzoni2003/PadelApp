@@ -3,8 +3,8 @@
 @section('title', 'Add Court') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/formCourt.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/court/formCourt.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
 @endpush
 
 @section('header')  
@@ -13,14 +13,18 @@
 
 @section('content') <!-- CONTENT -->
 
-    <div class="container pt-5 mt-5 mb-4">
+    @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
+        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+    @endif
 
-        @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
+    <h4 class="fst-italic text-center text-muted"> 
+        Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
+        Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
+    </h4>
 
+    <div class="container mb-4">
+        
         @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
             <div class="alert alert-danger">
                 <ul>
@@ -37,7 +41,7 @@
 
                 <div class="row"> <!-- 1° RIGA -->
                     <!-- COLONNA DI SINISTRA: dimensione = metà row -->
-                    <div class="col-md-6"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
+                    <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
                         <div class="form-group py-2">    <!-- NOME -->
                             <label for="inputName">Nome</label>
                             <input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome del campo" required>
@@ -61,7 +65,7 @@
                     </div>
 
                     <!-- COLONNA DI DESTRA: dimensione = metà row, display flex, column flex, allineamento a sinistra e centrato nella colonna -->
-                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center">
+                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center bg-column">
                         <!-- PADDING LUNGO Y SU OGNI ELEMENTO-->
                         <div class="form-group py-3">    <!-- TIPO DI CAMPO -->
                             <label for="selectType">Tipo</label> <br>
@@ -88,7 +92,7 @@
                 </div>
 
                 <!-- 2° RIGA -->
-                <div class="row mt-5 text-center">
+                <div class="row text-center p-5">
                     <div class="col d-flex justify-content-center">
                         <button type="submit" class="btn btn-color">Aggiungi</button>
                     </div>
@@ -96,3 +100,7 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/pages/successModal.js') }}"></script>
+@endpush
