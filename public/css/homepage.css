@@ -147,7 +147,7 @@ body {
 }
 
 
-/********  STYLE AROUSEL  ********/
+/********  STYLE CAROUSEL  ********/
 .carousel-indicators {
   position: static; 
   display: flex;
@@ -233,7 +233,7 @@ div i:hover {
 /**** SEZIONE CARD ****/
 .card-body {
   position: relative;
-  min-height: 300px; 
+  min-height: 200px; 
 }
 
 .card-body .btn {
