@@ -13,14 +13,18 @@
 
 @section('content') <!-- CONTENT -->
 
+    @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
+        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+    @endif
+
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
+    <h4 class="fst-italic text-center text-muted"> 
+        Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
+        Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
+    </h4>
+
     <div class="container mb-4">
-
-        @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
+        
         @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
             <div class="alert alert-danger">
                 <ul>
@@ -96,3 +100,7 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/pages/successModal.js') }}"></script>
+@endpush

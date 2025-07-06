@@ -13,15 +13,15 @@
 
 @section('content') <!-- CONTENT -->
 
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli del campo</h1>
+    <h4 class="fst-italic text-center text-muted"> 
+        Aggiorna le informazioni relative al campo selezionato.<br>
+        Puoi modificare nome, descrizione, location, prezzo e molto altro.
+    </h4>
+
     <div class="container mb-4">
 
-        @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
+        @if ($errors->any())    <!-- MESSAGGIO DI ERRORE -->
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)

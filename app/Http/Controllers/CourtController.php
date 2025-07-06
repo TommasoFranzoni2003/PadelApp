@@ -30,7 +30,7 @@ class CourtController extends Controller
         
         Court::create($validate);
 
-        return redirect()->back()->with("success", "Court added");
+        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'success' => 'Campo inserito con successo']);
     }
 
     public function showAll() {
@@ -84,8 +84,7 @@ class CourtController extends Controller
 
         $court->update($validate); 
 
-        return redirect()->route('court.edit', $courtId)->with('success', 'Campo aggiornato con successo');
-
+        return redirect()->route('court.show', $courtId)->with(['title' => 'Modifica Effettuata', 'success' => 'Campo aggiornato con successo']);
     }
 
     public function delete(Request $request, $courtId) {
