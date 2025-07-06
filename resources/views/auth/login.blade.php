@@ -35,18 +35,18 @@
             <!-- Checkbox per il ricordo della sessione -->
             <div class="form-check mb-3">
                 <x-checkbox id="remember_me" name="remember" class="form-check-input" />
-                <label for="remember_me" class="form-check-label">{{ __('Remember me') }}</label>
+                <label for="remember_me" class="form-check-label">{{ __('Ricordati di me') }}</label>
             </div>
 
             <!-- Pulsante di login e link per il recupero della password -->
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
                 @if (Route::has('password.request'))
                     <a class="text-decoration-underline small text-primary mb-2 mb-sm-0" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('Hai dimenticato la password?') }}
                     </a>
                 @endif
 
-                <x-button class="btn btn-primary ms-3">
+                <x-button  class="btn-color btn-primary text-center">
                     {{ __('Log in') }}
                 </x-button>
             </div>
