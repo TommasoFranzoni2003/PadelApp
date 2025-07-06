@@ -13,7 +13,7 @@
 
 @section('content') <!-- CONTENT -->
 
-    <div class="container pt-5 mt-5 mb-4">
+    <div class="container mb-4">
 
         @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
             <div class="alert alert-success">
@@ -37,7 +37,7 @@
 
                 <div class="row"> <!-- 1° RIGA -->
                     <!-- COLONNA DI SINISTRA: dimensione = metà row -->
-                    <div class="col-md-6"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
+                    <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
                         <div class="form-group py-2">    <!-- NOME -->
                             <label for="inputName">Nome</label>
                             <input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome del campo" required>
@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- COLONNA DI DESTRA: dimensione = metà row, display flex, column flex, allineamento a sinistra e centrato nella colonna -->
-                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center">
+                    <div class="col-md-6 d-flex flex-column align-items-start justify-content-center bg-column">
                         <!-- PADDING LUNGO Y SU OGNI ELEMENTO-->
                         <div class="form-group py-3">    <!-- TIPO DI CAMPO -->
                             <label for="selectType">Tipo</label> <br>
@@ -88,7 +88,7 @@
                 </div>
 
                 <!-- 2° RIGA -->
-                <div class="row mt-5 text-center">
+                <div class="row text-center p-5">
                     <div class="col d-flex justify-content-center">
                         <button type="submit" class="btn btn-color">Aggiungi</button>
                     </div>
