@@ -62,10 +62,6 @@ class CourtController extends Controller
         return view('pages.court.editCourt')->with('court', $court);
     }
 
-    public function delete() {
-
-    }
-
     public function update(Request $request, $courtId) {   
 
         $court = Court::findOrFail($courtId);
@@ -90,5 +86,17 @@ class CourtController extends Controller
 
         return redirect()->route('court.edit', $courtId)->with('success', 'Campo aggiornato con successo');
 
+    }
+
+    public function delete(Request $request, $courtId) {
+        try {
+            $court = Court::findOrFail($courtId);
+            $court->delete();
+        }
+        catch(\Exception $e){
+            return redirect()->route('court.show');
+        }
+
+        return redirect()->route('court.show');
     }
 }

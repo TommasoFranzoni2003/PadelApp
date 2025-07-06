@@ -21,6 +21,8 @@ Route::get('/viewCourt', [CourtController::class, 'showAll'])->name('court.show'
 Route::get('/editCourt/{courtId?}', [CourtController::class, 'edit'])->name('court.edit');
 Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('court.update');
 
+Route::get('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
+
 
 
 Route::middleware([

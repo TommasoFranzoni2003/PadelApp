@@ -3,7 +3,8 @@
 @section('title', 'View Court')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/court/viewCourt.css') }}">
 @endpush
 
 @section('header')
@@ -32,6 +33,9 @@
                             <div class="card-footer text-center">
                                 <a href="{{ route('court.edit', ['courtId' => $court->id ?? null]) }}" class="btn btn-primary mt-2 text-center" role="button">
                                     Modifica
+                                </a>
+                                <a href="{{ route('court.delete', ['courtId' => $court->id ?? null]) }}" class="btn btn-danger mt-2 text-center" role="button">
+                                    Elimina
                                 </a>
                             </div>
                         @endif

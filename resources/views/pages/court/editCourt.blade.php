@@ -3,8 +3,8 @@
 @section('title', 'Edit Court') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/formCourt.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/court/formCourt.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
 @endpush
 
 @section('header')  
