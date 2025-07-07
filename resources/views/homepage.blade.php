@@ -90,8 +90,8 @@
                                 <h4 class="card-title mt-3">Strutture</h4>
                                 <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
                                 <p class="card-text fs-5">Scopri le diverse aree del centro sportivo, ognuna con caratteristiche uniche pensate per offrirti il massimo comfort.</p>
-                                <a href="" class="btn btn-primary text-center" role="button">
-                                    Strutture
+                                <a href="{{ route('complex.showAll') }}" class="btn btn-primary text-center" role="button">
+                                Strutture
                                 </a>
                             </div>
                         </div>
