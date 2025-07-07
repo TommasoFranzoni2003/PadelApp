@@ -129,9 +129,9 @@
                 {{ __('Aggiorna') }}
             </x-button>
 
-            <x-button class="btn-color btn-secondary" type="button" onclick="window.location='{{ route('profile.show') }}'">
-            {{ __('Torna indietro') }}
-        </x-button>
+            <x-button class="btn-color btn-secondary" onclick="window.location='{{ route('homepage') }}'">
+              {{ __('Torna indietro') }}
+            </x-button>
         </div>
     </form>
 </x-guest-layout>

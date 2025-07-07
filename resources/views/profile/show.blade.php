@@ -60,7 +60,7 @@
                     </x-button>
                 </a>
 
-                <x-button class="btn-color btn-secondary" onclick="window.history.back();">
+                <x-button class="btn-color btn-secondary" onclick="window.location='{{ route('homepage') }}'">
                     {{ __('Torna indietro') }}
                 </x-button>
 
