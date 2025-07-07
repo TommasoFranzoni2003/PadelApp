@@ -14,7 +14,7 @@
 @section('content') <!-- CONTENT -->
 
     @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
-        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
     <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
