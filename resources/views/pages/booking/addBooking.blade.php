@@ -3,9 +3,7 @@
 @section('title', 'Visualizza Prenotazioni') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <!-- CSS di flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  <!-- CSS di flatpickr -->
     <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
 @endpush
 
@@ -14,6 +12,11 @@
 @endsection
 
 @section('content')
+
+    @if(session('message'))  <!-- GESTIONE DEI MESSGGI / AVVISI CON IL MODALE -->
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
+    @endif
+
     <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
     <h4 class="fst-italic text-center text-muted"> 
         Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
@@ -57,6 +60,7 @@
     <!-- JS di flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <!-- PASSAGGIO DEI DATI NECESSARI: prenotazioni presenti nel DB e orari di apertura della struttura -->
     @php
         $openingHoursJson = json_encode(optional($court->complex)->opening_hours ?? []);
         $bookingSlotsJson = json_encode($bookings->map(function ($b) {  /* Collection di oggetti Booking */
@@ -71,6 +75,8 @@
         const openingHours = JSON.parse('{!! $openingHoursJson !!}');
         const bookings = JSON.parse('{!! $bookingSlotsJson !!}');
     </script>
-    
-    <script src="{{ asset('js/pages/addBooking.js') }}"></script>
+
+    <script src="{{ asset('js/pages/addBooking.js') }}"></script>   <!-- SCRIPTS -->
+    <script src="{{ asset('js/pages/successModal.js') }}"></script> <!-- SCRIPTS -->
 @endpush
+

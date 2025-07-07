@@ -25,7 +25,7 @@ class BookingController extends Controller
             'startTime' => 'required|date_format:H:i'
         ]);
 
-         /** @var User $user */
+        /** @var User $user */
         $user = Auth::user(); //=> Recupera l'utente
 
         $startDateTime = \Carbon\Carbon::parse($validate['day'] . ' ' . $validate['startTime']);    //=> Crea la data
@@ -34,16 +34,16 @@ class BookingController extends Controller
 
         //=> CONTROLLO: orario passato
         if($startDateTime->lessThan((now())))
-            return back()->withErrors(['message' => "L'orario selezionato è già passato..."]);
+            return back()->withErrors(['title' => 'Errore durante la prenotazione', 'message' => "L'orario selezionato è già passato..."]);
 
         //=> CONTROLLO: sovrapposizioni
         if($this->hasOverlap($court->id, $startDateTime, $endDateTime))
-            return back()->withErrors(['messsage' => "La prenotazione è già stata effettuata..."]);
+            return back()->withErrors(['title' => 'Errore durante la prenotazione', 'messsage' => "La prenotazione è già stata effettuata..."]);
 
         //=> CONTROLLO: struttura chiusa
         if($this->isClosedDay($court, $startDateTime))
-            return back()->withErrors(['message' => "La struttura è chiusa in questo giorno..."]);
-        
+            return back()->withErrors(['title' => 'Errore durante la prenotazione', 'message' => "La struttura è chiusa in questo giorno..."]);
+    
         Booking::create([
 
             'user_id' => $user->id,
@@ -53,7 +53,7 @@ class BookingController extends Controller
             'status' => Booking::STATUS_PENDING,
         ]);
 
-        return redirect()->route('booking.show');
+        return redirect()->route('booking.show')->with(['title' => 'Operazione Riuscita', 'message' => 'Prenotazione realizzata con successo!']);
     }
 
     //=> Metodo per verificare la presenza di sovrapposizioni
@@ -81,4 +81,36 @@ class BookingController extends Controller
 
         return in_array($dayName, $closedDays);
     }
+
+    public function show(Request $request) {
+        $startWeek = now()->startOfWeek();
+        return view('pages.booking.viewBooking', ['startWeek' => $startWeek]);
+    }
+    
+
+    public function events(Request $request) {
+        $start = $request->query('start');
+        $end = $request->query('end');
+
+        $query = Booking::with('court')
+            ->whereBetween('start_time', [$start, $end]);
+
+        /** @var User $user */
+        $user = Auth::user();
+
+        if($user->hasRole('user'))
+            $query->where('user_id', $user->id);
+
+        $bookings = $query->get();
+
+        return response()->json($bookings->map(function ($booking) {
+            return [
+                'title' => $booking->court->name,
+                'start' => $booking->start_time->toIso8601String(),
+                'end' => $booking->end_time->toIso8601String(),
+                'color' => '#28a745',
+            ];
+        }));
+    }
+
 }

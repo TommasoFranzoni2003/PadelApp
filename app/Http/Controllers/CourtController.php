@@ -31,7 +31,7 @@ class CourtController extends Controller
         
         Court::create($validate);
 
-        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'success' => 'Campo inserito con successo']);
+        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'message' => 'Campo inserito con successo']);
     }
 
     public function showAll() {
@@ -55,10 +55,6 @@ class CourtController extends Controller
 
     public function edit($courtId = null) {
         $court = [];
-
-        /*if($courtId == null){
-            abort(404);
-        }*/
 
         try {
             $court = Court::findOrFail($courtId);

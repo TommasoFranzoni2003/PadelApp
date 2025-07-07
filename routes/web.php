@@ -29,7 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/addBooking/{court?}', [BookingController::class, 'store'])->name('booking.store');
 });
 
-Route::get('/viewBooking', function () { return view('pages.booking.viewBooking');})->name('booking.show');
+Route::get('/viewBooking', [BookingController::class, 'show'])->name('booking.show');
+Route::get('/booking/events', [BookingController::class, 'events'])->name('booking.events');
+
 
 Route::middleware([
     'auth:sanctum',

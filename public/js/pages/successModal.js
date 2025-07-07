@@ -1,11 +1,13 @@
 // SCRIPT PER L'ATTIVAZIONE DEL SUCCESS MODAL
 
 document.addEventListener("DOMContentLoaded", function () {
-    const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
-    messageModal.show();
+    const modalElement = document.getElementById('messageModal');
+    if(modalElement) {
+        const messageModal = new bootstrap.Modal(modalElement);
+        messageModal.show();
 
-    //=> Chiusura automatica
-    setTimeout(() => {
-        messageModal.hide();
-    }, 5000);
+        setTimeout(() => {
+            messageModal.hide();
+        }, 3000);
+    }
 });
