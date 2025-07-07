@@ -34,3 +34,14 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//rotta per la pagina di modifica dell'account
+Route::get('/profile/edit', function () {
+    return view('profile.update-profile-information-form');
+})->name('profile.edit');
+
+
+//rotta per la pagina di eliminazione dell'account
+Route::get('/profile/delete', function () {
+    return view('profile.delete-user-form');
+})->name('profile.delete');

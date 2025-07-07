@@ -59,7 +59,7 @@
               {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="">Profilo</a></li>
+              <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profilo</a>
               <li>
                 <form method="POST" action="{{ route('logout') }}" x-data>
                   @csrf

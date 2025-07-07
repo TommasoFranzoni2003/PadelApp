@@ -19,7 +19,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'surname' => ['nullable', 'string', 'max:255'],
+            'birth_date' => ['nullable', 'date'],
+            'tax_code' => ['nullable', 'string', 'max:16'],
+            'phone' => ['nullable', 'string', 'max:20'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -27,30 +30,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->updateProfilePhoto($input['photo']);
         }
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
-        } else {
-            $user->forceFill([
-                'name' => $input['name'],
-                'email' => $input['email'],
-            ])->save();
-        }
-    }
-
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  array<string, string>  $input
-     */
-    protected function updateVerifiedUser(User $user, array $input): void
-    {
+        // Aggiorna i dati senza toccare l'email
         $user->forceFill([
             'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
+            'surname' => $input['surname'] ?? $user->surname,
+            'birth_date' => $input['birth_date'] ?? $user->birth_date,
+            'tax_code' => $input['tax_code'] ?? $user->tax_code,
+            'phone' => $input['phone'] ?? $user->phone,
         ])->save();
-
-        $user->sendEmailVerificationNotification();
     }
 }

@@ -1,45 +1,80 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+<x-guest-layout>
+    <!-- css specifico -->
+    <link rel="stylesheet" href="{{ asset('css/auth/show.css') }}">
+
+    <div class="max-w-3xl mx-auto py-12 px-8 bg-white rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">
+            {{ __('Profilo Utente') }}
         </h2>
-    </x-slot>
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+        <div class="bg-white rounded-lg p-6">
+            <!-- info del profilo -->
+            <div class="profile-container">
+                <div class="profile-row">
+                    <div class="label">Nome:</div>
+                    <div class="value">{{ Auth::user()->name }}</div>
                 </div>
 
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
+                <div class="profile-row">
+                    <div class="label">Cognome:</div>
+                    <div class="value">{{ Auth::user()->surname }}</div>
                 </div>
 
-                <x-section-border />
-            @endif
+                <div class="profile-row">
+                    <div class="label">Email:</div>
+                    <div class="value">{{ Auth::user()->email }}</div>
+                </div>
 
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
+                <div class="profile-row">
+                    <div class="label">Data di nascita:</div>
+                    <div class="value">{{ Auth::user()->birth_date->format('d/m/Y') }}</div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="label">Data creazione account:</div>
+                    <div class="value">{{ Auth::user()->created_at->format('d/m/Y') }}</div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="label">Genere:</div>
+                    <div class="value">{{ Auth::user()->gender == 'male' ? 'Maschio' : (Auth::user()->gender == 'female' ? 'Femmina' : 'Altro') }}</div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="label">Codice Fiscale:</div>
+                    <div class="value">{{ Auth::user()->tax_code }}</div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="label">Telefono:</div>
+                    <div class="value">{{ Auth::user()->phone }}</div>
+                </div>
             </div>
 
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
+           <!-- Contenitore Bottoni -->
+            <div class="button-row">
+                <!-- bottone per la modifica -->
+                <a href="{{ route('profile.edit') }}"  style="text-decoration: none; color: inherit;">
+                    <x-button class="btn-color btn-primary">
+                        {{ __('Modifica account') }}
+                    </x-button>
+                </a>
 
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
-        </div>
+                <x-button class="btn-color btn-secondary" onclick="window.history.back();">
+                    {{ __('Torna indietro') }}
+                </x-button>
+
+                <!--elimina account-->
+                <a href="{{ route('profile.delete') }}"  style="text-decoration: none; color: inherit;">
+                    <x-button class="btn-color btn-primary red">
+                        {{ __('Elimina account') }}
+                    </x-button>
+                </a>
+
+                
+            </div>
+
     </div>
-</x-app-layout>
+
+</x-guest-layout>
+
