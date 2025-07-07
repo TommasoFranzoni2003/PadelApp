@@ -33,3 +33,25 @@
 .fc-toolbar-title {
     text-transform: capitalize;
 }
+
+/* => EVENTO */
+.fc-event {
+    background-color: #0D47A1 !important;
+    border-color: #0D47A1 !important;
+    transition: background-color 0.5s ease, transform 0.3s ease;
+    transform-origin: center center;
+}
+
+.fc-event:hover {
+    transform: scale(1.05);
+    padding: 3px;
+}
+
+/* SFONDO DEL GIORNO ODIERNO */
+.fc-timegrid-col.fc-day-today { /* => Cambia il colore di sfondo della colonna del giorno corrente */
+    background-color: #74acffaa !important; 
+}
+
+.fc-col-header-cell.fc-day-today {  /* => Tolgo lo sfondo dall'header del giorno odierno */
+    background-color: transparent !important;
+}
