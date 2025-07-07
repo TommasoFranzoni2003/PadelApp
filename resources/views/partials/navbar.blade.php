@@ -29,11 +29,11 @@
             
             @auth
               @if (Auth::user()->hasRole('admin'))
-                <li><a class="dropdown-item" href="">Inserisci Struttura</a></li>
+                <li><a class="dropdown-item" href="{{ route('complex.store') }}">Inserisci Struttura</a></li>
               @endif
             @endauth
 
-            <li><a class="dropdown-item" href="">Visualizza Struttura</a></li>
+            <li><a class="dropdown-item" href="{{ route('complex.show') }}">Visualizza Struttura</a></li>
           </ul>
         </li>
 

@@ -3,7 +3,8 @@
 @section('title', 'Aggiungi Complesso')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/pages/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/court/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
 @endpush
 
 @section('header')

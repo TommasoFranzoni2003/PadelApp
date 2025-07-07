@@ -3,7 +3,7 @@
 @section('title', 'View Complex') <!-- TITOLO -->
 
 @push('styles') <!-- STILI SPECIFICI -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/complex/viewComplex.css') }}">
 @endpush
 
@@ -14,7 +14,7 @@
 @section('content')
 
     @if(session('success'))
-        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
     <div class="container py-5" style="margin-top: 75px">
