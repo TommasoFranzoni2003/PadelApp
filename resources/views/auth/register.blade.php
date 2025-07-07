@@ -89,7 +89,7 @@
                     {{ __('Già Registrato?') }}
                 </a>
 
-                <x-button class="btn btn-primary ms-3">
+                <x-button class="btn-color btn-primary text-center">
                     {{ __('Registrati') }}
                 </x-button>
             </div>
