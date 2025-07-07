@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Booking;
+use App\Models\Court;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class BookingController extends Controller
+{
+    public function showBookingForm(Court $court){
+
+        //=> Prende le prenotazioni future
+        $bookings = Booking::where('court_id', $court->id)
+                            ->whereDate('start_time', ">=", now())
+                            ->get(['start_time', 'end_time']); 
+
+        return view('pages.booking.addBooking', ['court' => $court, 'bookings' => $bookings]);
+    }
+
+    public function store(Request $request, Court $court){
+        $validate = $request->validate([
+            'day' => 'required|date|after_or_equal:today',
+            'startTime' => 'required|date_format:H:i'
+        ]);
+
+         /** @var User $user */
+        $user = Auth::user(); //=> Recupera l'utente
+
+        $startDateTime = \Carbon\Carbon::parse($validate['day'] . ' ' . $validate['startTime']);    //=> Crea la data
+
+        $endDateTime = $startDateTime->copy()->addMinutes(90);
+
+        //=> CONTROLLO: orario passato
+        if($startDateTime->lessThan((now())))
+            return back()->withErrors(['message' => "L'orario selezionato è già passato..."]);
+
+        //=> CONTROLLO: sovrapposizioni
+        if($this->hasOverlap($court->id, $startDateTime, $endDateTime))
+            return back()->withErrors(['messsage' => "La prenotazione è già stata effettuata..."]);
+
+        //=> CONTROLLO: struttura chiusa
+        if($this->isClosedDay($court, $startDateTime))
+            return back()->withErrors(['message' => "La struttura è chiusa in questo giorno..."]);
+        
+        Booking::create([
+
+            'user_id' => $user->id,
+            'court_id' => $court->id,
+            'start_time' => $startDateTime,
+            'end_time' => $endDateTime,
+            'status' => Booking::STATUS_PENDING,
+        ]);
+
+        return redirect()->route('booking.show');
+    }
+
+    //=> Metodo per verificare la presenza di sovrapposizioni
+    private function hasOverlap(int $courtId, $start, $end): bool {
+
+        //start1 < end2 AND start2 < end1
+        //=> L'inizio della prenotazione esistente è prima della fine della nuova
+        //=> L'inizio della nuova prenotazione è prima della fine della prenotazione esistente
+
+        return Booking::where('court_id', $courtId)
+            ->where('start_time', '<', $end)
+            ->where('end_time', '>', $start)
+            ->exists();
+    }
+
+    //=> Metodo per verificare se il giorno corrisponde ad un giorno di chiusura per la struttura
+    private function isClosedDay($court, $startDateTime): bool {
+        $openingHours = $court->complex->opening_hours;
+
+        $closedDays = array_filter(array_keys($openingHours), function($day) use ($openingHours) {
+            return strtolower($openingHours[$day]) === 'closed';
+        });
+
+        $dayName = strtolower($startDateTime->format('l'));
+
+        return in_array($dayName, $closedDays);
+    }
+}

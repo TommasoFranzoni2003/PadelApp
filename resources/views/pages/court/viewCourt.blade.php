@@ -37,16 +37,22 @@
                             <p class="card-text"><strong>Stato:</strong> {{ ucfirst($court->status) }}</p>
                             <p class="card-text"><strong>Località:</strong> {{ $court->location }}</p>
                         </div>
-                        @if(Auth::user() && Auth::user()->hasRole('admin'))  <!-- SOLO PER ADMIN -->
+                        @if(Auth::user())  <!-- SOLO PER ADMIN -->
                             <div class="card-footer text-center">    <!-- CARD FOOTER -->
-                                <a href="{{ route('court.edit', ['courtId' => $court->id ?? null]) }}" class="btn btn-primary mt-2 text-center" role="button">
-                                    Modifica
-                                </a>
-                                
-                                <a href="{{ route('court.delete', ['courtId' => $court->id ?? null]) }}" class="btn btn-danger mt-2 text-center" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{$court->id}}">
-                                    Elimina
-                                </a>
-                                <x-modals.delete-modal :id="$court->id" :name="$court->name" />
+                                @if(Auth::user()->hasRole('admin'))
+                                    <a href="{{ route('court.edit', ['courtId' => $court->id ?? null]) }}" class="btn btn-primary mt-2 text-center" role="button">
+                                        Modifica
+                                    </a>
+                                    
+                                    <a href="{{ route('court.delete', ['courtId' => $court->id ?? null]) }}" class="btn btn-danger mt-2 text-center" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{$court->id}}">
+                                        Elimina
+                                    </a>
+                                    <x-modals.delete-modal :id="$court->id" :name="$court->name" />
+                                @else
+                                    <a href="{{ route('booking.add', ['court' => $court]) }}" class="btn btn-primary mt-2 text-center" role="button">
+                                        Prenota
+                                    </a>
+                                @endif
                             </div>
                         @endif
                     </div>

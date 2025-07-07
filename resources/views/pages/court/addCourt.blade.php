@@ -24,16 +24,6 @@
     </h4>
 
     <div class="container mb-4">
-        
-        @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <!-- FORM -->
         <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data">

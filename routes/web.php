@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CourtController;
 use App\Models\Court;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,10 @@ Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('
 Route::post('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
 
 //***  BOOKING'S ROUTES ***//
-Route::get('/addBooking', function () { return view('pages.booking.addBooking');})->name('booking.add');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/addBooking/{court?}', [BookingController::class, 'showBookingForm'])->name('booking.add');
+    Route::post('/addBooking/{court?}', [BookingController::class, 'store'])->name('booking.store');
+});
 
 Route::get('/viewBooking', function () { return view('pages.booking.viewBooking');})->name('booking.show');
 
