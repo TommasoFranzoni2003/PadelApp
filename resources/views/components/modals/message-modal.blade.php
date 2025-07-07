@@ -1,6 +1,6 @@
 <!-- MODALE PER IL MESSAGGIO DI SUCCESSO -->
 @props(['title', 'message'])
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

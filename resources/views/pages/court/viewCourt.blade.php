@@ -3,7 +3,7 @@
 @section('title', 'View Court') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/court/viewCourt.css') }}">
 @endpush
 
@@ -13,9 +13,10 @@
 
 @section('content') <!-- CONTENT -->
 
-    @if(session('success'))  <!-- MESSAGGIO DI SUCCESSO -->
-        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+    @if(session('message'))  <!-- GESTIONE DEI MESSGGI / AVVISI CON IL MODALE -->
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
+
 
     <!-- CONTAINER PRINCIPALE -->
     <div class="container py-5" style="margin-top: 75px">

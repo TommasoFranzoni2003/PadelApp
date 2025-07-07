@@ -8,11 +8,10 @@ Route::get('/laravel', function () {
     return view('welcome');
 });
 
-Route::get('/', [CourtController::class, 'selectCourt']);
+Route::get('/', [CourtController::class, 'selectCourt'])->name('homepage');
 
-Route::get('/addCourt', function () {
-    return view('pages.court.addCourt');
-});
+//***  COURT'S ROUTES ***//
+Route::get('/addCourt', function () { return view('pages.court.addCourt'); });
 
 Route::post('/addCourt', [CourtController::class, 'store'])->name('court.store');
 
@@ -23,7 +22,10 @@ Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('
 
 Route::post('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
 
+//***  BOOKING'S ROUTES ***//
+Route::get('/addBooking', function () { return view('pages.booking.addBooking');})->name('booking.add');
 
+Route::get('/viewBooking', function () { return view('pages.booking.viewBooking');})->name('booking.show');
 
 Route::middleware([
     'auth:sanctum',

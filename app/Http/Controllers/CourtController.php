@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -55,10 +56,17 @@ class CourtController extends Controller
     public function edit($courtId = null) {
         $court = [];
 
-        if($courtId == null){
-            return ;
+        /*if($courtId == null){
+            abort(404);
+        }*/
+
+        try {
+            $court = Court::findOrFail($courtId);
         }
-        $court = Court::all()->findOrFail($courtId);
+        catch(ModelNotFoundException $e){   //=> Se l'id non esiste, ritorna alla pagina di visualizzazione e mostra l'errore
+            return redirect()->route('court.show')->with(['title' => 'Errore durante la ricerca', 'message' => 'Campo non trovato']);
+        }
+
         return view('pages.court.editCourt')->with('court', $court);
     }
 
@@ -84,7 +92,7 @@ class CourtController extends Controller
 
         $court->update($validate); 
 
-        return redirect()->route('court.show', $courtId)->with(['title' => 'Modifica Effettuata', 'success' => 'Campo aggiornato con successo']);
+        return redirect()->route('court.show', $courtId)->with(['title' => 'Modifica Effettuata', 'message' => 'Campo aggiornato con successo']);
     }
 
     public function delete(Request $request, $courtId) {
