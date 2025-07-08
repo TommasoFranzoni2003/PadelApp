@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Court;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourtController extends Controller
 {
     public function store(Request $request) {
 
-        $validate = $request->validate([
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'type' => 'required|in:indoor,outdoor',
             'description' => 'string|max:255',
@@ -21,16 +23,20 @@ class CourtController extends Controller
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
+        if($validate->fails())
+            return redirect()->back()->withErrors($validate);
+
         if ($request->hasFile('image_path')) {   //=> Se l'immagine esiste viene salvata
             $imagePath = $request->file('image_path')->store('courts', 'public'); // salva in storage/app/public/courts
             $validate['image_path'] = $imagePath;
         }
 
-        $validate['is_available'] = true;
+        $data = $validate->validated();
+        $data['is_available'] = true;
         
-        Court::create($validate);
+        Court::create($data);
 
-        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'success' => 'Campo inserito con successo']);
+        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'message' => 'Campo inserito con successo']);
     }
 
     public function showAll() {
@@ -55,10 +61,13 @@ class CourtController extends Controller
     public function edit($courtId = null) {
         $court = [];
 
-        if($courtId == null){
-            return ;
+        try {
+            $court = Court::findOrFail($courtId);
         }
-        $court = Court::all()->findOrFail($courtId);
+        catch(ModelNotFoundException $e){   //=> Se l'id non esiste, ritorna alla pagina di visualizzazione e mostra l'errore
+            return redirect()->route('court.show')->with(['title' => 'Errore durante la ricerca', 'message' => 'Campo non trovato']);
+        }
+
         return view('pages.court.editCourt')->with('court', $court);
     }
 
@@ -84,7 +93,7 @@ class CourtController extends Controller
 
         $court->update($validate); 
 
-        return redirect()->route('court.show', $courtId)->with(['title' => 'Modifica Effettuata', 'success' => 'Campo aggiornato con successo']);
+        return redirect()->route('court.show', $courtId)->with(['title' => 'Modifica Effettuata', 'message' => 'Campo aggiornato con successo']);
     }
 
     public function delete(Request $request, $courtId) {

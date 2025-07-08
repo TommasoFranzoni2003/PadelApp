@@ -1,4 +1,4 @@
-/*** BUTTON ***/
+/*** BUTTON DELLA VIEW ***/
 .btn-primary {
     background-color: #0D47A1 !important;
     transition: transform 0.3s ease;
@@ -12,6 +12,6 @@
 .btn-primary:hover,
 .btn-danger:hover {
     color: #E4E1B6;
-    transform: scale(1.05);   /* => Ingrandisce del 10% */
+    transform: scale(1.05);   /* => Ingrandisce del 5% */
     transition: transform 0.3s ease;
 }

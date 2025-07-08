@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('postal_code'); // codice postale del complesso
             $table->string('phone');
             $table->json('opening_hours'); // orari di apertura del complesso, gestiti come JSON
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->text('description')->nullable(); // descrizione del complesso
             $table->timestamps(); // timestamps per created_at e updated_at
         });

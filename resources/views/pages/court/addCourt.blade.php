@@ -4,7 +4,7 @@
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/court/formCourt.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/menuOtherPages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
 @endpush
 
 @section('header')  
@@ -13,8 +13,8 @@
 
 @section('content') <!-- CONTENT -->
 
-    @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
-        <x-modals.success-modal :title="session('title')" :message="session('success')" />
+    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE --> 
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
     <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
@@ -24,9 +24,11 @@
     </h4>
 
     <div class="container mb-4">
-        
-        @if ($errors->any())    <!-- MESSAGGIO DI ALLARME -->
-            <div class="alert alert-danger">
+
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -34,9 +36,9 @@
                 </ul>
             </div>
         @endif
-
+        
         <!-- FORM -->
-        <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data" novalidate>
             @csrf
 
                 <div class="row"> <!-- 1° RIGA -->

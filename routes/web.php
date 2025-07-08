@@ -1,22 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\Auth\CustomRegisteredUserController;
 use App\Http\Controllers\CourtController;
 use App\Models\Court;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplexController;
 
 Route::get('/laravel', function () {
     return view('welcome');
 });
 
-Route::get('/', [CourtController::class, 'selectCourt'])->name('homepage');
+Route::get('/', [CourtController::class, 'selectCourt']);
 
-
-Route::get('/addCourt', function () {
-    return view('pages.court.addCourt');
-});
+//***  COURT'S ROUTES ***//
+Route::get('/addCourt', function () { return view('pages.court.addCourt'); });
 
 Route::post('/addCourt', [CourtController::class, 'store'])->name('court.store');
 
@@ -27,6 +23,8 @@ Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('
 
 Route::post('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
 
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -36,27 +34,3 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
-//rotta per la pagina di modifica dell'account
-Route::get('/profile/edit', function () {
-    return view('profile.update-profile-information-form');
-})->name('profile.edit');
-
-//rotta specifica per modificare l'immagine
-Route::put('/user/profile-information', [ProfileController::class, 'update'])
-    ->name('user-profile-information.update');
-
-//rotta per eliminare l'account
-Route::delete('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
-
-//rotta per registrare l'utente
-Route::post('/register', [CustomRegisteredUserController::class, 'store'])->name('register');
-
-//rotte per modificare la password
-Route::get('/profile/password', function () {
-    return view('profile.update-password-form');
-})->name('password.update.form');
-
-Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
-
-
