@@ -31,10 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.toggle-closed').forEach(toggle => {
         const card = toggle.closest('.card');
         const body = card.querySelector('.card-body');
+        const openInput = card.querySelector('.open-time');
+        const closeInput = card.querySelector('.close-time');
 
         if (toggle.checked) {
-            body.classList.add('closed');
+            body.classList.add('card-body-closed');
             card.classList.add('closed-full');
+
+            //=> Disabilita input e svuota valori
+            openInput.disabled = true;
+            closeInput.disabled = true;
+            openInput.value = '';
+            closeInput.value = '';
+        } else {
+            body.classList.remove('card-body-closed');
+            card.classList.remove('closed-full');
+
+            openInput.disabled = false;
+            closeInput.disabled = false;
         }
     });
 

@@ -4,7 +4,7 @@
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/court/viewCourt.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/viewButton.css') }}">
 @endpush
 
 @section('header') 

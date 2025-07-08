@@ -3,7 +3,9 @@
 @section('title', 'Modifica Complesso')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/pages/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/complex/addComplex.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 @endpush
 
 @section('header')
@@ -11,53 +13,129 @@
 @endsection
 
 @section('content')
-<div class="container py-5" style="margin-top: 75px">
-    <h1 class="text-center mb-4 text-primary fw-bold">Modifica complesso</h1>
 
-    <form action="{{ route('complex.update', ['complexId' => $complex->id]) }}" method="POST" class="mx-auto" style="max-width: 700px;">
-        @csrf
+    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE -->
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
+    @endif
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $complex->name }}" required>
-        </div>
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli della struttura</h1>
+    <h4 class="fst-italic text-center text-muted"> 
+        Aggiorna le informazioni relative alla struttura. <br>
+        Puoi modificare nome, descrizione, location, prezzo e molto altro.
+    </h4>
 
-        <div class="mb-3">
-            <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control" id="description" name="description" rows="3">{{ $complex->description }}</textarea>
-        </div>
+    <div class="container mb-4">
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <div class="mb-3">
-            <label for="address" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control" id="address" name="address" value="{{ $complex->address }}" required>
-        </div>
+        <form action="{{ route('complex.update', ['complexId' => $complex->id]) }}" method="POST" class="mx-auto" novalidate>
+            @csrf
 
-        <div class="mb-3">
-            <label for="city" class="form-label">Città</label>
-            <input type="text" class="form-control" id="city" name="city" value="{{ $complex->city }}" required>
-        </div>
+            <div class="row"> <!-- 1° RIGA -->
+                <div class="col-md-6 p-5"> <!-- COLONNA DI SINISTRA --> 
+                    <div class="form-group py-2"> <!-- NOME -->
+                        <label for="name" class="form-label">Nome della struttura</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $complex->name }}" required>
+                    </div>
+                    <div class="form-group py-2">  <!-- DESCRIZIONE -->
+                        <label for="description" class="form-label">Descrizione</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ $complex->description }}</textarea>
+                    </div>
+                    <div class="form-group py-2"> <!-- EMAIL -->
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $complex->email }}">
+                    </div>
+                    <div class="form-group py-2"> <!-- TELEFONO -->
+                        <label for="phone" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $complex->phone }}" required>
+                    </div>
+                </div>
+                <div class="col-md-6 p-5 d-flex flex-column align-items-start justify-content-center bg-column"> <!-- COLONNA DI DESTRA -->
+                    <div class="form-group py-2">  <!-- CITTA -->
+                        <label for="city" class="form-label">Città</label>
+                        <input type="text" class="form-control" id="city" name="city" value="{{ $complex->city }}" required>
+                    </div>
+                    <div class="form-group py-2"> <!-- INDIRIZZO -->
+                        <label for="address" class="form-label">Indirizzo</label>
+                        <input type="text" class="form-control" id="address" name="address" value="{{ $complex->address }}" required>
+                    </div>
+                    <div class="form-group py-2">  <!-- CAP -->
+                        <label for="postal_code" class="form-label">CAP</label>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ $complex->postal_code }}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-center mt-100"> <!-- CREAZIONE DELLA RIGA -->
+                @php 
+                    $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+                @endphp   
 
-        <div class="mb-3">
-            <label for="postal_code" class="form-label">CAP</label>
-            <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ $complex->postal_code }}" required>
-        </div>
+                <div class="col-1 d-flex justify-content-center mt-3">    <!-- 1° COLONNA (SINISTRA) -->
+                    <div class="swiper-button-prev position-static"></div> <!-- FRECCIA SINISTRA (PRECEDENTE)-->
+                </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ $complex->email }}">
-        </div>
+                <div class="col-10"> <!-- COLONNA CENTRALE - SWIPER -->
+                    <div class="swiper mySwiper">   <!-- SWIPER -->
+                        <div class="swiper-wrapper">
+                            @foreach($days as $day)
+                           
+                            @php
+                                $dayData = old("opening_hours.$day", $complex->opening_hours[$day] ?? ['closed' => true, 'open' => null, 'close' => null]);
+                                $isClosed = isset($dayData['closed']) && $dayData['closed'];
+                                $open = $isClosed ? null : ($dayData['open'] ?? null);
+                                $close = $isClosed ? null : ($dayData['close'] ?? null);
+                            @endphp
+                                <div class="swiper-slide">  <!-- SINGOLA SLIDE -->
+                                    <div class="card">  <!-- CARD -->
+                                        <div class="card-header d-flex justify-content-between align-items-center"> <!-- CARD HEADER-->
+                                            <strong>{{ ucfirst($day) }}</strong>
+                                            <div class="form-check form-switch">
+                                                <input type="checkbox" class="form-check-input toggle-closed" id="closed_{{$day}}"
+                                                    name="opening_hours[{{ $day }}][closed]" value="1" {{ $isClosed ? 'checked' : '' }}>
+                                                <label for="closed_{{ $day }}" class="form-check-label">{{ $isClosed ? 'Chiuso' : 'Aperto' }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="card-body d-flex gap-2 align-items-center"> <!-- CARD BODY -->
+                                            <label class="form-label mb-0">Dalle</label>
+                                            <input type="time" name="opening_hours[{{ $day }}][open]" class="form-control open-time"
+                                                value="{{ $open }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
 
-        <div class="mb-3">
-            <label for="phone" class="form-label">Telefono</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ $complex->phone }}">
-        </div>
+                                            <label class="form-label mb-0">Alle</label>
+                                            <input type="time" name="opening_hours[{{ $day }}][close]" class="form-control close-time"
+                                                value="{{ $close }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div> 
 
-        <div class="mb-3">
-            <label for="opening_hours" class="form-label">Orari di apertura (JSON)</label>
-            <textarea class="form-control" id="opening_hours" name="opening_hours" rows="2">{{ $complex->opening_hours }}</textarea>
-        </div>
+                <div class="col-1 d-flex justify-content-center mt-3"> <!-- 3° COLONNA (DESTRA) -->
+                    <div class="swiper-button-next position-static"></div> <!-- FRECCIA DESTRA (SUCCESSIVO)-->
+                </div>
+            </div>
 
-        <button type="submit" class="btn btn-success">Salva modifiche</button>
-    </form>
-</div>
+            <div class="row tex-center p-5">   <!-- 2° RIGA -->
+                <div class="col d-flex justify-content-center">
+                    <button type="submit" class="btn btn-color">Modifica Struttura</button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ asset('js/pages/complex/addComplex.js') }}"></script>
+    <script src="{{ asset('js/pages/successModal.js') }}"></script>
+    <script src="{{ asset('js/pages/complex/swiper-addComplex.js') }}"></script>
+@endpush

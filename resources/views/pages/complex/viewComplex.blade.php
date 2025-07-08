@@ -5,6 +5,7 @@
 @push('styles') <!-- STILI SPECIFICI -->
     <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/complex/viewComplex.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/viewButton.css') }}">
 @endpush
 
 @section('header')

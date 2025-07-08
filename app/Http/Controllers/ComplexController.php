@@ -58,8 +58,7 @@ class ComplexController extends Controller
         return view('pages.complex.editComplex')->with('complex', $complex);
     }
 
-    public function update(Request $request, $complexId)
-    {
+    public function update(Request $request, $complexId) {
         $complex = Complex::findOrFail($complexId);
 
         $validate = $request->validate([
@@ -75,11 +74,10 @@ class ComplexController extends Controller
 
         $complex->update($validate);
 
-        return redirect()->route('complex.showAll')->with(['title' => 'Modifica Effettuata', 'success' => 'Complesso aggiornato con successo']);
+        return redirect()->route('complex.showAll')->with(['title' => 'Modifica Effettuata', 'message' => 'Complesso aggiornato con successo']);
     }
 
-    public function delete(Request $request, $complexId)
-    {
+    public function delete(Request $request, $complexId) {
         try {
             $complex = Complex::findOrFail($complexId);
             $complex->delete();
