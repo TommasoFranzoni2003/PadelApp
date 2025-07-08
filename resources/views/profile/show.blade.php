@@ -4,8 +4,16 @@
 
     <div class="max-w-3xl mx-auto py-12 px-8 bg-white rounded-lg shadow-md">
         <h2 class="text-3xl font-semibold text-center text-gray-800 mb-10">
-            {{ __('Profilo Utente') }}
+            {{ __('Profilo di') }} {{ Auth::user()->name }}
         </h2>
+
+        <!-- immagine del profilo dell'utente centrata e rotonda -->
+        <div class="profile-photo-container">
+            <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : auth()->user()->profile_photo_url }}"
+                alt="Foto profilo"
+                class="profile-photo" />
+        </div>
+
 
         <div class="bg-white rounded-lg p-6">
             <!-- info del profilo -->

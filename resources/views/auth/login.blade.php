@@ -7,7 +7,7 @@
             <x-authentication-card-logo />
         </x-slot> -->
 
-        <x-validation-errors class="mb-4 text-danger" /> <!-- da cambiare -->
+        <x-validation-errors class="mb-4 text-danger" /> 
 
         @session('status')
             <div class="mb-4 font-medium text-sm text-success">

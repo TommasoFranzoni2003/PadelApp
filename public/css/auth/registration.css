@@ -107,4 +107,16 @@ a.text-primary:focus {
     margin-bottom: 0 !important;
     text-align: center;
   }
+
+  /*foto profilo*/
+  .profile-photo-container img {
+      width: 60px;       /* dimensione immagine */
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+  }
+  .gap-3 {
+      gap: 1rem; /* spazio tra immagine e input */
+  }
 }

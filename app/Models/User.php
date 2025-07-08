@@ -14,7 +14,6 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
@@ -62,5 +61,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'birth_date' => 'date',
         ];
+    }
+
+    public function profilePhotoDisk()
+    {
+        return 'public';
     }
 }

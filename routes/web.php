@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\CustomRegisteredUserController;
 use App\Http\Controllers\CourtController;
 use App\Models\Court;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,14 @@ Route::get('/profile/edit', function () {
     return view('profile.update-profile-information-form');
 })->name('profile.edit');
 
+//rotta specifica per modificare l'immagine
+Route::put('/user/profile-information', [ProfileController::class, 'update'])
+    ->name('user-profile-information.update');
+
 //rotta per eliminare l'account
 Route::delete('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
 
+//rotta per registrare l'utente
+Route::post('/register', [CustomRegisteredUserController::class, 'store'])->name('register');
 
 

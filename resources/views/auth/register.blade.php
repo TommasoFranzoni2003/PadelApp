@@ -1,6 +1,7 @@
 <x-guest-layout>
-    <!-- Includo il CSS specifico per login/register -->
+    <!-- Includo il CSS specifico per register ed il js -->
     <link rel="stylesheet" href="{{ asset('css/auth/registration.css') }}">
+    <script src="{{ asset('js/auth/registration.js') }}"></script>
 
     <x-authentication-card>
         <!-- <x-slot name="logo">
@@ -11,7 +12,7 @@
         <x-validation-errors class="mb-4 text-danger" />
 
         <h1 class="text-center mb-4">{{ __('Registrazione') }}</h1>
-        <form method="POST" action="{{ route('register') }}" class="auth-content">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="auth-content">
             @csrf
 
             <h3 class="align-left mt-4 pt-2 mb-4 border-top">{{ __('Dati anagrafici') }}</h3>
@@ -117,6 +118,19 @@
             </div>
 
             <h3 class="align-left mt-5 pt-2 mb-4 border-top">{{ __('Dati di accesso') }}</h3>
+
+            <!--immagine di profilo -->
+            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                <div class="mb-3">
+                    <x-label for="photo" value="{{ __('Foto Profilo') }}" class="form-label" />
+                    <input type="file" name="photo" id="photo" accept=".jpg,.jpeg,.png" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}">
+                    @error('photo')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            @endif
 
             <!-- Email -->
             <div class="mb-3">

@@ -10,12 +10,7 @@ use Laravel\Jetstream\Jetstream;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    /**
-     * Validate and create a newly registered user.
-     *
-     * @param  array<string, string>  $input
-     * @return \App\Models\User
-     */
+    //modificato per garantire l'inserimento della foto profilo
     public function create(array $input)
     {
         Validator::make($input, [
@@ -39,8 +34,10 @@ class CreateNewUser implements CreatesNewUsers
             'tax_code' => $input['tax_code'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'profile_photo_path' => $input['profile_photo_path'] ?? null, // aggiungi questa riga
         ]);
     }
+
 
     /**
      * Get the validation rules used to validate passwords.

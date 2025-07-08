@@ -22,18 +22,23 @@
         @csrf
         @method('PUT')
 
-        <!-- Foto Profilo -->
+       <!-- foto profilo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div class="mb-3">
                 <x-label for="photo" value="{{ __('Foto Profilo') }}" class="form-label" />
 
-                <div class="mb-2">
-                    <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}"
-                        class="rounded-circle object-cover" style="width: 80px; height: 80px;">
-                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-photo-container">
+                        <img 
+                            src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : auth()->user()->profile_photo_url }}" 
+                            alt="Foto profilo"
+                            class="rounded-circle profile-photo" 
+                        />
+                    </div>
 
-                <input type="file" name="photo" id="photo"
-                    class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}">
+                    <input type="file" name="photo" id="photo" accept=".jpg,.jpeg,.png"
+                        class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}">
+                </div>
                 @error('photo')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -41,6 +46,7 @@
                 @enderror
             </div>
         @endif
+
 
         <!-- Nome -->
         <div class="mb-3">
