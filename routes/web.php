@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourtController;
 use App\Models\Court;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +9,8 @@ Route::get('/laravel', function () {
     return view('welcome');
 });
 
-Route::get('/', [CourtController::class, 'selectCourt']);
+Route::get('/', [CourtController::class, 'selectCourt'])->name('homepage');
+
 
 Route::get('/addCourt', function () {
     return view('pages.court.addCourt');
@@ -22,8 +24,6 @@ Route::get('/editCourt/{courtId?}', [CourtController::class, 'edit'])->name('cou
 Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('court.update');
 
 Route::post('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
-
-
 
 Route::middleware([
     'auth:sanctum',
@@ -40,8 +40,8 @@ Route::get('/profile/edit', function () {
     return view('profile.update-profile-information-form');
 })->name('profile.edit');
 
+//rotta per eliminare l'account
+Route::delete('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
 
-//rotta per la pagina di eliminazione dell'account
-Route::get('/profile/delete', function () {
-    return view('profile.delete-user-form');
-})->name('profile.delete');
+
+

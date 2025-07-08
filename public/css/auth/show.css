@@ -1,5 +1,5 @@
 .profile-container {
-    max-width: 75%;
+    max-width: 90%;
     margin: 0 auto;
 }
 
@@ -27,7 +27,7 @@
 
 .button-row {
     display: flex;
-    justify-content: space-between; /* distribuisce i bottoni con spazio */
+    justify-content: flex-end; 
     margin-top: 30px;
     gap: 1rem; /* spazio uniforme tra i bottoni */
 }
@@ -55,16 +55,6 @@
 
 .btn-primary:hover {
     background-color: #2563eb;
-}
-
-/* bottone elimina (rosso) */
-.red {
-    background-color: #ef4444;
-    color: white;
-}
-
-.red:hover {
-    background-color: #dc2626;
 }
 
 /* bottone secondario */

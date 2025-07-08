@@ -59,21 +59,10 @@
                         {{ __('Modifica account') }}
                     </x-button>
                 </a>
-
                 <x-button class="btn-color btn-secondary" onclick="window.location='{{ route('homepage') }}'">
                     {{ __('Torna indietro') }}
-                </x-button>
-
-                <!--elimina account-->
-                <a href="{{ route('profile.delete') }}"  style="text-decoration: none; color: inherit;">
-                    <x-button class="btn-color btn-primary red">
-                        {{ __('Elimina account') }}
-                    </x-button>
-                </a>
-
-                
+                </x-button>                
             </div>
-
     </div>
 
 </x-guest-layout>

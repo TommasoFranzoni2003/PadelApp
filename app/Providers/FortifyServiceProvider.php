@@ -15,13 +15,16 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use App\Http\Responses\CustomRegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
-    //modifico la reindirezione dopo il login -> "/"
+    //modifico la reindirezione dopo il login/registrazione -> "/"
     public function register(): void
     {
        $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
+    $this->app->singleton(RegisterResponse::class, CustomRegisterResponse::class);
     }
 
     /**

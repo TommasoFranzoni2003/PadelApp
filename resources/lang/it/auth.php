@@ -1,8 +1,9 @@
 <?php
 
-//messaggi di errore in italiano
+// messaggi di errore in italiano
 return [
     'failed'   => 'Le credenziali non sono corrette.',
+    'profile_updated' => 'Profilo aggiornato con successo',
     'password' => 'La password inserita non è corretta.',
     'throttle' => 'Troppi tentativi di accesso. Riprova tra :seconds secondi.',
     'unauthorized' => 'Non sei autorizzato ad accedere a questa risorsa.',
