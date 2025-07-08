@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class ComplexController extends Controller
 {
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+
         $validate = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
@@ -19,6 +19,18 @@ class ComplexController extends Controller
             'email' => 'nullable|email|max:255',
             'opening_hours' => 'nullable|array',
         ]);
+
+        $opening_hours = [];
+        foreach($request->input('opening_hours') as  $day => $data) {
+            if(isset($data['closed']) && $data['closed'])
+                $opening_hours[$day] = 'closed';
+            elseif(!empty($data['open']) && !empty($data['close']))
+                $opening_hours[$day] = "{$data['open']}-{$data['close']}";
+            else
+                $opening_hours[$day] = 'closed';
+        }
+
+        $validate['opening_hours'] = $opening_hours;
 
         Complex::create($validate);
 

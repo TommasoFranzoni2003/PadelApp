@@ -45,7 +45,6 @@ class BookingController extends Controller
             return back()->withErrors(['title' => 'Errore durante la prenotazione', 'message' => "La struttura è chiusa in questo giorno..."]);
     
         Booking::create([
-
             'user_id' => $user->id,
             'court_id' => $court->id,
             'start_time' => $startDateTime,

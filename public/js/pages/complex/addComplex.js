@@ -1,0 +1,40 @@
+/*** SCRIPT PER GESTIRE GLI INPUT DEGLI ORARI DELLE STRUTTURE ***/
+
+document.querySelectorAll('.toggle-closed').forEach(toggle => {
+    toggle.addEventListener('change', function () { //=> Al cambiamento
+        const card = this.closest('.card'); //=> Prende la card
+        const openInput = card.querySelector('.open-time'); //=> Prende l'input
+        const closeInput = card.querySelector('.close-time'); //=> Prende l'input
+        const cardBoyd = card.querySelector('.card-body');  //=> Prende il body della card
+
+        const disabled = this.checked; 
+
+        //=> Disattiva l'input
+        openInput.disabled = disabled;  
+        closeInput.disabled = disabled;
+
+        if(disabled){   
+            openInput.value = ''; //=> Imposta i valori a 0
+            closeInput.value = ''; //=> Imposta i valori a 0
+            cardBoyd.classList.add('card-body-closed');  //=> Aggiunge la classe
+            card.classList.add('closed-full'); //=> Aggiunge la classe
+        }
+        else {
+            cardBoyd.classList.remove('card-body-closed'); //=> Rimuove la classe
+            card.classList.remove('closed-full'); //=> Rimuove la classe
+        }
+            
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.toggle-closed').forEach(toggle => {
+        const card = toggle.closest('.card');
+        const body = card.querySelector('.card-body');
+
+        if (toggle.checked) {
+            body.classList.add('closed');
+            card.classList.add('closed-full');
+        }
+    });
+});
