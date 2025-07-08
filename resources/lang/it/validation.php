@@ -19,5 +19,10 @@ return [
         'phone' => 'telefono',
         'email' => 'email',
         'opening_hours' => 'orari di apertura',
+        'location' => 'posizione',
+        'status' => 'stato',
+        'complex_id' => 'id della struttura',
+        'price_per_hour' => 'prezzo per ora',
+        'type' => 'tipo',
     ],
 ];

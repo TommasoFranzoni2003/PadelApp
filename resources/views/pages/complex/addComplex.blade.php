@@ -13,11 +13,11 @@
 @endsection
 
 @section('content')
-<!--
-    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE 
+
+    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE -->
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
--->
+
     <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi una nuova struttura</h1>
     <h4 class="fst-italic text-center text-muted"> 
         Inserisci nome, descrizione, città e altre informazioni per inserire la struttura.
@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group py-2"> <!-- TELEFONO -->
                         <label for="phone" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="phone" name="phone">
+                        <input type="text" class="form-control" id="phone" name="phone" required>
                     </div>
                 </div>
                 <div class="col-md-6 p-5 d-flex flex-column align-items-start justify-content-center bg-column"> <!-- COLONNA DI DESTRA -->

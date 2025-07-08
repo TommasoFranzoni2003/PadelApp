@@ -16,9 +16,9 @@ class ComplexController extends Controller
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
             'postal_code' => ['required', 'digits:5'],
-            'phone' => 'nullable|string|max:20',
+            'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
-            'opening_hours' => 'nullable|array',
+            'opening_hours' => 'required|array',
         ]);
 
         if($validate->fails())

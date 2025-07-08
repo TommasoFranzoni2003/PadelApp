@@ -25,8 +25,20 @@
 
     <div class="container mb-4">
 
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         <!-- FORM -->
-        <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('court.store') }}" enctype="multipart/form-data" novalidate>
             @csrf
 
                 <div class="row"> <!-- 1° RIGA -->
