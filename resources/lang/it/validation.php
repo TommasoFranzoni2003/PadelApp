@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'required' => 'Il campo :attribute è obbligatorio.',
+    'string' => 'Il campo :attribute deve essere una stringa.',
+    'email' => 'Il campo :attribute deve essere un indirizzo email valido.',
+    'max' => [
+        'string' => 'Il campo :attribute non può superare :max caratteri.',
+    ],
+    'digits' => 'Il campo :attribute deve contenere :digits cifre.',
 
     //messaggi di validazione predefiniti
     'accepted'             => 'Il campo :attribute deve essere accettato.',
@@ -128,33 +135,7 @@ return [
         ],
     ],
 
-    //attributi tradotti
-    'attributes' => [
-        'tax_code' => 'codice fiscale',
-        'name' => 'nome',
-        'surname' => 'cognome',
-        'email' => 'email',
-        'password' => 'password',
-        'password_confirmation' => 'conferma password',
-        'birth_date' => 'data di nascita',
-        'gender' => 'genere',
-        'phone' => 'telefono',
-        'terms' => 'termini e condizioni',
-    ],
-];
-
-<?php
-
-return [
-    'required' => 'Il campo :attribute è obbligatorio.',
-    'string' => 'Il campo :attribute deve essere una stringa.',
-    'email' => 'Il campo :attribute deve essere un indirizzo email valido.',
-    'description' => 'Il campo :attributo non deve superare la lunghezza massima',
-    'max' => [
-        'string' => 'Il campo :attribute non può superare :max caratteri.',
-    ],
-    'digits' => 'Il campo :attribute deve contenere :digits cifre.',
-
+    //attributi tradotti unificati
     'attributes' => [
         'name' => 'nome',
         'description' => 'descrizione',
@@ -169,5 +150,13 @@ return [
         'complex_id' => 'id della struttura',
         'price_per_hour' => 'prezzo per ora',
         'type' => 'tipo',
+        'tax_code' => 'codice fiscale',
+        'surname' => 'cognome',
+        'password' => 'password',
+        'password_confirmation' => 'conferma password',
+        'birth_date' => 'data di nascita',
+        'gender' => 'genere',
+        'terms' => 'termini e condizioni',
     ],
 ];
+
