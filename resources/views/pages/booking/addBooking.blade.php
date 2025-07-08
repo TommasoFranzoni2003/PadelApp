@@ -17,10 +17,9 @@
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Prenota il tuo campo da padel</h1>
     <h4 class="fst-italic text-center text-muted"> 
-        Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
-        Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
+        Scegli il giorno, l’orario e il campo che preferisci per vivere la tua partita perfetta. 
     </h4>
 
     <div class="container mb-4">
