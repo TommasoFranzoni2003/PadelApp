@@ -13,21 +13,37 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center mb-4 text-primary fw-bold">Aggiungi un nuovo complesso</h1>
+<!--
+    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE 
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
+    @endif
+-->
+    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi una nuova struttura</h1>
     <h4 class="fst-italic text-center text-muted"> 
-        Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
-        Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
+        Inserisci nome, descrizione, città e altre informazioni per inserire la struttura.
     </h4>
 
     <div class="container mb-4">
 
-        <form action="{{ route('complex.store') }}" method="POST" enctype="multipart/form-data" class="mx-auto">
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('complex.store') }}" method="POST" enctype="multipart/form-data" class="mx-auto" novalidate>
             @csrf
 
             <div class="row"> <!-- 1° RIGA -->
                 <div class="col-md-6 p-5"> <!-- COLONNA DI SINISTRA --> 
                     <div class="form-group py-2"> <!-- NOME -->
-                        <label for="name" class="form-label">Nome del complesso</label>
+                        <label for="name" class="form-label">Nome della struttura</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group py-2">  <!-- DESCRIZIONE -->
@@ -60,12 +76,12 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center align-items-center mt-5"> <!-- CREAZIONE DELLA RIGA -->
+            <div class="row justify-content-center align-items-center mt-100"> <!-- CREAZIONE DELLA RIGA -->
                 @php 
                     $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
                 @endphp   
 
-                <div class="col-1 text-end">    <!-- 1° COLONNA (SINISTRA) -->
+                <div class="col-1 d-flex justify-content-center mt-3">    <!-- 1° COLONNA (SINISTRA) -->
                     <div class="swiper-button-prev position-static"></div> <!-- FRECCIA SINISTRA (PRECEDENTE)-->
                 </div>
 
@@ -86,17 +102,17 @@
                                             <div class="form-check form-switch">
                                                 <input type="checkbox" class="form-check-input toggle-closed" id="closed_{{$day}}"
                                                     name="opening_hours[{{ $day }}][closed]" value="1" {{ $isClosed ? 'checked' : '' }}>
-                                                <label for="closed_{{ $day }}" class="form-check-label">Chiuso</label>
+                                                <label for="closed_{{ $day }}" class="form-check-label">{{ $isClosed ? 'Chiuso' : 'Aperto' }}</label>
                                             </div>
                                         </div>
                                         <div class="card-body d-flex gap-2 align-items-center"> <!-- CARD BODY -->
                                             <label class="form-label mb-0">Dalle</label>
                                             <input type="time" name="opening_hours[{{ $day }}][open]" class="form-control open-time"
-                                                value="{{ $open }}" {{ $isClosed ? 'disabled' : '' }}>
+                                                value="{{ $open }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
 
                                             <label class="form-label mb-0">Alle</label>
                                             <input type="time" name="opening_hours[{{ $day }}][close]" class="form-control close-time"
-                                                value="{{ $close }}" {{ $isClosed ? 'disabled' : '' }}>
+                                                value="{{ $close }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +121,7 @@
                     </div>
                 </div> 
 
-                <div class="col-1 text-start"> <!-- 3° COLONNA (DESTRA) -->
+                <div class="col-1 d-flex justify-content-center mt-3"> <!-- 3° COLONNA (DESTRA) -->
                     <div class="swiper-button-next position-static"></div> <!-- FRECCIA DESTRA (SUCCESSIVO)-->
                 </div>
             </div>
@@ -122,5 +138,6 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/pages/complex/addComplex.js') }}"></script>
+    <script src="{{ asset('js/pages/successModal.js') }}"></script>
     <script src="{{ asset('js/pages/complex/swiper-addComplex.js') }}"></script>
 @endpush

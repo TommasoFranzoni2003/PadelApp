@@ -13,7 +13,7 @@
 
 @section('content') <!-- CONTENT -->
 
-    @if(session('success')) <!-- MESSAGGIO DI SUCCESSO --> 
+    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE --> 
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 

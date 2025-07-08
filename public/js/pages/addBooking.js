@@ -25,14 +25,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const [startH, startM] = start.split(':').map(Number);
         const [endH, endM] = end.split(':').map(Number);
 
-        let current = new Date(1970, 0, 1, startH, startM);
+        //=> Arrotondo al multiplo di 30 più vicino per evitare di generare orari "particolari"
+        let roundedStartMinutes = startM <= 30 ? (startM > 0 ? 30 : 0) : 0;
+        let roundedStartHours = startH + (startM > 30 ? 1 : 0);
+
+        let current = new Date(1970, 0, 1, roundedStartHours, roundedStartMinutes);
         const endTime = new Date(1970, 0, 1, endH, endM);
 
-        while (current <= endTime) {
+        while (true) {
+            const next = new Date(current.getTime() + intervalMinutes * 60000);
+            
+            if(next > endTime)
+                break;
+
             const h = current.getHours().toString().padStart(2, '0');
             const m = current.getMinutes().toString().padStart(2, '0');
             times.push(`${h}:${m}`);
-            current.setMinutes(current.getMinutes() + intervalMinutes);
+
+            current = next
         }
 
         return times;

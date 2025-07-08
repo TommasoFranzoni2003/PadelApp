@@ -37,4 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('closed-full');
         }
     });
+
+    //=> AGGIORNAMENTO DELLA LABEL DELL'HEADER CARD
+    const switches = document.querySelectorAll('.toggle-closed');   //=> Prende l'elemento
+
+    switches.forEach(sw => {
+        sw.addEventListener('change', function () {
+            const label = sw.closest('.form-check').querySelector('label'); //=> Prende la label
+            if(sw.checked)
+                label.textContent = 'Chiuso';   //=> Imposta il valore a Chiuso
+            else
+                label.textContent = 'Aperto';   //=> Imposta il valore ad Aperto
+        })
+    });
 });

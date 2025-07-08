@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complex;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ComplexController extends Controller
 {
     public function store(Request $request) {
 
-        $validate = $request->validate([
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
+            'postal_code' => ['required', 'digits:5'],
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'opening_hours' => 'nullable|array',
         ]);
+
+        if($validate->fails())
+            return redirect()->back()->withErrors($validate);
 
         $opening_hours = [];
         foreach($request->input('opening_hours') as  $day => $data) {
@@ -30,11 +34,12 @@ class ComplexController extends Controller
                 $opening_hours[$day] = 'closed';
         }
 
-        $validate['opening_hours'] = $opening_hours;
+        $data = $validate->validated();
+        $data['opening_hours'] = $opening_hours;
 
-        Complex::create($validate);
+        Complex::create($data);
 
-        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'success' => 'Complesso inserito con successo']);
+        return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'message' => 'Complesso inserito con successo']);
     }
 
     public function showAll()

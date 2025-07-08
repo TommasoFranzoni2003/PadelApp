@@ -1,47 +1,5 @@
 /*** FILE CSS PER L'AGGIUNTA DI NUOVE STRUTTURE ***/
 
-/* => FRECCE */
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    font-size: 20px !important;
-    color: #0D47A1 !important;
-    line-height: 1 !important;
-    display: flex !important;
-}
-
-.swiper-button-disabled {
-    display: none !important;
-}
-
-/* => CARD - GESTIONE CHIUSURA */
-.card-body {
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5 ease;
-    max-height: 300px;
-    opacity: 1;
-}
-
-.card-body-closed { /* => Chiude il body */
-    max-height: 0;
-    opacity: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.card.closed-full {
-    min-height: 100px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;    /* => Posiziona l'header card al centro della riga */
-    border: none !important;    /* => Toglie il bordo della card */
-}
-
-.card.closed-full .card-header {
-    margin-bottom: 0;
-    border: 1px solid rgba(0, 0, 0, 0.125); /* => Bordo di default di bootstrap */
-    border-radius: 6px;
-}
-
 /* => CONTAINER: Ombra e bordi arrotondati sul container */
 .container {
     background-color: #f8f8f2; 
@@ -100,4 +58,61 @@
     background-color: #0D47A1;
     transform: scale(1.05);
     color: #E4E1B6;
+}
+
+
+/* => FRECCE */
+.swiper-button-next,
+.swiper-button-prev {
+    margin-left: auto !important; 
+    margin-right: auto !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px !important;
+    color: #0D47A1 !important;
+    line-height: 1 !important;
+    display: flex !important;
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+    transform: scale(1.2); 
+}
+
+/* => CARD - GESTIONE CHIUSURA */
+.card-body {
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5 ease;
+    max-height: 300px;
+    opacity: 1;
+}
+
+.card-body-closed { /* => Chiude il body */
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.card.closed-full {
+    min-height: 100px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    /* => Posiziona l'header card al centro della riga */
+    border: none !important;    /* => Toglie il bordo della card */
+    background-color: #f8f8f2 !important; 
+}
+
+.card.closed-full .card-header {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.125); /* => Bordo di default di bootstrap */
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* => CARD NORMALE */
+.mt-100 {
+    margin-top: 100px;
 }
