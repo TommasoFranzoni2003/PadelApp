@@ -2,6 +2,7 @@
     <!-- CSS specifico -->
     <link rel="stylesheet" href="{{ asset('css/auth/update.css') }}">
     <script src="{{ asset('js/auth/delete_account_confirm.js') }}"></script>
+    <script src="{{ asset('js/auth/update_profile_validation.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/auth/modal-confirm.css') }}">
 
     @if ($errors->any())
@@ -18,7 +19,8 @@
 
     <h1 class="text-center mb-4">{{ __('Modifica del profilo') }}</h1>
 
-    <form method="POST" action="{{ route('user-profile-information.update') }}" enctype="multipart/form-data">
+    <form id="profile-update-form" method="POST" action="{{ route('user-profile-information.update') }}" enctype="multipart/form-data">
+
         @csrf
         @method('PUT')
 
@@ -110,12 +112,17 @@
         </div>
 
         <!-- Pulsanti -->
-        <div class="d-flex justify-content-end mt-4 gap-2 flex-wrap">
-            <x-button class="btn-color btn-primary me-2">
+        <div class="d-flex mt-4 gap-3 w-100 justify-content-end">
+            <x-button class="btn-color btn-primary flex-grow-1 text-center">
                 {{ __('Aggiorna') }}
             </x-button>
 
-            <x-button class="btn-color btn-secondary" type="button"
+            <x-button class="btn-color flex-grow-1 text-center" type="button"
+                onclick="window.location='{{ route('password.update.form') }}'">
+                {{ __('Modifica password') }}
+            </x-button>
+
+            <x-button class="btn-color btn-secondary flex-grow-1 text-center" type="button"
                 onclick="window.location='{{ route('profile.show') }}'">
                 {{ __('Torna indietro') }}
             </x-button>
@@ -151,6 +158,5 @@
             </div>
         </div>
     </div>
-
 </x-guest-layout>
 

@@ -86,9 +86,9 @@
 }
 
 h2 {
-    font-size: 3rem; /* da 3rem a 3.5rem per renderlo più grande */
-    font-weight: 700;  /* più spesso se vuoi */
+    font-size: 3rem; 
+    font-weight: 700;  
     text-align: center;
-    color: #1f2937; /* un grigio scuro, puoi cambiare se vuoi */
-    margin-bottom: 2.5rem; /* margine sotto più ampio */
+    color: #1f2937;
+    margin-bottom: 2.5rem; 
 }

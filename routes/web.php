@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\CustomRegisteredUserController;
 use App\Http\Controllers\CourtController;
 use App\Models\Court;
@@ -50,5 +51,12 @@ Route::delete('/user/delete', [ProfileController::class, 'destroy'])->name('prof
 
 //rotta per registrare l'utente
 Route::post('/register', [CustomRegisteredUserController::class, 'store'])->name('register');
+
+//rotte per modificare la password
+Route::get('/profile/password', function () {
+    return view('profile.update-password-form');
+})->name('password.update.form');
+
+Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
 

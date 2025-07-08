@@ -1,39 +1,70 @@
-<x-form-section submit="updatePassword">
-    <x-slot name="title">
-        {{ __('Update Password') }}
-    </x-slot>
+<x-guest-layout>
+    <!-- CSS specifico -->
+    <link rel="stylesheet" href="{{ asset('css/auth/update.css') }}">
+    <script src="{{ asset('js/auth/password_validation.js') }}"></script>
 
-    <x-slot name="description">
-        {{ __('Ensure your account is using a long, random password to stay secure.') }}
-    </x-slot>
+    @if ($errors->any())
+        <div class="status-message status-error mb-4">
+            {{ $errors->first() }}
+        </div>
+    @endif
 
-    <x-slot name="form">
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="current_password" value="{{ __('Current Password') }}" />
-            <x-input id="current_password" type="password" class="mt-1 block w-full" wire:model="state.current_password" autocomplete="current-password" />
-            <x-input-error for="current_password" class="mt-2" />
+    @if (session('status'))
+        <div class="status-message mb-4">
+            {{ __('Password aggiornata con successo!') }}
+        </div>
+    @endif
+
+    <h1 class="text-center mb-4">{{ __('Modifica della password') }}</h1>
+
+    <form id="password-update-form" method="POST" action="{{ route('password.update') }}">
+        @csrf
+        @method('PUT')
+
+        <!-- Password corrente -->
+        <div class="mb-3">
+            <x-label for="current_password" value="{{ __('Password corrente') }}" class="form-label" />
+            <x-input id="current_password" type="password" name="current_password"
+                     class="form-control {{ $errors->has('current_password') ? 'is-invalid' : '' }}"
+                     required autocomplete="current-password" />
+            @error('current_password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="password" value="{{ __('New Password') }}" />
-            <x-input id="password" type="password" class="mt-1 block w-full" wire:model="state.password" autocomplete="new-password" />
-            <x-input-error for="password" class="mt-2" />
+        <!-- Nuova password -->
+        <div class="mb-3">
+            <x-label for="password" value="{{ __('Nuova password') }}" class="form-label" />
+            <x-input id="password" type="password" name="password"
+                     class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                     required autocomplete="new-password" />
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-            <x-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model="state.password_confirmation" autocomplete="new-password" />
-            <x-input-error for="password_confirmation" class="mt-2" />
+        <!-- Conferma nuova password -->
+        <div class="mb-3">
+            <x-label for="password_confirmation" value="{{ __('Conferma nuova password') }}" class="form-label" />
+            <x-input id="password_confirmation" type="password" name="password_confirmation"
+                     class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
+                     required autocomplete="new-password" />
+            @error('password_confirmation')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
-    </x-slot>
 
-    <x-slot name="actions">
-        <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
-        </x-action-message>
+        <!-- Pulsanti -->
+        <div class="d-flex mt-4 gap-3 w-100 justify-content-end">
+            <x-button class="btn-color btn-primary flex-grow-1 text-center">
+                {{ __('Salva') }}
+            </x-button>
 
-        <x-button>
-            {{ __('Save') }}
-        </x-button>
-    </x-slot>
-</x-form-section>
+            <x-button class="btn-color btn-secondary flex-grow-1 text-center" type="button"
+                onclick="window.location='{{ route('profile.show') }}'">
+                {{ __('Torna indietro') }}
+            </x-button>
+        </div>
+    </form>
+</x-guest-layout>
+
