@@ -19,6 +19,10 @@
 
     <!-- STILE GENERALE DEI COMPONENTI -->
     <link rel="stylesheet" href="{{ asset('css/components/components.css') }}">
+    
+    @if(!Route::currentRouteNamed('homepage'))  <!-- MENU DI TUTTE LE PAGINE TRANNE DELLA HOMEPAGE -->
+        <link rel="stylesheet" href="{{ asset('css/components/menu-basic.css') }}">
+    @endif
 
     <!-- Styles -->
     @yield('page-css')

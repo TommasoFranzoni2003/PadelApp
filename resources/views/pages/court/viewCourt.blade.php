@@ -2,11 +2,6 @@
 
 @section('title', 'View Court') <!-- TITOLO -->
 
-@push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/viewButton.css') }}">
-@endpush
-
 @section('header') 
     @include('partials.navbar')  <!-- MENU -->
 @endsection
@@ -16,7 +11,6 @@
     @if(session('message'))  <!-- GESTIONE DEI MESSGGI / AVVISI CON IL MODALE -->
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
-
 
     <!-- CONTAINER PRINCIPALE -->
     <div class="container container-header py-5">

@@ -2,11 +2,6 @@
 
 @section('title', 'View Complex') <!-- TITOLO -->
 
-@push('styles') <!-- STILI SPECIFICI -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/viewButton.css') }}">
-@endpush
-
 @section('header')
     @include('partials.navbar')
 @endsection
@@ -33,16 +28,19 @@
                             <p class="card-text"><strong>Telefono:</strong> {{ $complex->phone }}</p>
                             <p class="card-text"><strong>Orari di apertura:</strong></p>
 
-                            @php
-                                $openingHours = is_string($complex->opening_hours)
-                                    ? json_decode($complex->opening_hours, true)
-                                    : $complex->opening_hours;
-                            @endphp
-
-                            @if(is_array($openingHours))
-                                <ul>
-                                    @foreach ($openingHours as $day => $hours)
-                                      <x-modals.delete-modal :id="$complex->id" :name="is_array($complex->name) ? implode(' ', $complex->name) : $complex->name" />
+                            @if (is_array($complex->opening_hours))
+                                <ul class="ps-3">
+                                    @foreach ($complex->opening_hours as $day => $hours)
+                                        <li>
+                                            <strong>{{ ucfirst($day) }}:</strong>
+                                            @if (is_string($hours))
+                                                {{ $hours === 'closed' ? 'Chiuso' : $hours }}
+                                            @elseif (is_array($hours) && isset($hours['open'], $hours['close']))
+                                                {{ $hours['open'] }} - {{ $hours['close'] }}
+                                            @else
+                                                <em>Non disponibile</em>
+                                            @endif
+                                        </li>
                                     @endforeach
                                 </ul>
                             @else

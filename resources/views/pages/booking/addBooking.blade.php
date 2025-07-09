@@ -4,7 +4,6 @@
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  <!-- CSS di flatpickr -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/booking/addBooking.css') }}">
 @endpush
 

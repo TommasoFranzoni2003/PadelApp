@@ -3,8 +3,7 @@
 @section('title', 'Visualizza Prenotazioni') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
-    <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/pages/booking/tableBooking.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/pages/booking/viewBooking.css') }}"> 
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" /> 
 @endpush
 
