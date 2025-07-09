@@ -70,7 +70,7 @@
                 @endif
 
                 <x-button  class="btn-color btn-primary text-center">
-                    {{ __('Log in') }}
+                    {{ __('Login') }}
                 </x-button>
             </div>
         </form>

@@ -78,7 +78,7 @@ Route::put('/user/profile-information', [ProfileController::class, 'update'])
     ->name('user-profile-information.update');
 
 //rotta per eliminare l'account
-Route::delete('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
+Route::get('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
 
 //rotta per registrare l'utente
 Route::post('/register', [CustomRegisteredUserController::class, 'store'])->name('register');

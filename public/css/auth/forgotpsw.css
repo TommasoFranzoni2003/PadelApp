@@ -22,7 +22,7 @@
 
 /* Bordo più spesso e colore diverso quando il campo è in focus */
 .auth-content .form-control:focus {
-  border-color: #6610f2; /* viola, come il link */
+  border-color: #0D47A1; /* viola, come il link */
   box-shadow: 0 0 0 0.25rem rgba(102, 16, 242, 0.25);
   outline: none;
 }
@@ -39,13 +39,13 @@
 
 /* Link recupero password */
 a.text-primary {
-  color: #6610f2;
+  color: #0D47A1;
   transition: color 0.3s ease;
 }
 
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #520dc2;
+  color: #0D47A1;
   text-decoration: underline;
 }
 
@@ -104,7 +104,7 @@ a.text-primary:focus {
 
 /* focus sugli input */
 .auth-content .form-control:focus {
-  border-color: #6610f2;
+  border-color: #0D47A1;
   box-shadow: 0 0 0 0.1rem rgba(102, 16, 242, 0.25);
   outline: none;
 }

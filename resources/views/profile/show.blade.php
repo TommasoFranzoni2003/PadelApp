@@ -14,7 +14,6 @@
                 class="profile-photo" />
         </div>
 
-
         <div class="bg-white rounded-lg p-6">
             <!-- info del profilo -->
             <div class="profile-container">
@@ -60,17 +59,15 @@
             </div>
 
            <!-- Contenitore Bottoni -->
-            <div class="button-row">
-                <!-- bottone per la modifica -->
-                <a href="{{ route('profile.edit') }}"  style="text-decoration: none; color: inherit;">
-                    <x-button class="btn-color btn-primary">
-                        {{ __('Modifica account') }}
-                    </x-button>
+           <div class="button-row">
+                <a href="{{ route('profile.edit') }}" class="btn btn-primary">
+                    {{ __('Modifica account') }}
                 </a>
-                <x-button class="btn-color btn-secondary" onclick="window.location='{{ route('homepage') }}'">
+                <a href="{{ route('homepage') }}" class="btn btn-secondary">
                     {{ __('Torna indietro') }}
-                </x-button>                
+                </a>  
             </div>
+        </div>
     </div>
 
 </x-guest-layout>

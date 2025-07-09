@@ -15,7 +15,8 @@
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="auth-content">
             @csrf
 
-            <h3 class="align-left mt-4 pt-2 mb-4 border-top">{{ __('Dati anagrafici') }}</h3>
+            <h3 class="align-left mt-4 pt-2 mb-2">{{ __('Dati anagrafici') }}</h3>
+            <div class="border-top mb-4"></div>
 
             <!-- Nome -->
             <div class="mb-3">
@@ -26,7 +27,7 @@
                     name="name" 
                     :value="old('name')" 
                     required 
-                    autocomplete="name" />
+                    autocomplete="off" />
                 @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -43,7 +44,7 @@
                     name="surname" 
                     :value="old('surname')" 
                     required 
-                    autocomplete="surname" />
+                    autocomplete="off" />
                 @error('surname')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -91,7 +92,8 @@
                     class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" 
                     type="tel" 
                     name="phone" 
-                    :value="old('phone')" 
+                    :value="old('phone')"
+                    autocomplete="off" 
                     required />
                 @error('phone')
                     <div class="invalid-feedback">
@@ -109,6 +111,7 @@
                     name="tax_code" 
                     :value="old('tax_code')" 
                     maxlength="16" 
+                    autocomplete="off" 
                     required />
                 @error('tax_code')
                     <div class="invalid-feedback">
@@ -117,7 +120,8 @@
                 @enderror
             </div>
 
-            <h3 class="align-left mt-5 pt-2 mb-4 border-top">{{ __('Dati di accesso') }}</h3>
+            <h3 class="align-left mt-5 pt-2">{{ __('Dati di accesso') }}</h3>
+            <div class="border-top mb-4"></div>
 
             <!--immagine di profilo -->
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -141,7 +145,7 @@
                     name="email" 
                     :value="old('email')" 
                     required 
-                    autocomplete="email" />
+                    autocomplete="off" />
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -157,7 +161,7 @@
                     type="password" 
                     name="password" 
                     required 
-                    autocomplete="new-password" />
+                    autocomplete="off" />
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -173,7 +177,7 @@
                     type="password" 
                     name="password_confirmation" 
                     required 
-                    autocomplete="new-password" />
+                    autocomplete="off" />
                 @error('password_confirmation')
                     <div class="invalid-feedback">
                         {{ $message }}
