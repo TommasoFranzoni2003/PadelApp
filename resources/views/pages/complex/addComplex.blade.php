@@ -18,14 +18,16 @@
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi una nuova struttura</h1>
-    <h4 class="fst-italic text-center text-muted"> 
-        Inserisci nome, descrizione, città e altre informazioni per inserire la struttura.
-    </h4>
+    <div class="container-header">
+        <h1 class="h1-color text-center mb-2 mt-5 pt-5 fw-bold">Aggiungi una nuova struttura</h1>
+        <h4 class="fst-italic text-center text-muted"> 
+            Inserisci nome, descrizione, città e altre informazioni per inserire la struttura.
+        </h4>
+    </div>
 
-    <div class="container mb-4">
+    <div class="container container-section mb-4">
 
-        @if($errors->any())
+        @if($errors->any()) <!-- MESSAGGIO D'ERRORE -->
             <div class="alert alert-dismissible alert-danger">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
@@ -44,33 +46,33 @@
                 <div class="col-md-6 p-5"> <!-- COLONNA DI SINISTRA --> 
                     <div class="form-group py-2"> <!-- NOME -->
                         <label for="name" class="form-label">Nome della struttura</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Inserisci il nome della struttura" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2">  <!-- DESCRIZIONE -->
                         <label for="description" class="form-label">Descrizione</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Inserisci una descrizione" autocomplete="off"rows="3"></textarea>
                     </div>
                     <div class="form-group py-2"> <!-- EMAIL -->
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Inserisci l'indirizzo mail" autocomplete="off">
                     </div>
                     <div class="form-group py-2"> <!-- TELEFONO -->
                         <label for="phone" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Inserisci il numero di telefono" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="col-md-6 p-5 d-flex flex-column align-items-start justify-content-center bg-column"> <!-- COLONNA DI DESTRA -->
                     <div class="form-group py-2">  <!-- CITTA -->
                         <label for="city" class="form-label">Città</label>
-                        <input type="text" class="form-control" id="city" name="city" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Inserisci la città" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2"> <!-- INDIRIZZO -->
                         <label for="address" class="form-label">Indirizzo</label>
-                        <input type="text" class="form-control" id="address" name="address" required>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Inserisci l'indirizzo" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2">  <!-- CAP -->
                         <label for="postal_code" class="form-label">CAP</label>
-                        <input type="text" class="form-control" id="postal_code" name="postal_code" required>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Inserisci il cap" autocomplete="off" required>
                     </div>
 
                 </div>
@@ -128,7 +130,7 @@
 
             <div class="row tex-center p-5">   <!-- 2° RIGA -->
                 <div class="col d-flex justify-content-center">
-                    <button type="submit" class="btn btn-color">Aggiungi Complesso</button>
+                    <button type="submit" class="btn btn-color">Aggiungi</button>
                 </div>
             </div>
         </form>

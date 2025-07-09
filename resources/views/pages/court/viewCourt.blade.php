@@ -19,8 +19,8 @@
 
 
     <!-- CONTAINER PRINCIPALE -->
-    <div class="container py-5" style="margin-top: 75px">
-        <h1 class="text-center mb-2 fw-bold text-primary">Scopri i nostri campi disponibili</h1>
+    <div class="container container-header py-5">
+        <h1 class="h1-color text-center mb-2 fw-bold text-primary">Scopri i nostri campi disponibili</h1>
         <h4 class="fst-italic mb-5 text-center text-muted"> Trova il campo perfetto per la tua partita,<br>  scegli tra le migliori strutture indoor e outdoor vicino a te.</h4>
         <div class="row">  <!--  RIGA -->
             @forelse ($courts as $court)

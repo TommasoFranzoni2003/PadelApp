@@ -19,7 +19,7 @@ class CourtController extends Controller
             'location' =>  'required|string|max:255',
             'price_per_hour' =>  'required|numeric|min:0',
             'status' => 'required|in:active,inactive,maintenance',
-            'complex_id' => 'required|integer',
+            'complex_id' => 'required|integer|min:1',
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
@@ -82,7 +82,7 @@ class CourtController extends Controller
             'location' =>  'required|string|max:255',
             'price_per_hour' =>  'required|numeric|min:0',
             'status' => 'required|in:active,inactive,maintenance',
-            'complex_id' => 'required|integer',
+            'complex_id' => 'required|integer|exists:complexes,id',
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 

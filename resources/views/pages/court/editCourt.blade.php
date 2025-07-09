@@ -13,16 +13,20 @@
 
 @section('content') <!-- CONTENT -->
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli del campo</h1>
-    <h4 class="fst-italic text-center text-muted"> 
-        Aggiorna le informazioni relative al campo selezionato.<br>
-        Puoi modificare nome, descrizione, location, prezzo e molto altro.
-    </h4>
+    <div class="container-header">
+        <h1 class="h1-color text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli del campo</h1>
+        <h4 class="fst-italic text-center text-muted"> 
+            Aggiorna le informazioni relative al campo selezionato.<br>
+            Puoi modificare nome, descrizione, location, prezzo e molto altro.
+        </h4>
+    </div>
 
-    <div class="container mb-4">
+    <div class="container container-section mb-4">
 
-        @if ($errors->any())    <!-- MESSAGGIO DI ERRORE -->
-            <div class="alert alert-danger">
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -40,23 +44,23 @@
                     <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
                         <div class="form-group py-2">    <!-- NOME -->
                             <label for="inputName">Nome</label>
-                            <input type="text" class="form-control" name="name" id="inputName" value="{{ $court->name }}" required>
+                            <input type="text" class="form-control" name="name" id="inputName" value="{{ $court->name }}" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- DESCRIZIONE -->
                             <label for="inputDescription">Descrizione</label>
-                            <input type="text" class="form-control" name="description" id="inputDescription" value="{{ $court->description }}">
+                            <input type="text" class="form-control" name="description" id="inputDescription" value="{{ $court->description }}" autocomplete="off">
                         </div>
                         <div class="form-group py-2">    <!-- LOCATION -->
                             <label for="inputLocation">Location</label>
-                            <input type="text" class="form-control" name="location" id="inputLocation" value="{{ $court->location }}" required>
+                            <input type="text" class="form-control" name="location" id="inputLocation" value="{{ $court->location }}" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- PREZZO -->
                             <label for="inputPrice">Prezzo € / h</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" value="{{ $court->price_per_hour }}" required>
+                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" value="{{ $court->price_per_hour }}" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- ID DEL COMPLESSO-->
                             <label for="inputComplexId">Id del complesso</label>
-                            <input type="number" class="form-control" name="complex_id" id="inputComplexId" value="{{ $court->complex_id }}" required>
+                            <input type="number" class="form-control" name="complex_id" id="inputComplexId" value="{{ $court->complex_id }}" autocomplete="off" required>
                         </div>
                     </div>
 
@@ -82,17 +86,7 @@
                         </div>
                         <div class="form-group py-3">    <!-- IMMAGINE DI CARICAMENTO -->
                             <label for="image">Immagine del campo</label>
-                            
-                            <!-- Input per caricare una nuova immagine, sempre visibile -->
                             <input type="file" class="form-control mt-3" name="image_path" id="image">
-
-                        <!--    @if ($court->image_path)
-                                
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $court->image_path) }}" alt="Immagine campo" style="max-width: 100%; max-height: 150px; border-radius: 8px;">
-                                </div>
-                            @endif
-                        -->
                         </div>
                     </div>
                 </div>

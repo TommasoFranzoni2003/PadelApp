@@ -58,19 +58,3 @@
 .bg-column input {
   color: #333;
 }
-
-/* STILE BUTTON */
-.btn-color {
-  background-color: #0D47A1;
-  color: #E4E1B6;
-  transition: transform 0.3s ease;
-  padding: 10px 30px;
-  border-radius: 6px;
-  font-weight: bold;
-}
-
-.btn-color:hover {
-  background-color: #0D47A1;
-  transform: scale(1.05);
-  color: #E4E1B6;
-}

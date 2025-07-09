@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complex;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -50,8 +51,13 @@ class ComplexController extends Controller
 
     public function edit($complexId = null)
     {
-        if ($complexId === null) {
-            return abort(404);
+        $complex = [];
+
+        try {
+            $complex = Complex::findOrFail($complexId);
+        }
+        catch(ModelNotFoundException $e){   //=> Se l'id non esiste, ritorna alla pagina di visualizzazione e mostra l'errore
+            return redirect()->route('complex.show')->with(['title' => 'Errore durante la ricerca', 'message' => 'Struttura non trovata']);
         }
 
         $complex = Complex::findOrFail($complexId);
@@ -61,18 +67,34 @@ class ComplexController extends Controller
     public function update(Request $request, $complexId) {
         $complex = Complex::findOrFail($complexId);
 
-        $validate = $request->validate([
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
-            'postal_code' => 'required|string|max:20',
-            'phone' => 'nullable|string|max:20',
+            'postal_code' => ['required', 'digits:5'],
+            'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
-            'opening_hours' => 'nullable|array',
+            'opening_hours' => 'required|array',
         ]);
 
-        $complex->update($validate);
+        if($validate->fails())
+            return redirect()->back()->withErrors($validate);
+
+        $opening_hours = [];
+        foreach($request->input('opening_hours') as  $day => $data) {
+            if(isset($data['closed']) && $data['closed'])
+                $opening_hours[$day] = 'closed';
+            elseif(!empty($data['open']) && !empty($data['close']))
+                $opening_hours[$day] = "{$data['open']}-{$data['close']}";
+            else
+                $opening_hours[$day] = 'closed';
+        }
+
+        $data = $validate->validated();
+        $data['opening_hours'] = $opening_hours;
+
+        $complex->update($data);
 
         return redirect()->route('complex.showAll')->with(['title' => 'Modifica Effettuata', 'message' => 'Complesso aggiornato con successo']);
     }

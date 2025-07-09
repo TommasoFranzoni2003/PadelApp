@@ -4,7 +4,6 @@
 
 @push('styles') <!-- STILI SPECIFICI -->
     <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pages/complex/viewComplex.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/viewButton.css') }}">
 @endpush
 
@@ -14,12 +13,12 @@
 
 @section('content')
 
-    @if(session('success'))
+    @if(session('message'))
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
-    <div class="container py-5" style="margin-top: 75px">
-        <h1 class="text-center mb-2 fw-bold text-primary">I nostri complessi sportivi</h1>
+    <div class="container container-header py-5">
+        <h1 class="h1-color text-center mb-2 fw-bold text-primary">I nostri complessi sportivi</h1>
         <h4 class="fst-italic mb-5 text-center text-muted">Scopri le strutture dove puoi prenotare i tuoi campi preferiti.</h4>
         
         <div class="row">

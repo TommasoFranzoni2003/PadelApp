@@ -17,6 +17,9 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
 
+    <!-- STILE GENERALE DEI COMPONENTI -->
+    <link rel="stylesheet" href="{{ asset('css/components/components.css') }}">
+
     <!-- Styles -->
     @yield('page-css')
     @stack('styles')

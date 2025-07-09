@@ -14,17 +14,15 @@
 
 @section('content')
 
-    @if(session('message')) <!-- MESSAGGIO DELL'OPERAZIONE -->
-        <x-modals.message-modal :title="session('title')" :message="session('message')" />
-    @endif
+    <div class="container-header">
+        <h1 class="h1-color text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli della struttura</h1>
+        <h4 class="fst-italic text-center text-muted"> 
+            Aggiorna le informazioni relative alla struttura. <br>
+            Puoi modificare nome, descrizione, location, prezzo e molto altro.
+        </h4>
+    </div>
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Modifica i dettagli della struttura</h1>
-    <h4 class="fst-italic text-center text-muted"> 
-        Aggiorna le informazioni relative alla struttura. <br>
-        Puoi modificare nome, descrizione, location, prezzo e molto altro.
-    </h4>
-
-    <div class="container mb-4">
+    <div class="container container-section mb-4">
         @if($errors->any())
             <div class="alert alert-dismissible alert-danger">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -44,33 +42,33 @@
                 <div class="col-md-6 p-5"> <!-- COLONNA DI SINISTRA --> 
                     <div class="form-group py-2"> <!-- NOME -->
                         <label for="name" class="form-label">Nome della struttura</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $complex->name }}" required>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $complex->name }}" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2">  <!-- DESCRIZIONE -->
                         <label for="description" class="form-label">Descrizione</label>
-                        <textarea class="form-control" id="description" name="description" rows="3">{{ $complex->description }}</textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3" autocomplete="off">{{ $complex->description }}</textarea>
                     </div>
                     <div class="form-group py-2"> <!-- EMAIL -->
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ $complex->email }}">
+                        <input type="email" class="form-control" id="email" name="email" value="{{ $complex->email }}" autocomplete="off">
                     </div>
                     <div class="form-group py-2"> <!-- TELEFONO -->
                         <label for="phone" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $complex->phone }}" required>
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{ $complex->phone }}" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="col-md-6 p-5 d-flex flex-column align-items-start justify-content-center bg-column"> <!-- COLONNA DI DESTRA -->
                     <div class="form-group py-2">  <!-- CITTA -->
                         <label for="city" class="form-label">Città</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{ $complex->city }}" required>
+                        <input type="text" class="form-control" id="city" name="city" value="{{ $complex->city }}" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2"> <!-- INDIRIZZO -->
                         <label for="address" class="form-label">Indirizzo</label>
-                        <input type="text" class="form-control" id="address" name="address" value="{{ $complex->address }}" required>
+                        <input type="text" class="form-control" id="address" name="address" value="{{ $complex->address }}" autocomplete="off" required>
                     </div>
                     <div class="form-group py-2">  <!-- CAP -->
                         <label for="postal_code" class="form-label">CAP</label>
-                        <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ $complex->postal_code }}" required>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ $complex->postal_code }}" autocomplete="off" required>
                     </div>
                 </div>
             </div>
@@ -127,7 +125,7 @@
 
             <div class="row tex-center p-5">   <!-- 2° RIGA -->
                 <div class="col d-flex justify-content-center">
-                    <button type="submit" class="btn btn-color">Modifica Struttura</button>
+                    <button type="submit" class="btn btn-color">Modifica</button>
                 </div>
             </div>
         </form>

@@ -17,13 +17,15 @@
         <x-modals.message-modal :title="session('title')" :message="session('message')" />
     @endif
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Aggiungi un nuovo campo da padel</h1>
-    <h4 class="fst-italic text-center text-muted"> 
-        Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
-        Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
-    </h4>
+    <div class="container-header">
+        <h1 class="h1-color text-center mb-2 mt-5 pt-5 fw-bold">Aggiungi un nuovo campo da padel</h1>
+        <h4 class="fst-italic text-center text-muted"> 
+            Inserisci nome, descrizione, location, stato operativo e dati di pricing.<br>
+            Carica un’immagine e assegna il campo al complesso corretto prima di salvare. 
+        </h4>
+    </div>
 
-    <div class="container mb-4">
+    <div class="container container-section mb-4">
 
         @if($errors->any())
             <div class="alert alert-dismissible alert-danger">
@@ -45,24 +47,24 @@
                     <!-- COLONNA DI SINISTRA: dimensione = metà row -->
                     <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->
                         <div class="form-group py-2">    <!-- NOME -->
-                            <label for="inputName">Nome</label>
-                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome del campo" required>
+                            <label for="inputName">Nome del campo</label>
+                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Inserisci il nome del campo" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- DESCRIZIONE -->
                             <label for="inputDescription">Descrizione</label>
-                            <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Inserisci una descrizione">
+                            <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Inserisci una descrizione" autocomplete="off">
                         </div>
                         <div class="form-group py-2">    <!-- LOCATION -->
                             <label for="inputLocation">Location</label>
-                            <input type="text" class="form-control" name="location" id="inputLocation" placeholder="Inserisci una location" required>
+                            <input type="text" class="form-control" name="location" id="inputLocation" placeholder="Inserisci una location" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- PREZZO -->
                             <label for="inputPrice">Prezzo € / h</label>
-                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" placeholder="Inserisci il prezzo" required>
+                            <input type="number" step="0.01" min="0.00" class="form-control" name="price_per_hour" id="inputPrice" placeholder="Inserisci il prezzo" autocomplete="off" required>
                         </div>
                         <div class="form-group py-2">    <!-- ID DEL COMPLESSO-->
                             <label for="inputComplexId">Id del complesso</label>
-                            <input type="number" class="form-control" name="complex_id" id="inputComplexId" placeholder="Inserisci l'id del complesso" required>
+                            <input type="number" class="form-control" min="1" name="complex_id" id="inputComplexId" placeholder="Inserisci l'id del complesso" autocomplete="off" required>
                         </div>
                     </div>
 

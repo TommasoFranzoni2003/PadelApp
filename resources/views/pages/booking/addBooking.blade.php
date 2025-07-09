@@ -14,12 +14,15 @@
 
 @section('content')
 
-    <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Prenota il tuo campo da padel</h1>
-    <h4 class="fst-italic text-center text-muted"> 
-        Scegli il giorno, l’orario e il campo che preferisci per vivere la tua partita perfetta. 
-    </h4>
+    <div class="container-header">
+        <h1 class="h1-color text-center mb-2 mt-5 pt-5 fw-bold text-primary">Prenota il tuo campo da padel</h1>
+        <h4 class="fst-italic text-center text-muted"> 
+            Scegli il giorno, l’orario e il campo che preferisci per vivere la tua partita perfetta.<br>
+            Non hai la racchetta? Nessun problema, puoi noleggiarla sul posto! 
+        </h4>
+    </div>
 
-    <div class="container mb-3">
+    <div class="container container-section mb-4 distance">
 
         @if($errors->any())
             <div class="alert alert-dismissible alert-danger">
