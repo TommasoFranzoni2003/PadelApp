@@ -163,6 +163,29 @@ body {
   color: #E4E1B6 !important;
 }
 
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+/* => Stile specifico per il dropdown profilo, per mantenere l’immagine centrata */
+#userDropdown.nav-link {
+  padding: 0;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
 
 /********  STYLE CAROUSEL  ********/
 .carousel-indicators {

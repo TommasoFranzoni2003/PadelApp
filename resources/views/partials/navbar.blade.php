@@ -8,7 +8,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
         {{-- Dropdown Campi --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="campiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Campi </a>
@@ -66,7 +66,9 @@
         @auth
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ Auth::user()->name }}
+              <img src="{{ Auth::user()->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) : asset('image/default-profile.png') }}"
+                  alt="Immagine Profilo"
+                  class="profile-image">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profilo</a>
