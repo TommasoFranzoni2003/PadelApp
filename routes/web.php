@@ -8,6 +8,7 @@ use App\Http\Controllers\CourtController;
 use App\Models\Court;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComplexController;
+use App\Models\Booking;
 
 Route::get('/laravel', function () {
     return view('welcome');
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/viewBooking', [BookingController::class, 'show'])->name('booking.show');
 Route::get('/booking/events', [BookingController::class, 'events'])->name('booking.events');
+
+Route::post('/deleteBooking/{bookingId?}', [BookingController::class, 'delete'])->name('booking.delete');
 
 
 Route::middleware([

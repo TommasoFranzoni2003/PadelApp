@@ -15,6 +15,7 @@ return new class extends Migration
             $table->dateTime('end_time')->index();
             $table->integer('number_of_players', false)->default(4); 
             $table->boolean('racket_needed')->nullable();
+            $table->integer('racket_count')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending'); //stato della prenotazione
             $table->timestamps();
 

@@ -17,6 +17,7 @@ class Booking extends Model
         'end_time',
         'number_of_players', //numero di giocatori
         'racket_needed', //se le racchette sono necessarie
+        'racket_count',
         'status', //stato della prenotazione
     ];
 

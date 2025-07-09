@@ -23,7 +23,42 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         dayHeaderFormat: { weekday: 'long'}, //=> Mette solo il nome nell'intestazione
         titleFormat: {year: 'numeric', month: 'long', day: 'numeric'},
+
+        eventClick: function(info) { //=> Creazione del modale della prenotazione al click
+            info.jsEvent.preventDefault();
+            //=> Prende gli elementi necessari
+            const event = info.event;
+            const players = event.extendedProps.players;
+            const racketNeeded = event.extendedProps.racket_needed;
+            const numberRakcet = event.extendedProps.racket_count;
+            
+            const list = document.getElementById('modal-info-list');
+            list.querySelectorAll('.dynamic-li').forEach(el => el.remove());
+
+            //=> Imposta il testo
+            document.getElementById('modal-title').textContent = `Prenotazione ${event.title}`;
+            document.getElementById('modal-start').textContent = `Inizio: ${event.start.toLocaleString()}`;
+            document.getElementById('modal-end').textContent = `Fine: ${event.end.toLocaleString()}`;
+            document.getElementById('modal-players').textContent = `Numero di giocatori: ${players}`;
+            document.getElementById('modal-racket').textContent = "Racchette prenotate: " + (racketNeeded ? 'Si' : 'No');
+
+            if(racketNeeded){   //=> Se le racchette sono necessarie viene aggiunta la voce del numero
+                const li = document.createElement('li');
+                li.textContent = 'Numero di racchette: ' + numberRakcet;
+                li.classList.add('dynamic-li');
+                list.appendChild(li);
+            }
+                
+            //=> Passaggio dell'id per la rimozione
+            const deleteForm = document.querySelector('#eventModal form');  
+            deleteForm.action = '/deleteBooking/' + event.id;
+
+            const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+            modal.show();
+        }
     });
 
     calendar.render(); //=> Mostra il calendario
+
+    
 });

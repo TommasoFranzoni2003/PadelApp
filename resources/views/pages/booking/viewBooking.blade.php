@@ -24,6 +24,33 @@
         <div id="calendar" data-events-url="{{ route('booking.events') }}"></div>
     </div>
 
+    <!-- MODAL -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header position-relative">
+                <h5 class="modal-title position-absolute top-50 start-50 translate-middle" id="modal-title">Titolo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-subtitle pb-1" id="modal-subtitle">Dettagli Prenotazione: </h5>
+                <ul id="modal-info-list">
+                    <li id="modal-start"></li>
+                    <li id="modal-end"></li>
+                    <li id="modal-players"></li>
+                    <li id="modal-racket"></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('booking.delete', ['bookingId' => $booking->id ?? null]) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')     <!-- SCRIPTS -->

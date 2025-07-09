@@ -110,12 +110,27 @@ class BookingController extends Controller
 
         return response()->json($bookings->map(function ($booking) {
             return [
+                'id' => $booking->id,
                 'title' => $booking->court->name,
                 'start' => $booking->start_time->format('Y-m-d\TH:i:s'),
                 'end' => $booking->end_time->format('Y-m-d\TH:i:s'),
                 'color' => '#28a745',
+                'players' => $booking->number_of_players,
+                'racket_needed' => $booking->racket_needed,
+                'racket_count' => $booking->racket_count
             ];
         }));
+    }
+
+    public function delete(Request $request, $bookingId = null) {
+        try {
+            $booking = Booking::findOrFail($bookingId);
+            $booking->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('booking.show')->with(['title' => 'Operazione Fallita', 'message' => 'Si sono verificati degli errori durante la rimozione...' . $e]);
+        }
+
+        return redirect()->route('booking.show')->with(['title'=> 'Operazione Riuscita', 'message' => 'Rimozione effettuata con successo!']);
     }
 
 }
