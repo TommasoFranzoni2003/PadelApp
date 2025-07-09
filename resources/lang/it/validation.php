@@ -157,6 +157,10 @@ return [
         'birth_date' => 'data di nascita',
         'gender' => 'genere',
         'terms' => 'termini e condizioni',
+        'startTime' => 'ora di inizio',
+        'day' => 'giorno',
+        'numberOfPlayer' => 'numero di giocatori',
+        'selectedRacketNeeded' => 'racchette necessarie'
     ],
 ];
 

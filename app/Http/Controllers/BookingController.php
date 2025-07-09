@@ -22,7 +22,10 @@ class BookingController extends Controller
     public function store(Request $request, Court $court){
         $validate = $request->validate([
             'day' => 'required|date|after_or_equal:today',
-            'startTime' => 'required|date_format:H:i'
+            'startTime' => 'required|date_format:H:i',
+            'numberOfPlayer' => 'required|in:2,4',
+            'selectedRacketNeeded' => 'required|in:0,1',
+            'racket_count' => 'nullable|integer|min:0|max:4'
         ]);
 
         /** @var User $user */
@@ -49,6 +52,9 @@ class BookingController extends Controller
             'court_id' => $court->id,
             'start_time' => $startDateTime,
             'end_time' => $endDateTime,
+            'number_of_players' => $validate['numberOfPlayer'],
+            'racket_needed' => $validate['selectedRacketNeeded'],
+            'racket_count' => $validate['selectedRacketNeeded'] ? ($validate['racket_count'] ?? 0) : 0,
             'status' => Booking::STATUS_PENDING,
         ]);
 
@@ -105,8 +111,8 @@ class BookingController extends Controller
         return response()->json($bookings->map(function ($booking) {
             return [
                 'title' => $booking->court->name,
-                'start' => $booking->start_time->toIso8601String(),
-                'end' => $booking->end_time->toIso8601String(),
+                'start' => $booking->start_time->format('Y-m-d\TH:i:s'),
+                'end' => $booking->end_time->format('Y-m-d\TH:i:s'),
                 'color' => '#28a745',
             ];
         }));

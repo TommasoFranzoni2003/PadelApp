@@ -15,6 +15,8 @@ class BookingFactory extends Factory
         return [
             'start_time' => $this->faker->dateTimeBetween('now', '+1 month'),
             'end_time' => $this->faker->dateTimeBetween('+1 hour', '+2 hours'),
+            'number_of_players' => $this->faker->randomElement([2, 4]), 
+            'racket_needed' => $this->faker->boolean(),
             'status' => $this->faker->randomElement(['confirmed', 'cancelled', 'pending']), //stato della prenotazione
             //creo prima il campo a cui appartiene la prenotazione
             'court_id' => Court::factory(),

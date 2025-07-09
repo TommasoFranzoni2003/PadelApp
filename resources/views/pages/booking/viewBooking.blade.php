@@ -13,11 +13,17 @@
 @endsection
 
 @section('content')
+
+    @if(session('message'))  <!-- GESTIONE DEI MESSGGI / AVVISI CON IL MODALE -->
+        <x-modals.message-modal :title="session('title')" :message="session('message')" />
+    @endif
+
     <div class="container mt-100 mb-5">
         <h2 class="mt-5 text-center">Calendario delle Prenotazioni</h2>
         <h4 class="mb-5 text-center fst-italic">Consulta lo storico e lo stato aggiornato delle tue prenotazioni.</h4>
         <div id="calendar" data-events-url="{{ route('booking.events') }}"></div>
     </div>
+
 @endsection
 
 @push('scripts')     <!-- SCRIPTS -->

@@ -100,6 +100,8 @@ class DatabaseSeeder extends Seeder
             'court_id' => 1, //associata al campo con ID 1
             'start_time' => now()->addDays(1)->setHour(10)->setMinute(0),
             'end_time' => now()->addDays(1)->setHour(11)->setMinute(0),
+            'number_of_players' => [2, 4][rand(0, 1)],
+            'racket_needed' => (bool) rand(0, 1),
             'status' => Booking::STATUS_CONFIRMED, 
         ]);
         //creo 20 prenotazioni fittizie

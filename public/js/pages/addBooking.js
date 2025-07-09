@@ -141,4 +141,48 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+
+    //=> Gestione del numero di racchette
+    const numberOfPlayer = document.getElementById('selectNumberOfPlayer');
+    const racketNeededSelect = document.getElementById('selectedRacketNeeded');
+    const racketCountContainer = document.getElementById('racketCountContainer');
+    const racketCountSelect = document.getElementById('racketCount');
+
+    function updateRacketCountOptions() {
+        const players = parseInt(numberOfPlayer.value);
+        racketCountSelect.innerHTML = ''; //=> Per resettare le opzioni
+
+        if(!players || players < 1) {
+            racketCountContainer.classList.add('d-none');
+            racketCountSelect.removeAttribute('required');
+            return
+        }
+
+        for(let i = 1; i <= players; i++){  //=> Crea le diverse opzioni e le aggiunge al select
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i; 
+            racketCountSelect.appendChild(option);
+        }
+
+        racketCountSelect.setAttribute('required', 'required'); //=> Aggiunge required
+        racketCountContainer.classList.remove('d-none');    //=> Toglie display none
+    }
+
+    racketNeededSelect.addEventListener('change', () => {
+        if(racketNeededSelect.value === '1') 
+            updateRacketCountOptions();
+        else {
+            racketCountContainer.classList.add('d-none');
+            racketCountSelect.removeAttribute('required');
+            racketCountSelect.innerHTML = '';
+        }
+    });
+
+    numberOfPlayer.addEventListener('change', () => {
+        if (racketNeededSelect.value === '1') {
+            updateRacketCountOptions();
+        }
+    });
+
 });

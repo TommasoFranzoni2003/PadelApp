@@ -15,6 +15,8 @@ class Booking extends Model
         'court_id', //id del campo prenotato
         'start_time',
         'end_time',
+        'number_of_players', //numero di giocatori
+        'racket_needed', //se le racchette sono necessarie
         'status', //stato della prenotazione
     ];
 

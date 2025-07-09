@@ -5,6 +5,7 @@
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  <!-- CSS di flatpickr -->
     <link rel="stylesheet" href="{{ asset('css/pages/menu-basic.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/booking/addBooking.css') }}">
 @endpush
 
 @section('header')
@@ -13,45 +14,73 @@
 
 @section('content')
 
-    @if(session('message'))  <!-- GESTIONE DEI MESSGGI / AVVISI CON IL MODALE -->
-        <x-modals.message-modal :title="session('title')" :message="session('message')" />
-    @endif
-
     <h1 class="text-center mb-2 mt-5 pt-5 fw-bold text-primary">Prenota il tuo campo da padel</h1>
     <h4 class="fst-italic text-center text-muted"> 
         Scegli il giorno, l’orario e il campo che preferisci per vivere la tua partita perfetta. 
     </h4>
 
-    <div class="container mb-4">
-        <!-- FORM -->
-        <form method="POST" action="{{ route('booking.store', ['court' => $court]) }}" enctype="multipart/form-data">
-            @csrf
+    <div class="container mb-3">
 
-            <div class="form-group py-2">   
-                <label for="inputDay">Giorno</label>
-                <input type="date" class="form-control" name="day" id="inputDay" placeholder="Inserisci il giorno" required>
+        @if($errors->any())
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh no!</strong> <a href="#" class="alert-link">Modifica alcuni campi </a> e riprova a inviare il modulo.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="form-group py-2">   
-                <label for="selectStartTime">Orario</label>
-                <select name="startTime" id="selectStartTime" class="form-control" required>
-                    <option value="">Seleziona un orario</option>
-                </select>
-            </div>  
-        <!--    <div class="form-group py-2">   
-                <label for="selectNumberOfPlayer">Orario</label>
-                <select name="numberOfPlayer" id="selectNumberOfPlayer" class="form-control" required>
-                    <option value="">Seleziona il numero di giocatori</option>
-                    <option value="2">2</option>
-                    <option value="4">4</option>
-                </select>
-            </div>  -->
+        @endif
 
-            <div class="row text-center p-5">
-                <div class="col d-flex justify-content-center">
-                    <button type="submit" class="btn btn-color">Prenota</button>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 p-4">
+                <!-- FORM -->
+                <form method="POST" action="{{ route('booking.store', ['court' => $court]) }}" enctype="multipart/form-data" novalidate>
+                    @csrf
+
+                    <div class="form-group py-2">   
+                        <label for="inputDay">Giorno</label>
+                        <input type="date" class="form-control" name="day" id="inputDay" placeholder="Inserisci il giorno" required>
+                    </div>
+                    <div class="form-group py-2">   
+                        <label for="selectStartTime">Orario</label>
+                        <select name="startTime" id="selectStartTime" class="form-control" required>
+                            <option value="">Seleziona un orario</option>
+                        </select>
+                    </div>  
+                    <div class="form-group py-2">   
+                        <label for="selectNumberOfPlayer">Numero di giocatori</label>
+                        <select name="numberOfPlayer" id="selectNumberOfPlayer" class="form-control" required>
+                            <option value="">Seleziona il numero di giocatori</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>  
+                    <div class="form-group mb-3 py-2" id="racketNeededGroup">
+                        <label for="racketCount" class="form-label">
+                            Hai bisogno di una racchetta?
+                            <p class="form-text">Puoi scegliere se utilizzare la tua racchetta o noleggiarne una</p>
+                        </label>
+                        <select class="form-select" id="selectedRacketNeeded" name="selectedRacketNeeded" required>
+                            <option value="" selected>Seleziona un'opzione</option>
+                            <option value="1">Sì, voglio la racchetta</option>
+                            <option value="0">No, non mi serve</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3 d-none" id="racketCountContainer">
+                        <label for="racketCount" class="form-label">Quante racchette ti servono?</label>
+                        <select class="form-select" id="racketCount" name="racket_count"></select>
+                    </div>
+
+                    <div class="row text-center p-5">
+                        <div class="col d-flex justify-content-center">
+                            <button type="submit" class="btn btn-color">Prenota</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 @endsection
 
