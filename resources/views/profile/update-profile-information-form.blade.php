@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Elimina definitivamente</button>
+                        <button type="submit" class="btn btn-danger">Elimina Definitivamente</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                     </div>
                 </div>

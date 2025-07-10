@@ -52,6 +52,10 @@
     transition: transform 0.3s ease;
 }
 
+.btn.btn-link {
+    color: #0D47A1;
+}
+
 
 /*aggiornamento effettuato più stiloso*/
 .status-message {
