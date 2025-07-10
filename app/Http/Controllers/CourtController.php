@@ -19,19 +19,20 @@ class CourtController extends Controller
             'location' =>  'required|string|max:255',
             'price_per_hour' =>  'required|numeric|min:0',
             'status' => 'required|in:active,inactive,maintenance',
-            'complex_id' => 'required|integer|min:1',
+            'complex_id' => 'required|integer|min:1|exists:complexes,id',
             'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         if($validate->fails())
-            return redirect()->back()->withErrors($validate);
+            return redirect()->back()->withErrors($validate)->withInput();
+
+        $data = $validate->validated();
 
         if ($request->hasFile('image_path')) {   //=> Se l'immagine esiste viene salvata
             $imagePath = $request->file('image_path')->store('courts', 'public'); // salva in storage/app/public/courts
-            $validate['image_path'] = $imagePath;
+            $data['image_path'] = $imagePath;
         }
 
-        $data = $validate->validated();
         $data['is_available'] = true;
         
         Court::create($data);

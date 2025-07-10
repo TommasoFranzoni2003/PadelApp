@@ -12,7 +12,7 @@ class CourtSeeder extends Seeder
      */
     public function run(): void
     {
-        $imagePath = '3sFLQJmnCX9Yr9j2e4ESfF6wYkqs494hLOV52tpK.webp';
+        $imagePath = 'court.webp';
 
         $customCourts = [
             [

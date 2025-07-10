@@ -2,6 +2,10 @@
 
 @section('title', 'View Court') <!-- TITOLO -->
 
+@push('styles') <!-- AGGIUNTA STILI -->
+    <link rel="stylesheet" href="{{ asset('css/pages/court/cardCourt.css') }}">
+@endpush
+
 @section('header') 
     @include('partials.navbar')  <!-- MENU -->
 @endsection
@@ -20,8 +24,19 @@
             @forelse ($courts as $court)
                 <div class="col-md-4 mb-4 mt-3">
                     <div class="card h-100 shadow-sm">  <!-- CARD -->
-                        @if($court->image_path)  <!-- CARD IMAGE -->
-                            <img src="{{ asset('image/pages/courts/' . $court->image_path) }}" class="card-img-top" alt="{{ $court->name }}">
+                        @if($court->image_path)
+                            @php
+                                if (\Illuminate\Support\Str::startsWith($court->image_path, 'courts/')) 
+                                    $url = asset('storage/' . $court->image_path);
+                                else {
+                                    $url = asset('image/pages/courts/' . $court->image_path);
+                                }
+                            @endphp
+
+                        <div class="card-header header">
+                            <img src="{{ $url }}" alt="{{ $court->name }}">
+                        </div>
+                            
                         @endif
                         <div class="card-body">  <!-- CARD BODY -->
                             <h5 class="card-title text-center">{{ $court->name }}</h5>

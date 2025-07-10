@@ -40,7 +40,7 @@
                                 @foreach($chunk as $court)
                                     <div class="col-md-4">
                                         <div class="card mb-3">
-                                            <img src="{{ asset('storage/' . $court->image_path) }}" class="card-img-top" alt="...">
+                                            <img src="{{ asset('image/pages/courts/' . $court->image_path) }}" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $court->name }}</h5>
                                                 <p class="card-text">{{ $court->description }}</p>
