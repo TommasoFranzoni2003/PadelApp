@@ -25,7 +25,7 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted'] : [],
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'surname' => $input['surname'],
             'birth_date' => $input['birth_date'],
@@ -36,6 +36,10 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'profile_photo_path' => $input['profile_photo_path'] ?? null, // aggiungi questa riga
         ]);
+
+        $user->assignRole('user');
+
+        return $user;
     }
 
 

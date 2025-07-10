@@ -20,6 +20,7 @@
     <div class="container container-header py-5">
         <h1 class="h1-color text-center mb-2 fw-bold text-primary">Scopri i nostri campi disponibili</h1>
         <h4 class="fst-italic mb-5 text-center text-muted"> Trova il campo perfetto per la tua partita,<br>  scegli tra le migliori strutture indoor e outdoor vicino a te.</h4>
+        
         <div class="row">  <!--  RIGA -->
             @forelse ($courts as $court)
                 <div class="col-md-4 mb-4 mt-3">
