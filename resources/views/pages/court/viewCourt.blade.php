@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'View Court') <!-- TITOLO -->
+@section('title', 'Campi da Padel') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/court/cardCourt.css') }}">

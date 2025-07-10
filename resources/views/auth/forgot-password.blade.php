@@ -1,3 +1,4 @@
+@section('title', 'Recupera Password') <!-- TITOLO -->
 <x-guest-layout>
     <!-- CSS specifico per questa pagina -->
     @section('page-css')
@@ -33,7 +34,7 @@
         </div>
 
         <!--bottone di reset -->
-        <div class="text-end">
+        <div class="text-center">
             <button type="submit" class="btn btn-color px-4 py-2">
                 {{ __('Invia link di reset') }}
             </button>

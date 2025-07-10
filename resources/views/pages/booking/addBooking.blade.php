@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Visualizza Prenotazioni') <!-- TITOLO -->
+@section('title', 'Aggiungi Prenotazione') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">  <!-- CSS di flatpickr -->

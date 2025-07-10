@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'View Complex') <!-- TITOLO -->
+@section('title', 'Strutture Sportive') <!-- TITOLO -->
 
 @section('header')
     @include('partials.navbar')

@@ -1,3 +1,4 @@
+@section('title', 'Profilo') <!-- TITOLO -->
 <x-guest-layout>
     <!-- css specifico -->
     <link rel="stylesheet" href="{{ asset('css/auth/show.css') }}">
@@ -68,7 +69,7 @@
            <!-- Contenitore Bottoni -->
            <div class="button-row">
                 <a href="{{ route('profile.edit') }}" class="btn btn-primary">
-                    {{ __('Modifica account') }}
+                    {{ __('Modifica Account') }}
                 </a> 
             </div>
         </div>

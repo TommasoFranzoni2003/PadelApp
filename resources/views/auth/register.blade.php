@@ -1,3 +1,4 @@
+@section('title', 'Iscriviti') <!-- TITOLO -->
 <x-guest-layout>
     <!-- Includo il CSS specifico per register ed il js -->
     <link rel="stylesheet" href="{{ asset('css/auth/registration.css') }}">

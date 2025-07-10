@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home Page')  <!-- TITOLO DELLA PAGINA -->
+@section('title', 'Padel App')  <!-- TITOLO DELLA PAGINA -->
 
 @push('styles') <!-- STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/homepage.css') }}">

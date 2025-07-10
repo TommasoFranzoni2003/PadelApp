@@ -1,3 +1,5 @@
+@section('title', 'Login') <!-- TITOLO -->
+
 <x-guest-layout>
     <!-- Inserisco il CSS specifico per il login -->
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">

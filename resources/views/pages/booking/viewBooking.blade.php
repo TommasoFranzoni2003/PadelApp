@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Visualizza Prenotazioni') <!-- TITOLO -->
+@section('title', 'Prenotazioni') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/booking/viewBooking.css') }}"> 

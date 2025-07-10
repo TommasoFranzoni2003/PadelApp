@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Modifica Complesso')
+@section('title', 'Modifica Struttura')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/pages/complex/formComplex.css') }}">

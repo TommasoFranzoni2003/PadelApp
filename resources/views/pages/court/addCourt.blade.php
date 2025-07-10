@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Court') <!-- TITOLO -->
+@section('title', 'Aggiungi Campo') <!-- TITOLO -->
 
 @push('styles') <!-- AGGIUNTA STILI -->
     <link rel="stylesheet" href="{{ asset('css/pages/court/formCourt.css') }}">

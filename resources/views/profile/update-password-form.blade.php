@@ -1,3 +1,4 @@
+@section('title', 'Modifica Password') <!-- TITOLO -->
 <x-guest-layout>
     <!-- CSS specifico -->
     <link rel="stylesheet" href="{{ asset('css/auth/update.css') }}">
