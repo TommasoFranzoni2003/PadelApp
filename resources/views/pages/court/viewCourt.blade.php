@@ -21,7 +21,7 @@
                 <div class="col-md-4 mb-4 mt-3">
                     <div class="card h-100 shadow-sm">  <!-- CARD -->
                         @if($court->image_path)  <!-- CARD IMAGE -->
-                            <img src="{{ asset('storage/' . $court->image_path) }}" class="card-img-top" alt="{{ $court->name }}">
+                            <img src="{{ asset('image/pages/courts/' . $court->image_path) }}" class="card-img-top" alt="{{ $court->name }}">
                         @endif
                         <div class="card-body">  <!-- CARD BODY -->
                             <h5 class="card-title text-center">{{ $court->name }}</h5>
