@@ -19,8 +19,8 @@ class CourtFactory extends Factory
             'status' => $faker->randomElement(['active', 'maintenance','inactive']), //Stato del campo
             'location' => $faker->address,
             'price_per_hour' => $faker->numberBetween(10, 50), //Prezzo per ora tra 10 e 50
-            //creo prima il complex a cui appartiene il campo
-            'complex_id' => Complex::factory(),
+            'image_path' => 'courts/4UsmYYwNiI9W3B8pFOklnWqHmEazupjUYdFfu4c4.webp',
+            'complex_id' => Complex::inRandomOrder()->first()->id
         ];
     }
 }

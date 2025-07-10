@@ -20,80 +20,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->createPermissionSeeder();
         $this->createRoleSeeder();
-        $this->createUserSeeder();
-        $this->createComplexSeeder();
-        $this->createCourtSeeder();
-        $this->createAvailabilitySeeder();
+        $this->call([
+            ComplexSeeder::class,
+            CourtSeeder::class,
+            UserSeeder::class,
+        ]);
         $this->createBookingSeeder();
     }
 
-    //seeder per creare gli utenti
-    private function createUserSeeder()
-    {
-        //admin con id=1
-        User::factory()->create([
-            'name' => 'Alessandro',
-            'surname' => 'Belussi',
-            'email' => 'a.belussi007@studenti.unibs.it',
-            'password' => bcrypt('0000'),
-            'birth_date' => '2003-04-29',
-            'gender' => 'male',
-            'tax_code' => 'ABLSLS03D29A000Z',
-            'phone' => '3404869403',
-            'is_active' => true,
-        ]);
-        User::find(1)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
-        //admin con id=2
-        User::factory()->create([
-            'name' => 'Tommaso',
-            'surname' => 'Franzoni',
-            'email' => 't.franzoni@studenti.unibs.it',
-            'password' => bcrypt('1234'),
-            'birth_date' => '2003-07-07',
-            'gender' => 'male',
-            'tax_code' => 'FRNTSM03L07A000Z',
-            'phone' => '3313512921',
-            'is_active' => true,
-        ]);
-        User::find(2)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
-        //admin con id=3
-        User::factory()->create([
-            'name' => 'Vincenzo',
-            'surname' => 'Ingiaimo',
-            'email' => 'v.ingiaimo@studenti.unibs.it',
-            'password' => bcrypt('4321'),
-            'birth_date' => '2003-10-15',
-            'gender' => 'male',
-            'tax_code' => 'INGVNC03D15A000Z',
-            'phone' => '3473465119',
-            'is_active' => true,
-        ]);
-        User::find(3)->assignRole('admin'); //assegno il ruolo di admin all'utente con ID 1
-        //creo un utente specifico
-        $simpleUser= User::factory()->create([
-            'name' => 'Alberto',
-            'surname' => 'Ferrari',
-            'email' => 'a.ferrari03@studenti.unibs.it',
-            'password' => bcrypt('ironman'),
-            'birth_date' => '2003-04-10',
-            'gender' => 'male',
-            'tax_code' => 'AFRRBT03D10A000Z',
-            'phone' => '3270921251',
-            'is_active' => true,
-        ]);
-        //assegno il ruolo di admin all'utente con ID 1
-        $simpleUser->assignRole('user');
-        //creo 10 utenti fittizzi
-        $users= User::factory(10)->create();
-        //assegno a tutti gli utenti il ruolo di user
-        foreach ($users as $user) {
-            $user->assignRole('user');
-        }
-    }
-
     //seeder per creare le prenotazioni
-    private function createBookingSeeder()
-    {
+    private function createBookingSeeder() {
         //creo una prenotazione specifica
         Booking::factory()->create([
             'user_id' => 1, //associata all'utente con ID 1
@@ -106,10 +42,10 @@ class DatabaseSeeder extends Seeder
         ]);
         //creo 20 prenotazioni fittizie
         Booking::factory(20)->create();
-    }   
+    }  
 
     //seeder per creare i campi da gioco
-    private function createCourtSeeder()
+  /*  private function createCourtSeeder()
     {
         //creo un campo specifico
         Court::factory()->create([
@@ -148,10 +84,10 @@ class DatabaseSeeder extends Seeder
         ]);
         //creo 5 campi da gioco fittizi
         Court::factory(5)->create();
-    }
+    }*/
 
     //seeder per creare le disponibilità dei campi
-    private function createAvailabilitySeeder()
+ /*   private function createAvailabilitySeeder()
     {
         //creo una disponibilità specifica
         Availability::factory()->create([  
@@ -163,34 +99,7 @@ class DatabaseSeeder extends Seeder
         ]);
         //creo 20 disponibilità fittizie
         Availability::factory(20)->create();
-    }
-
-    //seeder per creare il complesso dei campi
-    private function createComplexSeeder()
-    {
-        //creo una struttura specifica
-        Complex::factory()->create([
-            'id' => 1, //imposto l'ID per poterlo associare
-            'name' => 'Complesso Sportivo San Paolo',  
-            'description' => 'Complesso sportivo con campi da padel legato alla comunità cattolica di San Paolo ',
-            'address' => 'Via San Paolo 1',
-            'city' => 'Brescia',
-            'postal_code' => '25100',
-            'phone' => '0301234567',
-            'email' => 'padelsanpaolo@sanpaolocrew.org',
-            'opening_hours' => [
-                'monday' => ['09:00', '20:00'],
-                'tuesday' => ['09:00', '20:00'],
-                'wednesday' => ['09:00', '22:00'],
-                'thursday' => ['09:00', '22:00'],
-                'friday' => ['09:00', '24:00'],
-                'saturday' => ['08:00', '24:00'],
-                'sunday' => ['08:00', '16:00'],
-            ],
-        ]);
-        //creo 3 strutture fittizie 
-        Complex::factory(3)->create();
-    }
+    }*/
 
     private function createPermissionSeeder()
     {
