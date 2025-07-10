@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             list.querySelectorAll('.dynamic-li').forEach(el => el.remove());
 
             //=> Imposta il testo
-            document.getElementById('modal-title').textContent = `Prenotazione ${event.title}`;
+            document.getElementById('modal-title').textContent = `${event.title}`;
             document.getElementById('modal-start').textContent = `Inizio: ${event.start.toLocaleString()}`;
             document.getElementById('modal-end').textContent = `Fine: ${event.end.toLocaleString()}`;
             document.getElementById('modal-players').textContent = `Numero di giocatori: ${players}`;
@@ -59,6 +59,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render(); //=> Mostra il calendario
-
-    
 });

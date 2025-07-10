@@ -56,19 +56,10 @@
         @endauth
 
         {{-- Prenotazioni --}}
-        @auth
-          @if (Auth::user()->hasRole('admin'))  <!-- PRENOTAZIONI -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="prenotazioniDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Prenotazioni</a>
-              <ul class="dropdown-menu" aria-labelledby="prenotazioniDropdown">
-                <li><a class="dropdown-item" href="{{ route('booking.show') }}">Visualizza</a></li>
-              </ul>
-            </li>
-          @elseif (Auth::user()->hasRole('user'))
+        @auth   <!-- PRENOTAZIONI -->
             <li class="nav-item">
               <a class="nav-link" href="{{ route('booking.show') }}">Prenotazioni</a>
             </li>
-          @endif
         @endauth
 
         {{-- Link per ospiti --}}
@@ -84,7 +75,7 @@
         {{-- Dropdown utente loggato --}}
         @auth
           <li class="nav-item dropdown">  <!-- PROFILO LOGGATO -->
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <x-avatar class="profile-image" :user="Auth::user()" />
           </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">

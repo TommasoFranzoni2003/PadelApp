@@ -71,6 +71,10 @@
     color: #E4E1B6;
 }
 
+.btn.btn-link {
+    color: #0D47A1;
+}
+
 /* foto profilo */
 .profile-photo-container {
     width: 100%;
@@ -85,7 +89,7 @@
     height: 160px;
     object-fit: cover;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    border: 2px solid #6366f1; 
+    border: 2px solid #0D47A1; 
 }
 
 h2 {
