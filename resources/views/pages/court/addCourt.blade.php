@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group py-2">    <!-- DESCRIZIONE -->
                             <label for="inputDescription">Descrizione</label>
-                            <input type="text" class="form-control" name="description" id="inputDescription" placeholder="Inserisci una descrizione" autocomplete="off">
+                            <textarea class="form-control" name="description" id="inputDescription" placeholder="Inserisci una descrizione" autocomplete="off" rows="3"></textarea>
                         </div>
                         <div class="form-group py-2">    <!-- LOCATION -->
                             <label for="inputLocation">Location</label>

@@ -40,7 +40,16 @@
                                 @foreach($chunk as $court)
                                     <div class="col-md-4">
                                         <div class="card mb-3">
-                                            <img src="{{ asset('image/pages/courts/' . $court->image_path) }}" class="card-img-top" alt="...">
+                                        @if($court->image_path)
+                                            @php
+                                                if (\Illuminate\Support\Str::startsWith($court->image_path, 'courts/')) 
+                                                    $url = asset('storage/' . $court->image_path);
+                                                else {
+                                                    $url = asset('image/pages/courts/' . $court->image_path);
+                                                }
+                                            @endphp
+                                        @endif
+                                            <img src="{{ $url }}" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $court->name }}</h5>
                                                 <p class="card-text">{{ $court->description }}</p>
@@ -83,6 +92,21 @@
             <div class="container text-center">
             
                 <div class="row g-4 h-100">
+
+                    <!-- Card 2: CAMPI -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h4 class="card-title mt-3">Campi</h4>
+                                <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
+                                <p class="card-text fs-5">Esplora i campi da padel disponibili, scegli il tuo preferito e preparati per la prossima partita.</p>
+                                <a href="{{ route('court.show') }}" class="btn btn-primary text-center" role="button">
+                                        Campi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Card 1: STRUTTURE -->
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm">
@@ -91,48 +115,34 @@
                                 <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
                                 <p class="card-text fs-5">Scopri le diverse aree del centro sportivo, ognuna con caratteristiche uniche pensate per offrirti il massimo comfort.</p>
                                 <a href="{{ route('complex.showAll') }}" class="btn btn-primary text-center" role="button">
-                                Strutture
+                                    Strutture
                                 </a>
                             </div>
                         </div>
                     </div>
                 
-                <!-- Card 2: CAMPI -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h4 class="card-title mt-3">Campi</h4>
-                            <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
-                            <p class="card-text fs-5">Esplora i campi da padel disponibili, scegli il tuo preferito e preparati per la prossima partita.</p>
-                            <a href="{{ route('court.show') }}" class="btn btn-primary text-center" role="button">
-                                    Campi
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Card 3: PRENOTAZIONI -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h4 class="card-title mt-3">Prenotazioni</h4>
-                            <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
-                            <p class="card-text fs-5">Gestisci facilmente le tue prenotazioni: verifica date, orari e aggiorna le tue scelte in pochi click.</p>
-                            @if(Auth::check())
-                                <a href="{{ route('booking.show') }}" class="btn btn-primary mt-4 text-center" role="button">
-                                    Visualizza
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-primary text-center" role="button">
-                                    Login
-                                </a>
-                            @endif
+                    <!-- Card 3: PRENOTAZIONI -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h4 class="card-title mt-3">Prenotazioni</h4>
+                                <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
+                                <p class="card-text fs-5">Gestisci facilmente le tue prenotazioni: verifica date, orari e aggiorna le tue scelte in pochi click.</p>
+                                @if(Auth::check())
+                                    <a href="{{ route('booking.show') }}" class="btn btn-primary mt-4 text-center" role="button">
+                                        Visualizza
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-primary text-center" role="button">
+                                        Login
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- 3° SEZIONE -->
     <div class="panel">
         <div class="container py-5">

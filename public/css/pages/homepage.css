@@ -283,6 +283,12 @@ div i:hover {
   margin-top: 0 !important;
 }
 
+.card-body .btn:hover {
+  transform: translateX(-50%) scale(1.05);
+  background-color: #08306b !important;
+  color: #E4E1B6;
+}
+
 .panel .card {
   min-height: 350px;
 }

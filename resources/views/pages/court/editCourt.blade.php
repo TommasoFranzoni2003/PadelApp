@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group py-2">    <!-- DESCRIZIONE -->
                             <label for="inputDescription">Descrizione</label>
-                            <input type="text" class="form-control" name="description" id="inputDescription" value="{{ $court->description }}" autocomplete="off">
+                            <textarea type="text" class="form-control" name="description" id="inputDescription"  autocomplete="off" rows="3">{{ $court->description }}</textarea>
                         </div>
                         <div class="form-group py-2">    <!-- LOCATION -->
                             <label for="inputLocation">Location</label>
