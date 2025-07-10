@@ -28,14 +28,13 @@
 }
 
 /* bottone secondario */
-.btn-sec {
+.btn-secondary {
     background-color: #000; /* nero */
     opacity: 0.5; 
     border: 1px solid #d1d5db;
-    color: white;
 }
 
-.btn-sec:hover {
+.btn-secondary:hover {
     background-color: #000;
     transform: scale(1.05);
     color: #E4E1B6;
@@ -105,4 +104,12 @@
 }
 .gap-3 {
     gap: 1rem; /* spazio tra immagine e input */
+}
+
+.modal {
+    z-index: 9999 !important;
+}
+
+.modal-backdrop {
+    z-index: 9998 !important;
 }

@@ -35,12 +35,16 @@
     <div class="background-overlay"></div>
 
     <!-- Contenitore centrale con contenuto dinamico -->
-    <div class="auth-container position-relative z-1">
+    <div class="auth-container">
         <div class="auth-content">
             {{ $slot }}
         </div>
     </div>
 
+    <!-- Popper.js -->
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     @livewireScripts
 </body>
 </html>

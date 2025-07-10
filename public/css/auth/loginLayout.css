@@ -34,13 +34,11 @@
 /* Contenitore bianco sopra il video */
 .auth-container {
   position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   box-sizing: border-box;
+  display: flex;
 }
 
 /* Box login con contenuto allineato a sinistra */
@@ -60,9 +58,9 @@
 /* STILE BUTTON */
 .btn-color{
     background-color: #0D47A1;
-    color: #E4E1B6;
+    color: #f8f8f2;
     transition: transform 0.3s ease;
-    border-radius: 10px;
+    border-radius: 6px;
   }
   
 .btn-color:hover {
@@ -70,5 +68,5 @@
     color: #E4E1B6;
     font-size: 17px;
     transition: transform 0.3s ease;
-    border-radius: 10px;
+    border-radius: 6px;
 }

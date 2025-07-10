@@ -1,9 +1,7 @@
 <x-guest-layout>
     <!-- CSS specifico -->
     <link rel="stylesheet" href="{{ asset('css/auth/update.css') }}">
-    <script src="{{ asset('js/auth/delete_account_confirm.js') }}"></script>
     <script src="{{ asset('js/auth/update_profile_validation.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/auth/modal-confirm.css') }}">
 
     @if ($errors->any())
         <div class="status-message status-error mb-4">
@@ -17,7 +15,14 @@
         </div>
     @endif
 
+    <a href="{{ route('profile.show') }}" class="btn btn-link d-flex align-items-center mb-3" style="text-decoration: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
+        </svg>
+        Torna indietro
+    </a>
     <h1 class="text-center mb-4">{{ __('Modifica del profilo') }}</h1>
+    
 
     <form id="profile-update-form" method="POST" action="{{ route('user-profile-information.update') }}" enctype="multipart/form-data">
 
@@ -48,7 +53,6 @@
                 @enderror
             </div>
         @endif
-
 
         <!-- Nome -->
         <div class="mb-3">
@@ -112,50 +116,47 @@
         </div>
 
         <!-- Pulsanti -->
-        <div class="d-flex mt-4 gap-3 w-100 justify-content-end">
-            <x-button class="btn-color btn-primary flex-grow-1 text-center">
+        <div class="d-flex mt-4 gap-3 w-100 justify-content-center">
+            <x-button class="btn btn-primary">
                 {{ __('Aggiorna') }}
             </x-button>
 
-            <x-button class="btn-color flex-grow-1 text-center" type="button"
-                onclick="window.location='{{ route('password.update.form') }}'">
-                {{ __('Modifica password') }}
-            </x-button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+                Elimina
+            </button>
 
-            <x-button class="btn-color btn-secondary flex-grow-1 text-center" type="button"
-                onclick="window.location='{{ route('profile.show') }}'">
-                {{ __('Torna indietro') }}
+            <x-button class="btn btn-primary" type="button"
+                onclick="window.location='{{ route('password.update.form') }}'">
+                {{ __('Modifica Password') }}
             </x-button>
         </div>
     </form>
 
-    <!-- Bottone Elimina account -->
-    <div class="mt-3 d-flex justify-content-end">
-        <x-button type="button" class="btn-color red" id="delete-account-btn">
-            {{ __('Elimina account') }}
-        </x-button>
+    <!-- Modal di conferma eliminazione -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="{{ route('profile.destroy') }}">
+                @csrf
+                @method('DELETE')
 
-        <!-- Form nascosto per l'eliminazione -->
-        <form id="delete-account-form" method="POST" action="{{ route('profile.delete') }}" style="display:none;">
-            @csrf
-            @method('DELETE')
-            <input type="hidden" name="current_password" id="current_password">
-        </form>
-    </div>
-
-    <!-- Modal personalizzato -->
-    <div id="delete-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-content">
-            <h2>Conferma eliminazione</h2>
-            <p>Sei sicuro di voler eliminare il tuo account?</p>
-
-            <label for="modal-password">Inserisci la tua password per confermare:</label>
-            <input type="password" id="modal-password" class="form-control" autocomplete="current-password">
-
-            <div class="modal-buttons">
-                <button id="modal-confirm" class="btn-color red">Elimina</button>
-                <button id="modal-cancel" class="btn-color btn-secondary">Annulla</button>
-            </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Conferma eliminazione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sei sicuro di voler eliminare il tuo account? <br> Questa azione è irreversibile.</p>
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label">Conferma la password</label>
+                            <input type="password" class="form-control" name="current_password" id="current_password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Elimina definitivamente</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </x-guest-layout>

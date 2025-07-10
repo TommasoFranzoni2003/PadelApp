@@ -61,7 +61,6 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="prenotazioniDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Prenotazioni</a>
               <ul class="dropdown-menu" aria-labelledby="prenotazioniDropdown">
-                <li><a class="dropdown-item" href="{{ route('court.show') }}">Iscrizione</a></li>
                 <li><a class="dropdown-item" href="{{ route('booking.show') }}">Visualizza</a></li>
               </ul>
             </li>

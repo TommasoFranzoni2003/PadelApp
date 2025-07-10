@@ -67,8 +67,8 @@
             <!-- BUTTON NEL FOOTER DEL CAROSELLO -->
             <div class="text-center mt-4">
                 @if(Auth::check())
-                    <a href="{{ route('booking.add') }}" class="btn btn-primary mt-4 text-center" role="button">
-                        Prenota
+                    <a href="{{ route('court.show') }}" class="btn btn-primary mt-4 text-center" role="button">
+                        Visualizza
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-primary mt-4 text-center" role="button">
@@ -119,8 +119,8 @@
                             <span class="d-block my-3 border-top border-primary w-25 mx-auto"></span>
                             <p class="card-text fs-5">Gestisci facilmente le tue prenotazioni: verifica date, orari e aggiorna le tue scelte in pochi click.</p>
                             @if(Auth::check())
-                                <a href="{{ route('booking.add') }}" class="btn btn-primary mt-4 text-center" role="button">
-                                    Prenota
+                                <a href="{{ route('booking.show') }}" class="btn btn-primary mt-4 text-center" role="button">
+                                    Visualizza
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-primary text-center" role="button">
