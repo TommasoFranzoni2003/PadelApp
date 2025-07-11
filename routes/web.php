@@ -5,17 +5,10 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\CustomRegisteredUserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CourtController;
-use App\Models\Court;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComplexController;
-use App\Models\Booking;
-
-Route::get('/laravel', function () {
-    return view('welcome');
-});
 
 Route::get('/', [CourtController::class, 'selectCourt'])->name('homepage');
-
 
 //***  COURT'S ROUTES ***//
 Route::get('/addCourt', function () { return view('pages.court.addCourt'); });
