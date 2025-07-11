@@ -106,7 +106,7 @@
         const bookings = JSON.parse('{!! $bookingSlotsJson !!}');
     </script>
 
-    <script src="{{ asset('js/pages/addBooking.js') }}"></script>   <!-- SCRIPTS -->
+    <script src="{{ asset('js/pages/booking/addBooking.js') }}"></script>   <!-- SCRIPTS -->
     <script src="{{ asset('js/pages/successModal.js') }}"></script> <!-- SCRIPTS -->
 @endpush
 

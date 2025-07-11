@@ -1,5 +1,5 @@
 <!-- MODALE PER AVVISARE DELLA RIMOZIONE -->
-@props(['id', 'name'])
+@props(['id', 'name', 'route'])
 <div class="modal fade" id="deleteModal{{ $id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $id }}" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,7 +13,7 @@
         <p>Attenzione: stai per eliminare il {{$name}}!</p>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('court.delete', ['courtId' => $id]) }}" method="POST" class="d-inline">
+        <form action="{{ $route }}" method="POST" class="d-inline">
             @csrf
             <button type="submit" class="btn btn-danger">Elimina</button>
         </form>

@@ -57,7 +57,7 @@
                                     <a href="{{ route('court.delete', ['courtId' => $court->id ?? null]) }}" class="btn btn-danger mt-2 text-center" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{$court->id}}">
                                         Elimina
                                     </a>
-                                    <x-modals.delete-modal :id="$court->id" :name="$court->name" />
+                                    <x-modals.delete-modal :id="$court->id" :name="$court->name" route="{{ route('court.delete', ['courtId' => $court->id]) }}"/>
                                 @else
                                     <a href="{{ route('booking.add', ['court' => $court]) }}" class="btn btn-primary mt-2 text-center" role="button">
                                         Prenota

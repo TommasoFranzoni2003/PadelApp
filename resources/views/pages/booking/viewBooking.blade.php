@@ -55,5 +55,5 @@
 @push('scripts')     <!-- SCRIPTS -->
     <script src="{{ asset('js/pages/successModal.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script src="{{ asset('js/pages/viewBooking.js') }}"></script> 
+    <script src="{{ asset('js/pages/booking/viewBooking.js') }}"></script> 
 @endpush

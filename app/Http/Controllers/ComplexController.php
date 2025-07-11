@@ -64,14 +64,14 @@ class ComplexController extends Controller
 
         $structuredOpeningHours = [];
 
-        foreach (['monday','tuesday','wednesday','thursday','friday','saturday','sunday'] as $day) {
-            $value = $decodedOpeningHours[$day] ?? 'closed';
+        foreach (['monday','tuesday','wednesday','thursday','friday','saturday','sunday'] as $day) { //=> Itera per ogni giorno della settimana
+            $value = $decodedOpeningHours[$day] ?? 'closed';    //=> Se l'orario non esiste, allora è chiuso
 
             if ($value === 'closed') 
-                $structuredOpeningHours[$day] = ['closed' => true];
-            elseif (preg_match('/^([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2})$/', $value, $matches)) {
-                $structuredOpeningHours[$day] = [
-                    'closed' => false,
+                $structuredOpeningHours[$day] = ['closed' => true]; //=> Popolamento checkbox
+            elseif (preg_match('/^([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2})$/', $value, $matches)) { //=> Regex per verificare il formato
+                $structuredOpeningHours[$day] = [   //=> Estrazione dell'orario di apertura e chiusura
+                    'closed' => false,  
                     'open' => $matches[1],
                     'close' => $matches[2],
                 ];
