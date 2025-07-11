@@ -60,7 +60,29 @@ class ComplexController extends Controller
             return redirect()->route('complex.show')->with(['title' => 'Errore durante la ricerca', 'message' => 'Struttura non trovata']);
         }
 
-        $complex = Complex::findOrFail($complexId);
+        $decodedOpeningHours = $complex->opening_hours;
+
+        $structuredOpeningHours = [];
+
+        foreach (['monday','tuesday','wednesday','thursday','friday','saturday','sunday'] as $day) {
+            $value = $decodedOpeningHours[$day] ?? 'closed';
+
+            if ($value === 'closed') 
+                $structuredOpeningHours[$day] = ['closed' => true];
+            elseif (preg_match('/^([0-9]{2}:[0-9]{2})-([0-9]{2}:[0-9]{2})$/', $value, $matches)) {
+                $structuredOpeningHours[$day] = [
+                    'closed' => false,
+                    'open' => $matches[1],
+                    'close' => $matches[2],
+                ];
+            } 
+            else
+                $structuredOpeningHours[$day] = ['closed' => true];
+        
+        }
+
+        $complex->opening_hours = $structuredOpeningHours;
+
         return view('pages.complex.editComplex')->with('complex', $complex);
     }
 

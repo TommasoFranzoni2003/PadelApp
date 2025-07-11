@@ -14,8 +14,6 @@ document.querySelectorAll('.toggle-closed').forEach(toggle => {
         closeInput.disabled = disabled;
 
         if(disabled){   
-            openInput.value = ''; //=> Imposta i valori a 0
-            closeInput.value = ''; //=> Imposta i valori a 0
             cardBoyd.classList.add('card-body-closed');  //=> Aggiunge la classe
             card.classList.add('closed-full'); //=> Aggiunge la classe
         }
@@ -41,8 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             //=> Disabilita input e svuota valori
             openInput.disabled = true;
             closeInput.disabled = true;
-            openInput.value = '';
-            closeInput.value = '';
         } else {
             body.classList.remove('card-body-closed');
             card.classList.remove('closed-full');

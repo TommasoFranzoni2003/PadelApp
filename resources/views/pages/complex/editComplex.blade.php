@@ -102,12 +102,12 @@
                                             </div>
                                         </div>
                                         <div class="card-body d-flex gap-2 align-items-center"> <!-- CARD BODY -->
-                                            <label class="form-label mb-0">Dalle</label>
-                                            <input type="time" name="opening_hours[{{ $day }}][open]" class="form-control open-time"
+                                            <label for="open_{{ $day }}" class="form-label mb-0">Dalle</label>
+                                            <input type="time" id="open_{{ $day }}" name="opening_hours[{{ $day }}][open]" class="form-control open-time"
                                                 value="{{ $open }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
 
-                                            <label class="form-label mb-0">Alle</label>
-                                            <input type="time" name="opening_hours[{{ $day }}][close]" class="form-control close-time"
+                                            <label for="open_{{ $day }}" class="form-label mb-0">Alle</label>
+                                            <input type="time" id="open_{{ $day }}" name="opening_hours[{{ $day }}][close]" class="form-control close-time"
                                                 value="{{ $close }}" {{ $isClosed ? 'disabled' : '' }} step="1800" required>
                                         </div>
                                     </div>
