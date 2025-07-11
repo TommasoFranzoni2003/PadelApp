@@ -43,14 +43,25 @@ class ComplexController extends Controller
         return redirect()->back()->with(['title' => 'Inserimento Effettuato', 'message' => 'Complesso inserito con successo']);
     }
 
-    public function showAll()
-    {
+    public function showAll() {
         $complexes = Complex::all();
+
+        $days_ordered = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+        foreach ($complexes as $complex) {
+            if (is_array($complex->opening_hours)) {
+                $ordered_hours = [];
+                foreach ($days_ordered as $day) {
+                    $ordered_hours[$day] = $complex->opening_hours[$day] ?? 'closed';
+                }
+                $complex->opening_hours = $ordered_hours;
+            }
+        }
+
         return view('pages.complex.viewComplex')->with('complexes', $complexes);
     }
 
-    public function edit($complexId = null)
-    {
+    public function edit($complexId = null) {
         $complex = [];
 
         try {
@@ -134,8 +145,9 @@ class ComplexController extends Controller
     }
 
     public function selectComplex($number = 9) {
-    $complexes = \App\Models\Complex::take($number)->get(); 
-    return view('pages.complex.viewComplex', compact('complexes'));
+        $complexes = \App\Models\Complex::take($number)->get(); 
+        
+        return view('pages.complex.viewComplex', compact('complexes'));
     }
 }
 

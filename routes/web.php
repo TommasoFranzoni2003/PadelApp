@@ -56,6 +56,7 @@ Route::controller(ComplexController::class)->name('complex.')->group(function ()
     Route::get('/strutture', 'showAll')->name('showAll');
 });
 
+//***  PROFILE'S ROUTES ***//
 Route::controller(ProfileController::class)->group(function () {
 
     Route::middleware(['auth'])->group(function () {
