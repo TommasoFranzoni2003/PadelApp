@@ -36,7 +36,7 @@
 
         <form action="{{ route('complex.update', ['complexId' => $complex->id]) }}" method="POST" class="mx-auto" novalidate>
             @csrf
-
+            @method('PUT')
             <div class="row"> <!-- 1° RIGA -->
                 <div class="col-md-6 p-5"> <!-- COLONNA DI SINISTRA --> 
                     <div class="form-group py-2"> <!-- NOME -->

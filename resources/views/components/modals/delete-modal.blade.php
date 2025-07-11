@@ -15,6 +15,7 @@
       <div class="modal-footer">
         <form action="{{ $route }}" method="POST" class="d-inline">
             @csrf
+            @method('DELETE') <!-- SIMULA LA RIMOZIONE -->
             <button type="submit" class="btn btn-danger">Elimina</button>
         </form>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>

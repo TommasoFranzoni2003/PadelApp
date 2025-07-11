@@ -37,7 +37,7 @@
         <!-- FORM -->
         <form method="POST" action="{{ route('court.update', $court->id) }}" enctype="multipart/form-data">
             @csrf
-
+            @method('PUT')
                 <div class="row"> <!-- 1° RIGA -->
                     <!-- COLONNA DI SINISTRA: dimensione = metà row -->
                     <div class="col-md-6 p-5"> <!-- PADDING LUNGO Y SU OGNI ELEMENTO - py2 -->

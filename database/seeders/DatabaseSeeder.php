@@ -122,7 +122,6 @@ class DatabaseSeeder extends Seeder
         //ruolo di amministratore
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo([
-            'booking_create',
             'booking_view',
             'booking_cancel',
             'court_create',

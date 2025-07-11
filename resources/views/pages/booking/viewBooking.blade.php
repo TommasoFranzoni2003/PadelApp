@@ -43,6 +43,7 @@
             <div class="modal-footer">
                 <form action="{{ route('booking.delete', ['bookingId' => $booking->id ?? null]) }}" method="POST" class="d-inline">
                     @csrf
+                    @method('DELETE') <!-- SIMULA LA RIMOZIONE -->
                     <button type="submit" class="btn btn-danger">Elimina</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
