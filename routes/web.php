@@ -8,82 +8,87 @@ use App\Http\Controllers\CourtController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComplexController;
 
+//*** HOME PAGE ***//
 Route::get('/', [CourtController::class, 'selectCourt'])->name('homepage');
 
 //***  COURT'S ROUTES ***//
-Route::get('/addCourt', function () { return view('pages.court.addCourt'); });
+Route::controller(CourtController::class)->name('court.')->group(function () {
 
-Route::post('/addCourt', [CourtController::class, 'store'])->name('court.store');
+    Route::group(['middleware' => ['can:court_create', 'can:court_edit', 'can:court_delete']], function () {
+        Route::get('/editCourt/{courtId?}', 'edit')->name('edit');
+        Route::post('/editCourt/{courtId?}', 'update')->name('update');
+        Route::get('/addCourt', function () { return view('pages.court.addCourt'); });
+        Route::post('/addCourt', 'store')->name('store');
+        Route::post('/deleteCourt/{courtId?}', 'delete')->name('delete');
+    });
 
-Route::get('/viewCourt', [CourtController::class, 'showAll'])->name('court.show');
-
-Route::get('/editCourt/{courtId?}', [CourtController::class, 'edit'])->name('court.edit');
-Route::post('/editCourt/{courtId?}', [CourtController::class, 'update'])->name('court.update');
-
-Route::post('/deleteCourt/{courtId?}', [CourtController::class, 'delete'])->name('court.delete');
+    Route::get('/viewCourt', 'showAll')->name('show');
+});
 
 //***  BOOKING'S ROUTES ***//
-Route::middleware(['auth'])->group(function () {
-    Route::get('/addBooking/{court?}', [BookingController::class, 'showBookingForm'])->name('booking.add');
-    Route::post('/addBooking/{court?}', [BookingController::class, 'store'])->name('booking.store');
+Route::controller(BookingController::class)->name('booking.')->group(function () {
+    Route::group(['middleware' => ['can:booking_create', 'can:booking_cancel']], function () {
+        Route::get('/addBooking/{court?}', 'showBookingForm')->name('add');
+        Route::post('/addBooking/{court?}', 'store')->name('store');
+        Route::get('/booking/events', 'events')->name('events');
+        Route::post('/deleteBooking/{bookingId?}', 'delete')->name('delete');
+    });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/viewBooking', 'show')->name('show');
+    });
 });
 
-Route::get('/viewBooking', [BookingController::class, 'show'])->name('booking.show');
-Route::get('/booking/events', [BookingController::class, 'events'])->name('booking.events');
+//***  COMPLEX'S ROUTES ***//
+Route::controller(ComplexController::class)->name('complex.')->group(function () {
 
-Route::post('/deleteBooking/{bookingId?}', [BookingController::class, 'delete'])->name('booking.delete');
-
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::group(['middleware' => ['can:complex_create', 'can:complex_edit', 'can:complex_delete']], function () {
+        Route::get('/addComplex', function () {
+            return view('pages.complex.addComplex');
+        });
+        Route::post('/addComplex', 'store')->name('store');
+        Route::get('/editComplex/{complexId?}', 'edit')->name('edit');
+        Route::post('/editComplex/{complexId?}', 'update')->name('update');
+        Route::post('/deleteComplex/{complexId?}', 'delete')->name('delete');
+    });
+   
+    Route::get('/viewComplex', 'showAll')->name('show');
+    Route::get('/complexes', 'selectComplex');
+    Route::get('/strutture', 'showAll')->name('showAll');
 });
 
-Route::get('/addComplex', function () {
-    return view('pages.complex.addComplex');
+Route::controller(ProfileController::class)->group(function () {
+
+    Route::middleware(['auth'])->group(function () {
+        //=> Rotta specifica per modificare l'immagine
+        Route::put('/user/profile-information', 'update')->name('user-profile-information.update');
+
+        //=> Rotta per eliminare l'account
+        Route::get('/user/delete', 'destroy')->name('profile.delete');
+
+        //=> Rotta per eliminare l'account
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+
+        //=> Rotta per la pagina di modifica dell'account
+        Route::get('/profile/edit', function () {
+            return view('profile.update-profile-information-form');
+        })->name('profile.edit');
+
+    });
 });
 
-Route::post('/addComplex', [ComplexController::class, 'store'])->name('complex.store');
-
-Route::get('/viewComplex', [ComplexController::class, 'showAll'])->name('complex.show');
-
-Route::get('/editComplex/{complexId?}', [ComplexController::class, 'edit'])->name('complex.edit');
-Route::post('/editComplex/{complexId?}', [ComplexController::class, 'update'])->name('complex.update');
-
-Route::post('/deleteComplex/{complexId?}', [ComplexController::class, 'delete'])->name('complex.delete');
-
-Route::get('/complexes', [ComplexController::class, 'selectComplex']);
-
-Route::get('/strutture', [ComplexController::class, 'showAll'])->name('complex.showAll');
-
-//rotta per la pagina di modifica dell'account
-Route::get('/profile/edit', function () {
-    return view('profile.update-profile-information-form');
-})->name('profile.edit');
-
-//rotta specifica per modificare l'immagine
-Route::put('/user/profile-information', [ProfileController::class, 'update'])
-    ->name('user-profile-information.update');
-
-//rotta per eliminare l'account
-Route::get('/user/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
-Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])
-    ->middleware(['auth'])
-    ->name('profile.destroy');
-
-//rotta per registrare l'utente
+//=> Rotta per registrare l'utente
 Route::post('/register', [CustomRegisteredUserController::class, 'store'])->name('register');
 
-//rotte per modificare la password
+//=> Rotte per modificare la password
 Route::get('/profile/password', function () {
     return view('profile.update-password-form');
-})->name('password.update.form');
+})->middleware('auth')->name('password.update.form');
 
 Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
+/* DEFAULT IMPORTED */
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified',])->group(function () {
+    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+});
 
